@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Button from "@/components/common/Button/ConfirmButton.jsx";
 
 export default function Home() {
   return (
@@ -58,6 +59,13 @@ export default function Home() {
           >
             Documentation
           </a>
+        </div>
+
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <Button>Xác nhận</Button>
+
+          <Button>Đặt vé trước</Button>
+
         </div>
       </main>
     </div>
