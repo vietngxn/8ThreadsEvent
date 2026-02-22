@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/common/Button/ConfirmButton.jsx";
+import ProductItem from "@/components/common/ProductItem/ProductItem.jsx";
 
 export default function Home() {
   return (
@@ -62,9 +63,18 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col gap-4 sm:flex-row">
-          <Button>Xác nhận</Button>
+          <ProductItem
+            color="#ff4d4f"
+            name="Áo Rực Lửa"
+            price={1200000}
+          />
 
-          <Button>Đặt vé trước</Button>
+          <ProductItem
+            color="#4BB8F0"
+            name="Áo Băng Giá"
+            price={980000}
+            initialQty={2}
+          />
 
         </div>
       </main>
