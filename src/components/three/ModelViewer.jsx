@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Suspense, useRef, memo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Environment } from "@react-three/drei";
 
 function Model({ url }) {
@@ -14,15 +14,15 @@ function Model({ url }) {
     useFrame((_, delta) => {
         clock.current += delta;
         if (ref.current) {
-            ref.current.rotation.y = Math.sin(clock.current * 0.3) * (Math.PI / 90);  // ±2°
-            ref.current.rotation.x = Math.sin(clock.current * 0.2) * (Math.PI / 360); // ±0.5°
+            ref.current.rotation.y = Math.sin(clock.current * 0.3) * (Math.PI / 90);
+            ref.current.rotation.x = Math.sin(clock.current * 0.2) * (Math.PI / 360);
         }
     });
 
     return <primitive ref={ref} object={scene} />;
 }
 
-export default function ModelViewer({ url, className = "" }) {
+function ModelViewer({ url, className = "" }) {
     return (
         <div className={`w-full h-full ${className}`}>
             <Canvas
@@ -51,3 +51,6 @@ export default function ModelViewer({ url, className = "" }) {
         </div>
     );
 }
+
+export default memo(ModelViewer);
+
