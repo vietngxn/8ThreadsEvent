@@ -1,12 +1,36 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import localFont from "next/font/local";
+
+const fogtwono5 = localFont({
+    src: "../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
+    variable: "--font-fogtwono5",
+    display: "swap",
+});
+
+const kanit = localFont({
+    src: "../../public/assets/fonts/Kanit/Kanit-Medium.ttf",
+    variable: "--font-kanit",
+    display: "swap",
+});
 
 const ModelViewer = dynamic(() => import("@/components/three/ModelViewer"), { ssr: false });
 
+
 export default function StartingPage() {
     const containerRef = useRef(null);
+    const [zooming, setZooming] = useState(false);
+    const router = useRouter();
+
+    const handleEnter = useCallback(() => {
+        setZooming(true);
+        setTimeout(() => {
+            router.push("/highlight");
+        }, 800);
+    }, [router]);
 
     const handleMouseMove = useCallback((e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -28,7 +52,7 @@ export default function StartingPage() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full min-h-screen overflow-hidden "
+            className={`relative w-full min-h-screen overflow-hidden page-container${zooming ? " zoom-in" : ""}`}
             style={{ "--mx": "-9999px", "--my": "-9999px" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -55,28 +79,33 @@ export default function StartingPage() {
                     transition: "background 0.05s ease",
                 }}
             />
+            <div className="absolute inset-0 pointer-events-none spotlight-beam beam-1" />
+            <div className="absolute inset-0 pointer-events-none spotlight-beam beam-2" />
+            <div className="absolute inset-0 pointer-events-none spotlight-beam beam-3" />
 
             <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-white text-center px-6">
                 <div style={{ width: 800, height: 800, marginLeft: -100 }}>
                     <ModelViewer url="/Model8Threadfinal.glb" />
                 </div>
                 <div
+                    className="enter-btn"
+                    onClick={handleEnter}
                     style={{
                         background: "url('/assets/images/button-bg 1.png')",
                         backgroundRepeat: "no-repeat",
-                        width: 200,
-                        height: 50,
+                        width: 157,
+                        height: 39,
                         color: "black",
                         cursor: "pointer",
                     }}
                 >
                     <span
                         style={{
-                            fontSize: 19,
-                            marginLeft: "-40px",
-                            lineHeight: "40px"
+                            fontSize: 23,
+                            lineHeight: "40px",
+                            fontFamily: fogtwono5.style.fontFamily,
                         }}>
-                        Bắt đầu
+                        ENTER
                     </span>
                 </div>
             </div>
