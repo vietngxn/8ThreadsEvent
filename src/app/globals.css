@@ -24,3 +24,290 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.enter-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.enter-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: black;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  pointer-events: none;
+}
+
+.enter-btn:hover::after {
+  animation: flash-black 0.35s ease forwards;
+}
+
+.enter-btn span {
+  display: inline-block;
+  transition: transform 0.3s ease 0.15s;
+}
+
+.enter-btn:hover span {
+  transform: scale(1.25);
+}
+
+@keyframes flash-black {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.page-container {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+  transform-origin: center center;
+}
+
+.page-container.zoom-in {
+  transform: scale(3);
+  opacity: 0;
+}
+
+.spotlight-beam {
+  overflow: hidden;
+}
+
+/* Beam 1: wide, slow, slightly tilted right */
+.beam-1::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -50%;
+  width: 120%;
+  height: 350px;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 15%,
+      rgba(255, 255, 255, 0.10) 45%,
+      rgba(255, 255, 255, 0.10) 55%,
+      rgba(255, 255, 255, 0.03) 85%,
+      transparent 100%);
+  transform: rotate(5deg);
+  animation: sweep-1 18s ease-in-out infinite;
+}
+
+/* Beam 2: narrower, faster, tilted left */
+.beam-2::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -50%;
+  width: 120%;
+  height: 200px;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.02) 20%,
+      rgba(255, 255, 255, 0.07) 50%,
+      rgba(255, 255, 255, 0.02) 80%,
+      transparent 100%);
+  transform: rotate(-8deg);
+  animation: sweep-2 23s ease-in-out infinite;
+}
+
+/* Beam 3: medium, opposite direction */
+.beam-3::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -50%;
+  width: 120%;
+  height: 280px;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.02) 10%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.02) 90%,
+      transparent 100%);
+  transform: rotate(12deg);
+  animation: sweep-3 14s ease-in-out infinite;
+}
+
+@keyframes sweep-1 {
+  0% {
+    top: -35%;
+  }
+
+  50% {
+    top: 110%;
+  }
+
+  100% {
+    top: -35%;
+  }
+}
+
+@keyframes sweep-2 {
+  0% {
+    top: 120%;
+  }
+
+  50% {
+    top: -40%;
+  }
+
+  100% {
+    top: 120%;
+  }
+}
+
+@keyframes sweep-3 {
+  0% {
+    top: -20%;
+  }
+
+  35% {
+    top: 90%;
+  }
+
+  70% {
+    top: 10%;
+  }
+
+  100% {
+    top: -20%;
+  }
+}
+
+/* ── Clock Component ── */
+
+.clock-container {
+  position: fixed;
+  top: 40%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.clock-red-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.clock-red-glow-1 {
+  width: 350px;
+  height: 180px;
+  bottom: 5%;
+  left: 10%;
+  animation: glow-drift-1 12s ease-in-out infinite alternate;
+}
+
+.clock-red-glow-2 {
+  width: 280px;
+  height: 140px;
+  bottom: 10%;
+  right: 8%;
+  animation: glow-drift-2 15s ease-in-out infinite alternate;
+}
+
+.clock-red-glow-3 {
+  width: 200px;
+  height: 100px;
+  bottom: 2%;
+  left: 40%;
+  animation: glow-drift-3 10s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift-1 {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(40px) translateY(-20px);
+    opacity: 0.25;
+  }
+}
+
+@keyframes glow-drift-2 {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: translateX(-30px) translateY(-15px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes glow-drift-3 {
+  0% {
+    transform: translateX(0);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateX(20px) translateY(-10px);
+    opacity: 0.4;
+  }
+}
+
+/* Analog clock */
+.analog-clock {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 40px;
+}
+
+.analog-clock svg {
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.05));
+}
+
+/* Digital section */
+.digital-clock {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.digital-time {
+  color: white;
+  font-size: 22px;
+  letter-spacing: 6px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+
+.digital-message {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
+}
