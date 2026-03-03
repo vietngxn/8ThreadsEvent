@@ -1,0 +1,32 @@
+.wrapper {
+  position: relative;
+  width: 30%;
+  max-width: 700px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 60px 14px 20px;
+  border-radius: 999px;
+  border: 1px solid #ffffff;
+  background: #666;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
