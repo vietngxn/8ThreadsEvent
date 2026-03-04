@@ -1,0 +1,121 @@
+@font-face {
+  font-family: 'CustomDaiCaFont';
+  src: url('/assets/fonts/fogtwono5/FogtwoNo5.otf'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+  font-family: 'CustomDaiCaFont', "Times New Roman", Times, serif;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 450px;
+  padding: 50px 45px;
+  background: rgba(20, 20, 20, 0.45);
+  border: 1px solid rgba(203, 179, 122, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.logoArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  color: #cbb37a;
+  font-size: 45px;
+  letter-spacing: 0.15em;
+  margin-top: 15px;
+  font-weight: normal;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.inputGroup input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  border-radius: 8px; 
+  color: white;
+  padding: 15px 18px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.inputGroup input::placeholder {
+  color: #a0a0a0;
+  font-style: normal;
+}
+
+.inputGroup input:focus {
+  border-color: #cbb37a;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 12px rgba(203, 179, 122, 0.3);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%); 
+  color: #a0a0a0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+.eyeButton:hover {
+  color: #cbb37a;
+}
+
+.divider {
+  text-align: center;
+  margin: 25px 0 20px 0;
+  color: #cbb37a;
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 25px;
+}
+
+.socialIcons span {
+  color: #e6e6e6;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.socialIcons span:hover {
+  color: #cbb37a;
+  transform: translateY(-2px);
+}
