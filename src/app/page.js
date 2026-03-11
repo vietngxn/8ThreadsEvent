@@ -3,11 +3,12 @@ import Image from "next/image";
 import Button from "@/components/common/Button/ConfirmButton.jsx";
 import StartingPage from "./startingPage";
 import ConcertEventCard from "@/components/common/Card/ConcertEventCard";
+import ProductOptions from "@/components/common/ProductItem/ProductOptions";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <ConcertEventCard />
+      <ProductOptions />
     </div>
   )
 }
