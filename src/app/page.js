@@ -4,11 +4,12 @@ import Button from "@/components/common/Button/ConfirmButton.jsx";
 import StartingPage from "./startingPage";
 import ConcertEventCard from "@/components/common/Card/ConcertEventCard";
 import ProductOptions from "@/components/common/ProductItem/ProductOptions";
+import CheckoutPage from "@/components/common/Checkout/CheckoutPage";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <ProductOptions />
+      <CheckoutPage />
     </div>
   )
 }
