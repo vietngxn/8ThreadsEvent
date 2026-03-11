@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./ConcertEventCard.module.css";
-import Button from "@/components/common/Button/ConfirmButton.jsx";
+import GoldButton from "@/components/common/Button/GoldButton.jsx";
 
 export default function ConcertEventCard() {
     return (
@@ -40,7 +40,7 @@ export default function ConcertEventCard() {
                         <span className={styles.price}>500.000đ</span>
                     </div>
 
-                    <Button>Mua ngay</Button>
+                    <GoldButton>Mua ngay</GoldButton>
                 </div>
 
             </div>
