@@ -1,0 +1,32 @@
+.diagram-svg {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  margin: auto;
+}
+
+/* node chung */
+.node polygon,
+.node rect {
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.node:hover polygon,
+.node:hover rect {
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
+  transform: translateY(-4px);
+}
+
+.node text {
+  fill: white;
+  font-weight: bold;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.node.active polygon,
+.node.active rect {
+  stroke: #00eaff;
+  stroke-width: 4;
+}
