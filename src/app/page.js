@@ -3,11 +3,12 @@ import Image from "next/image";
 import Button from "@/components/common/Button/GoldButton.jsx";
 import StartingPage from "./startingPage";
 import ConcertEventCard from "@/components/Card/ConcertEventCard";
+import ConcertBooking from "@/components/booking/ConcertBooking";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <CheckoutPage />
+      <ConcertBooking />
     </div>
   )
 }
