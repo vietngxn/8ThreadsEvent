@@ -1,0 +1,145 @@
+.container {
+  background-color: #3f3f3f;
+  border-radius: 20px;
+  padding: 24px;
+  color: white;
+  width: 100%;
+  max-width: 500px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.selectionArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.optionsRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.colorCircle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.colorCircle.active {
+  border-color: #ff3b30;
+}
+
+.innerCircle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #b31d1d;
+}
+
+.sizeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #444;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.sizeBtnActive {
+  background-image: url('/assets/images/common-panel 1.png');
+  background-size: cover;
+  background-position: center;
+  color: #000;
+  border: none;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(203, 179, 122, 0.4);
+}
+
+.guideText {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 15px;
+  display: block;
+}
+
+
+.addToCartBtn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  background-image: url('/assets/images/common-panel 1.png');
+  background-size: cover;
+  background-position: center;
+  color: #000;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.addToCartBtn:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.addToCartBtn:active {
+  transform: scale(0.98);
+}
+
+
+.quantityRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+  background: #2a2a2a;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 15px;
+  border-radius: 12px;
+}
+
+.qtyBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.qtyValue {
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 20px;
+}

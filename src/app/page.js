@@ -1,8 +1,8 @@
 import SearchInput from "@/components/common/SearchInput";
 import Image from "next/image";
-import Button from "@/components/common/Button/ConfirmButton.jsx";
+import Button from "@/components/common/Button/GoldButton.jsx";
 import StartingPage from "./startingPage";
-import ConcertEventCard from "@/components/common/Card/ConcertEventCard";
+import ConcertEventCard from "@/components/Card/ConcertEventCard";
 
 export default function Home() {
   return (
