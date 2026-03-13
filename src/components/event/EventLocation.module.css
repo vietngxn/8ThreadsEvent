@@ -1,0 +1,28 @@
+.locationRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.locationRow svg {
+  margin-top: 4px;
+}
+
+.locationName {
+  margin: 0;
+  line-height: 1.2;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.locationAddress {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.gradientText {
+  background: linear-gradient(90deg,#cbb37a,#e6e6e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
