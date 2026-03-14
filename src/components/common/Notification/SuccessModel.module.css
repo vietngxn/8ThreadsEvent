@@ -27,34 +27,11 @@
   text-align: center;
 }
 
-.checkIconContainer {
-  margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 5rem;
-  width: 5rem;
-  border-radius: 9999px;
-  border: 5px solid #ffffff;
-}
-
-.checkIcon {
-  height: 3rem;
-  width: 3rem;
-  color: #ffffff;
-}
-
 .plainIconContainer {
   margin: 0 auto 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.plainBellIcon {
-  height: 5rem;
-  width: 5rem;
-  color: #ffffff;
 }
 
 .modalTitle {
