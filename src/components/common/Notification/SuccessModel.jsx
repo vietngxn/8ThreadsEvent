@@ -18,20 +18,13 @@ export default function SuccessModel() {
             <div className={styles.modalBody}>
                 <h2 className={styles.modalTitle}>Thông báo</h2>
 
-                <div className={styles.checkIconContainer}>
-                    <svg
-                    className={styles.checkIcon}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={3}
-                    >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
+                <div className={styles.plainIconContainer}>
+                    <img
+                        src="/check-circle.svg"
+                        alt="bell"
+                        width={80}
+                        height={80}
                     />
-                    </svg>
                 </div>
 
                 <p className={styles.modalMessage}>Đặt vé thành công</p>
