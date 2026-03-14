@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "@/components/common/Button/ConfirmButton.jsx";
+import Button from "@/components/common/Button/GoldButton.jsx";
 import StartingPage from "./startingPage";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
 

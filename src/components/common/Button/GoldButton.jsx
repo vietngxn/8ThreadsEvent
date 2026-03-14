@@ -3,7 +3,7 @@
 import styles from "./Button.module.css";
 import clsx from "clsx";
 
-export default function Button({
+export default function GoldButton({
   children,
   onClick,
   disabled = false,
