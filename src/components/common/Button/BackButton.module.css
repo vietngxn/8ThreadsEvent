@@ -1,0 +1,31 @@
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Kanit", sans-serif;
+}
+
+/* icon */
+.icon {
+  font-size: 24px;
+
+  background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* text gold gradient */
+.text {
+  background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
