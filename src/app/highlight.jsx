@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import localFont from "next/font/local";
+import Image from "next/image";
 import Clock from "@/components/common/Clock";
 const fogtwono5 = localFont({
     src: "../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
@@ -21,13 +23,14 @@ const brunoace = localFont({
 export default function Highlight() {
     const containerRef = useRef(null);
     const [menuOpen, setMenuOpen] = useState(false);
+    const router = useRouter();
 
     const menuItems = [
-        { label: "TICKETS", href: "/" },
+        { label: "TICKETS", href: "/", showArrow: true },
         { label: "HIGHLIGHT", href: "#" },
-        { label: "RETAIL", href: "#" },
+        { label: "RETAIL", href: "#", showArrow: true },
         { label: "EXPERIENCE", href: "#" },
-        { label: "ARTISTS", href: "#" },
+        { label: "ARTISTS", href: "/artists" },
         { label: "DROP", href: "#" },
         { label: "STORIES", href: "#" },
 
@@ -111,9 +114,9 @@ export default function Highlight() {
                     }}
                 >
                     {menuItems.map((item, index) => (
-                        <a
+                        <div
                             key={index}
-                            href={item.href}
+                            onClick={() => router.push(item.href)}
                             style={{
                                 fontFamily: fogtwono5.style.fontFamily,
                                 fontSize: "clamp(48px, 8vw, 110px)",
@@ -122,6 +125,7 @@ export default function Highlight() {
                                 letterSpacing: "0.04em",
                                 textDecoration: "none",
                                 display: "block",
+                                cursor: "pointer",
                                 transform: menuOpen ? "translateY(0)" : "translateY(20px)",
                                 opacity: menuOpen ? 1 : 0,
                                 transition: `transform 0.45s cubic-bezier(0.4,0,0.2,1) ${index * 60}ms, opacity 0.45s cubic-bezier(0.4,0,0.2,1) ${index * 60}ms, color 0.2s, letter-spacing 0.2s`,
@@ -135,19 +139,30 @@ export default function Highlight() {
                                 e.currentTarget.style.letterSpacing = "0.04em";
                             }}
                         >
-                            <span
-                                style={{
-                                    background: "linear-gradient(150deg, #C5C3BD, #816431)",
-                                    WebkitBackgroundClip: "text",
-                                    backgroundClip: "text",
-                                    WebkitTextFillColor: "transparent",
-                                    color: "transparent",
-                                }}
-                            >
-                                {item.label[0]}
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "clamp(8px, 1vw, 20px)" }}>
+                                <span
+                                    style={{
+                                        background: "linear-gradient(150deg, #C5C3BD, #816431)",
+                                        WebkitBackgroundClip: "text",
+                                        backgroundClip: "text",
+                                        WebkitTextFillColor: "transparent",
+                                        color: "transparent",
+                                    }}
+                                >
+                                    {item.label[0]}
+                                </span>
+                                {item.label.slice(1)}
+                                {item.showArrow && (
+                                    <Image
+                                        src="/arrow.png"
+                                        alt="arrow"
+                                        width={50}
+                                        height={50}
+                                        style={{ objectFit: "contain", display: "inline-block" }}
+                                    />
+                                )}
                             </span>
-                            {item.label.slice(1)}
-                        </a>
+                        </div>
                     ))}
                 </nav>
             </div>

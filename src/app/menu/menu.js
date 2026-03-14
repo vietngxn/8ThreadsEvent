@@ -2,6 +2,7 @@
 
 import localFont from "next/font/local";
 import Link from "next/link";
+import Image from "next/image";
 
 const fogtwono5 = localFont({
     src: "../../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
@@ -14,7 +15,8 @@ const menuItems = [
     { label: "SCHEDULE", href: "#" },
     { label: "ARTISTS", href: "#" },
     { label: "GALLERY", href: "#" },
-    { label: "TICKETS", href: "#" },
+    { label: "TICKETS", href: "#", showArrow: true },
+    { label: "RETAIL", href: "#", showArrow: true },
     { label: "CONTACT", href: "#" },
 ];
 
@@ -88,7 +90,18 @@ export default function Menu() {
                                 e.currentTarget.style.letterSpacing = "0.05em";
                             }}
                         >
-                            {item.label}
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "clamp(8px, 1vw, 20px)" }}>
+                                {item.label}
+                                {item.showArrow && (
+                                    <Image
+                                        src="/arrow.png"
+                                        alt="arrow"
+                                        width={60}
+                                        height={60}
+                                        style={{ objectFit: "contain", display: "inline-block" }}
+                                    />
+                                )}
+                            </span>
                         </div>
                     </Link>
                 ))}
