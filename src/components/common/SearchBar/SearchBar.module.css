@@ -1,18 +1,48 @@
+@font-face {
+  font-family: "KanitLocal";
+  src: url("/assets/fonts/Kanit/Kanit-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 .wrapper {
   position: relative;
-  width: 30%;
+  width: min(92vw, 700px);
+  min-width: 280px;
   max-width: 700px;
+  transition: filter 0.25s ease;
 }
 
 .input {
   width: 100%;
   padding: 14px 60px 14px 20px;
   border-radius: 999px;
-  border: 1px solid #ffffff;
-  background: #666;
-  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.88);
   font-size: 16px;
+  font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   outline: none;
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
+}
+
+.wrapper:focus-within .input {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.16);
+  color: #fff;
+}
+
+.wrapper:focus-within .input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .searchButton {
@@ -24,9 +54,19 @@
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: #ddd;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.wrapper:focus-within .searchButton,
+.searchButton:hover {
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.22);
 }
