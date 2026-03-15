@@ -52,7 +52,6 @@ export default function Artist() {
     }, []);
 
 
-
     return (
         <div
             ref={containerRef}
@@ -61,7 +60,6 @@ export default function Artist() {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Background image */}
             <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
@@ -69,8 +67,6 @@ export default function Artist() {
                     filter: "brightness(1.4)",
                 }}
             />
-
-            {/* Spotlight dark overlay */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
@@ -78,8 +74,6 @@ export default function Artist() {
                     transition: "background 0.05s ease",
                 }}
             />
-
-            {/* Spotlight light beam */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
@@ -88,13 +82,10 @@ export default function Artist() {
                     transition: "background 0.05s ease",
                 }}
             />
-
-            {/* Animated spotlight beams */}
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-1" />
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-2" />
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-3" />
 
-            {/* Artist detail overlay */}
             <div
                 onClick={() => setSelectedArtist(null)}
                 style={{
@@ -152,7 +143,6 @@ export default function Artist() {
                         )}
                     </div>
 
-                    {/* Right panel — artist info */}
                     <div
                         style={{
                             width: "620px",

@@ -1,8 +1,10 @@
-"use client";
-
-import { useState } from "react";
-import FilterBar from "./concerts/components/FilterBar/FilterBar";
-import FilterTags from "./concerts/components/FilterTags/FilterTags";
+import BackButton from "@/components/common/Button/BackButton";
+import GoldButton from "@/components/common/Button/GoldButton";
+import VoucherDetail from "@/components/common/VoucherDetail/VoucherDetail";
+import VoucherModal from "@/components/common/VoucherModal/VoucherModal";
+import FilterBar from "../components/FilterBar/FilterBar";
+import FilterTags from "../components/FilterTags/FilterTags";
+import Diagram from "@/components/Diagram/Diagram";
 
 export default function Home() {
   const [filters, setFilters] = useState({
@@ -12,9 +14,8 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-black px-6 py-10 font-sans text-white">
-      <FilterBar filters={filters} setFilters={setFilters} />
-      <FilterTags filters={filters} setFilters={setFilters} />
+    <div className="flex min-h-screen items-center justify-center bg-[#121212]">
+      <Diagram />
     </div>
   );
 }
