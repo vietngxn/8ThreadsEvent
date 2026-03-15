@@ -1,0 +1,260 @@
+{
+    "anhTai": [
+        {
+            "name": "Bằng Kiều",
+            "description": "Ca sĩ nổi tiếng với chất giọng tenor cao, nhiều năm hoạt động tại Việt Nam và hải ngoại.",
+            "img": "/assets/images/artist/bangkieu.jpg",
+            "facebook": "https://facebook.com/bangkieuofficial",
+            "youtube": "https://youtube.com/@BangKieuOfficial",
+            "instagram": "https://instagram.com/bangkieuofficial"
+        },
+        {
+            "name": "BB Trần",
+            "description": "Diễn viên hài và nhà sáng tạo nội dung nổi tiếng với các video parody.",
+            "img": "/assets/images/artist/bbtran.jpg",
+            "facebook": "https://facebook.com/bbtran",
+            "youtube": "https://youtube.com/@BBTranOfficial",
+            "instagram": "https://instagram.com/bbtran"
+        },
+        {
+            "name": "Binz",
+            "description": "Rapper nổi tiếng của Việt Nam, thành viên SpaceSpeakers.",
+            "img": "/assets/images/artist/binz.jpg",
+            "facebook": "https://facebook.com/binz.da.poet",
+            "youtube": "https://youtube.com/@BINZDaPoet",
+            "instagram": "https://instagram.com/binz.da.poet"
+        },
+        {
+            "name": "Bùi Công Nam",
+            "description": "Ca sĩ, nhạc sĩ trẻ nổi tiếng với nhiều ca khúc tự sáng tác.",
+            "img": "/assets/images/artist/buicongnam.jpg",
+            "facebook": "https://facebook.com/buicongnam",
+            "youtube": "https://youtube.com/@BuiCongNamOfficial",
+            "instagram": "https://instagram.com/buicongnam"
+        },
+        {
+            "name": "Cường Seven",
+            "description": "Ca sĩ, dancer và diễn viên, từng là thành viên SpaceSpeakers.",
+            "img": "/assets/images/artist/cuongseven.jpg",
+            "facebook": "https://facebook.com/cuongseven",
+            "youtube": "https://youtube.com/@CuongSevenOfficial",
+            "instagram": "https://instagram.com/cuongseven"
+        },
+        {
+            "name": "Đăng Khôi",
+            "description": "Ca sĩ nổi tiếng với nhiều bản hit Vpop thập niên 2000.",
+            "img": "/assets/images/artist/dangkhoi.jpg",
+            "facebook": "https://facebook.com/dangkhoi",
+            "youtube": "https://youtube.com/@DangKhoiOfficial",
+            "instagram": "https://instagram.com/dangkhoi"
+        },
+        {
+            "name": "Đinh Tiến Đạt",
+            "description": "Rapper đời đầu của hip hop Việt Nam.",
+            "img": "/assets/images/artist/dinhtiendat.jpg",
+            "facebook": "https://facebook.com/dinhtiendat",
+            "youtube": "",
+            "instagram": "https://instagram.com/dinhtiendat"
+        },
+        {
+            "name": "Đỗ Hoàng Hiệp",
+            "description": "Ca sĩ rock, trưởng nhóm Ngũ Cung.",
+            "img": "/assets/images/artist/dohoanghiep.jpg",
+            "facebook": "https://facebook.com/dohoanghiep",
+            "youtube": "",
+            "instagram": ""
+        },
+        {
+            "name": "Duy Khánh",
+            "description": "Diễn viên hài và YouTuber nổi tiếng với nhiều nhân vật giả gái.",
+            "img": "/assets/images/artist/duykhanh.jpg",
+            "facebook": "https://facebook.com/duykhanh",
+            "youtube": "https://youtube.com/@DuyKhanh",
+            "instagram": "https://instagram.com/duykhanh"
+        },
+        {
+            "name": "Hà Lê",
+            "description": "Biên đạo múa, dancer và ca sĩ nổi tiếng.",
+            "img": "/assets/images/artist/hale.jpg",
+            "facebook": "https://facebook.com/hale",
+            "youtube": "",
+            "instagram": "https://instagram.com/hale"
+        },
+        {
+            "name": "Hồng Sơn",
+            "description": "Cựu danh thủ bóng đá Việt Nam.",
+            "img": "/assets/images/artist/hongson.jpg",
+            "facebook": "",
+            "youtube": "",
+            "instagram": ""
+        },
+        {
+            "name": "HuyR",
+            "description": "Ca sĩ, nhạc sĩ nổi tiếng với nhiều ca khúc viral.",
+            "img": "/assets/images/artist/huyr.jpg",
+            "facebook": "https://facebook.com/huyr",
+            "youtube": "https://youtube.com/@HuyROfficial",
+            "instagram": "https://instagram.com/huyr"
+        },
+        {
+            "name": "Jun Phạm",
+            "description": "Ca sĩ, diễn viên, cựu thành viên nhóm 365.",
+            "img": "/assets/images/artist/junpham.jpg",
+            "facebook": "https://facebook.com/junpham365",
+            "youtube": "https://youtube.com/@JunPhamOfficial",
+            "instagram": "https://instagram.com/junpham"
+        },
+        {
+            "name": "Kay Trần",
+            "description": "Ca sĩ, rapper và dancer nổi tiếng.",
+            "img": "/assets/images/artist/kaytran.jpg",
+            "facebook": "https://facebook.com/kaytran1904",
+            "youtube": "https://youtube.com/@KayTranOfficial",
+            "instagram": "https://instagram.com/kaytran"
+        },
+        {
+            "name": "Kiên Ứng",
+            "description": "Đạo diễn và nhà sáng tạo nội dung nổi tiếng trên mạng xã hội.",
+            "img": "/assets/images/artist/kienung.jpg",
+            "facebook": "https://facebook.com/kienung",
+            "youtube": "",
+            "instagram": "https://instagram.com/kienung"
+        },
+        {
+            "name": "Liên Bỉnh Phát",
+            "description": "Diễn viên nổi tiếng qua nhiều bộ phim điện ảnh.",
+            "img": "/assets/images/artist/lienbinhphat.jpg",
+            "facebook": "https://facebook.com/lienbinhphat",
+            "youtube": "",
+            "instagram": "https://instagram.com/lienbinhphat"
+        },
+        {
+            "name": "Neko Lê",
+            "description": "Đạo diễn và nhà sáng tạo nội dung nổi tiếng trên YouTube.",
+            "img": "/assets/images/artist/nekole.jpg",
+            "facebook": "https://facebook.com/nekole",
+            "youtube": "https://youtube.com/@NekoLe",
+            "instagram": "https://instagram.com/neko.le"
+        },
+        {
+            "name": "Nguyễn Trần Duy Nhất",
+            "description": "Võ sĩ Muay Thái nổi tiếng của Việt Nam.",
+            "img": "/assets/images/artist/duynhat.jpg",
+            "facebook": "https://facebook.com/nguyentranduynhat",
+            "youtube": "",
+            "instagram": "https://instagram.com/nguyentranduynhat"
+        },
+        {
+            "name": "Phạm Khánh Hưng",
+            "description": "Ca sĩ và nhạc sĩ nổi tiếng với nhiều ca khúc ballad.",
+            "img": "/assets/images/artist/phamkhanhhung.jpg",
+            "facebook": "https://facebook.com/phamkhanhhung",
+            "youtube": "",
+            "instagram": ""
+        },
+        {
+            "name": "Phan Đinh Tùng",
+            "description": "Ca sĩ nhạc trẻ nổi tiếng thập niên 2000.",
+            "img": "/assets/images/artist/phandinhtung.jpg",
+            "facebook": "https://facebook.com/phandinhtung",
+            "youtube": "",
+            "instagram": ""
+        },
+        {
+            "name": "Quốc Thiên",
+            "description": "Ca sĩ, quán quân Vietnam Idol 2008.",
+            "img": "/assets/images/artist/quocthien.jpg",
+            "facebook": "https://facebook.com/quocthien",
+            "youtube": "",
+            "instagram": "https://instagram.com/quocthien"
+        },
+        {
+            "name": "Rhymastic",
+            "description": "Rapper, producer nổi tiếng và thành viên SpaceSpeakers.",
+            "img": "/assets/images/artist/rhymastic.jpg",
+            "facebook": "https://facebook.com/rhymastic",
+            "youtube": "",
+            "instagram": "https://instagram.com/rhymastic"
+        },
+        {
+            "name": "S.T Sơn Thạch",
+            "description": "Ca sĩ, dancer, cựu thành viên nhóm 365.",
+            "img": "/assets/images/artist/stsonthach.jpg",
+            "facebook": "https://facebook.com/stsonthach",
+            "youtube": "",
+            "instagram": "https://instagram.com/stsonthach"
+        },
+        {
+            "name": "SOOBIN",
+            "description": "Ca sĩ, nhạc sĩ nổi tiếng của Vpop, thành viên SpaceSpeakers.",
+            "img": "/assets/images/artist/soobin.jpg",
+            "facebook": "https://facebook.com/soobin.official",
+            "youtube": "https://youtube.com/@SOOBINOFFICIAL",
+            "instagram": "https://instagram.com/soobin.hoangson"
+        },
+        {
+            "name": "Tăng Phúc",
+            "description": "Ca sĩ trẻ nổi tiếng với nhiều bản cover và ballad.",
+            "img": "/assets/images/artist/tangphuc.jpg",
+            "facebook": "https://facebook.com/tangphuc",
+            "youtube": "",
+            "instagram": "https://instagram.com/tangphuc"
+        },
+        {
+            "name": "Thanh Duy",
+            "description": "Ca sĩ, quán quân Vietnam Idol 2008.",
+            "img": "/assets/images/artist/thanhduy.jpg",
+            "facebook": "https://facebook.com/thanhduy",
+            "youtube": "",
+            "instagram": "https://instagram.com/thanhduy"
+        },
+        {
+            "name": "Thành Trung",
+            "description": "MC truyền hình nổi tiếng tại Việt Nam.",
+            "img": "/assets/images/artist/thanhtrung.jpg",
+            "facebook": "https://facebook.com/thanhtrung",
+            "youtube": "",
+            "instagram": ""
+        },
+        {
+            "name": "Tiến Luật",
+            "description": "Diễn viên hài và điện ảnh nổi tiếng.",
+            "img": "/assets/images/artist/tienluat.jpg",
+            "facebook": "https://facebook.com/tienluat",
+            "youtube": "",
+            "instagram": "https://instagram.com/tienluat"
+        },
+        {
+            "name": "Trọng Hiếu",
+            "description": "Ca sĩ, quán quân Vietnam Idol Đức.",
+            "img": "/assets/images/artist/tronghieu.jpg",
+            "facebook": "https://facebook.com/tronghieu",
+            "youtube": "",
+            "instagram": "https://instagram.com/tronghieu"
+        },
+        {
+            "name": "Trương Thế Vinh",
+            "description": "Ca sĩ, diễn viên và người mẫu.",
+            "img": "/assets/images/artist/truongthevinh.jpg",
+            "facebook": "https://facebook.com/truongthevinh",
+            "youtube": "",
+            "instagram": "https://instagram.com/truongthevinh"
+        },
+        {
+            "name": "Tuấn Hưng",
+            "description": "Ca sĩ nổi tiếng với nhiều bản hit Vpop.",
+            "img": "/assets/images/artist/tuanhung.jpg",
+            "facebook": "https://facebook.com/tuanhung",
+            "youtube": "",
+            "instagram": "https://instagram.com/tuanhung"
+        },
+        {
+            "name": "Tự Long",
+            "description": "NSND, nghệ sĩ hài và diễn viên chèo nổi tiếng.",
+            "img": "/assets/images/artist/tulong.jpg",
+            "facebook": "https://facebook.com/tulong",
+            "youtube": "",
+            "instagram": ""
+        }
+    ]
+}

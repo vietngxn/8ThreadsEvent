@@ -1,0 +1,8 @@
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+  color: #aaa;
+  font-size: 13.5px;
+}

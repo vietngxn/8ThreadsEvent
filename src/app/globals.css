@@ -311,3 +311,31 @@ body {
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
 }
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-left {
+  animation: marqueeLeft var(--speed, 35s) linear infinite;
+}
+
+.marquee-right {
+  animation: marqueeRight var(--speed, 35s) linear infinite;
+}
