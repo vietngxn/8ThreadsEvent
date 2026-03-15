@@ -1,7 +1,9 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import localFont from "next/font/local";
+import Image from "next/image";
 import Clock from "@/components/common/Clock";
 const fogtwono5 = localFont({
     src: "../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
@@ -20,6 +22,19 @@ const brunoace = localFont({
 });
 export default function Highlight() {
     const containerRef = useRef(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const router = useRouter();
+
+    const menuItems = [
+        { label: "TICKETS", href: "/", showArrow: true },
+        { label: "HIGHLIGHT", href: "#" },
+        { label: "RETAIL", href: "#", showArrow: true },
+        { label: "EXPERIENCE", href: "#" },
+        { label: "ARTISTS", href: "/artists" },
+        { label: "DROP", href: "#" },
+        { label: "STORIES", href: "#" },
+
+    ];
 
 
 
@@ -43,7 +58,7 @@ export default function Highlight() {
     return (
         <div
             ref={containerRef}
-            className="relative w-full min-h-screen overflow-hidden"
+            className={`relative w-full min-h-screen overflow-hidden ${fogtwono5.variable}`}
             style={{ "--mx": "-9999px", "--my": "-9999px" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -70,11 +85,124 @@ export default function Highlight() {
                     transition: "background 0.05s ease",
                 }}
             />
-
-            {/* Sweeping spotlight beams */}
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-1" />
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-2" />
             <div className="absolute inset-0 pointer-events-none spotlight-beam beam-3" />
+            <div
+                style={{
+                    position: "fixed",
+                    inset: 0,
+                    zIndex: 50,
+                    background: "rgba(0,0,0,0.4)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    display: "flex",
+                    alignItems: "center",
+                    pointerEvents: menuOpen ? "auto" : "none",
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? "translateX(0)" : "translateX(4%)",
+                    transition: "opacity 0.45s cubic-bezier(0.4,0,0.2,1), transform 0.45s cubic-bezier(0.4,0,0.2,1)",
+                }}
+            >
+                <nav
+                    style={{
+                        position: "relative",
+                        zIndex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        paddingLeft: "10vw",
+                    }}
+                >
+                    {menuItems.map((item, index) => (
+                        <div
+                            key={index}
+                            onClick={() => router.push(item.href)}
+                            style={{
+                                fontFamily: fogtwono5.style.fontFamily,
+                                fontSize: "clamp(48px, 8vw, 110px)",
+                                color: "rgba(255,255,255,0.8)",
+                                lineHeight: 1.05,
+                                letterSpacing: "0.04em",
+                                textDecoration: "none",
+                                display: "block",
+                                cursor: "pointer",
+                                transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+                                opacity: menuOpen ? 1 : 0,
+                                transition: `transform 0.45s cubic-bezier(0.4,0,0.2,1) ${index * 60}ms, opacity 0.45s cubic-bezier(0.4,0,0.2,1) ${index * 60}ms, color 0.2s, letter-spacing 0.2s`,
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.color = "white";
+                                e.currentTarget.style.letterSpacing = "0.08em";
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+                                e.currentTarget.style.letterSpacing = "0.04em";
+                            }}
+                        >
+                            <span style={{ display: "inline-flex", alignItems: "center", gap: "clamp(8px, 1vw, 20px)" }}>
+                                <span
+                                    style={{
+                                        background: "linear-gradient(150deg, #C5C3BD, #816431)",
+                                        WebkitBackgroundClip: "text",
+                                        backgroundClip: "text",
+                                        WebkitTextFillColor: "transparent",
+                                        color: "transparent",
+                                    }}
+                                >
+                                    {item.label[0]}
+                                </span>
+                                {item.label.slice(1)}
+                                {item.showArrow && (
+                                    <Image
+                                        src="/arrow.png"
+                                        alt="arrow"
+                                        width={50}
+                                        height={50}
+                                        style={{ objectFit: "contain", display: "inline-block" }}
+                                    />
+                                )}
+                            </span>
+                        </div>
+                    ))}
+                </nav>
+            </div>
+
+            {/* Toggle button */}
+            <button
+                onClick={() => setMenuOpen(v => !v)}
+                style={{
+                    position: "fixed",
+                    top: "32px",
+                    right: "32px",
+                    width: "48px",
+                    height: "48px",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 200,
+                    opacity: 0.75,
+                    transition: "opacity 0.2s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.opacity = "1"}
+                onMouseLeave={e => e.currentTarget.style.opacity = "0.75"}
+            >
+                <svg
+                    width="36"
+                    height="36"
+                    viewBox="0 0 36 36"
+                    fill="none"
+                    style={{
+                        transform: menuOpen ? "rotate(45deg)" : "rotate(0deg)",
+                        transition: "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+                    }}
+                >
+                    <line x1="18" y1="2" x2="18" y2="34" stroke="white" strokeWidth="2" />
+                    <line x1="2" y1="18" x2="34" y2="18" stroke="white" strokeWidth="2" />
+                </svg>
+            </button>
 
             <div className="relative z-10 flex flex-col items-center min-h-screen text-white text-center px-6">
                 <img style={{
