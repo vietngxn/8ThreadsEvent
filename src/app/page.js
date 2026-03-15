@@ -1,12 +1,11 @@
-import SearchInput from "@/components/common/SearchInput";
-import Image from "next/image";
-import Button from "@/components/common/Button/ConfirmButton.jsx";
-import StartingPage from "./startingPage";
+import BackButton from "@/components/common/Button/BackButton";
+import GoldButton from "@/components/common/Button/GoldButton";
+import VoucherDetail from "@/components/common/VoucherDetail/VoucherDetail";
+import VoucherModal from "@/components/common/VoucherModal/VoucherModal";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <StartingPage />
+    <div className="flex min-h-screen items-center justify-center bg-[#121212]">
     </div>
-  )
+  );
 }
