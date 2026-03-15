@@ -4,12 +4,12 @@ import Button from "@/components/common/Button/GoldButton.jsx";
 import StartingPage from "./startingPage";
 import ConcertEventCard from "@/components/Card/ConcertEventCard";
 import ConcertBooking from "@/components/booking/ConcertBooking";
-import LoginPage from "./login/page";
+import Footer from "@/components/common/Footer/Footer";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <LoginPage />
+      <ConcertEventCard />
     </div>
   )
 }
