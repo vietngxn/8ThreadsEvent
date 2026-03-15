@@ -9,17 +9,13 @@ export default function ConcertsPage() {
   const [filters, setFilters] = useState({
     city: null,
     price: null,
+    genre: null,
   });
 
   return (
-    <div style={{ padding: "40px" }}>
-      {/* Filter Buttons */}
+    <div style={{ padding: "40px", minHeight: "100vh", background: "#000" }}>
       <FilterBar filters={filters} setFilters={setFilters} />
-
-      {/* Selected Filters */}
       <FilterTags filters={filters} setFilters={setFilters} />
-
-      {/* Concert List */}
     </div>
   );
 }
