@@ -1,0 +1,104 @@
+.navbar{
+  position: relative;
+  width: 100%;
+  background: #000000;
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Kanit", sans-serif;
+}
+
+.menu{
+  display: flex;
+  gap: 100px;
+}
+
+.link{
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+.link:hover{
+  color: #9ca3af;
+}
+
+.userSection{
+  position: relative;
+}
+
+.userButton{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.userButton:hover{
+  background: rgba(255,255,255,0.05);
+}
+
+.username{
+    font-size: 18px;
+}
+
+.avatar{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.rightSide{
+  display:flex;
+  align-items:center;
+  gap:50px;
+  margin-right: 50px;
+}
+
+.dropdown{
+  position: absolute;
+  right: 0;
+  margin-top: 12px;
+  width: 220px;
+  background: #262626;
+  border: 1px solid #404040;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  padding: 8px 0;
+  z-index: 20;
+}
+
+.dropdownItem{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #e5e5e5;
+  transition: 0.2s;
+  font-size: 18px;
+}
+
+.dropdownItem:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+.overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}

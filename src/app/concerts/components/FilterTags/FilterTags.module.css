@@ -1,0 +1,54 @@
+.wrapper {
+  display: flex;
+  gap: 16px;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+/* Tag */
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  background-color: #4b4b4b;
+
+  background-image:
+    linear-gradient(#4b4b4b, #4b4b4b), linear-gradient(90deg, #cbb37a, #e6e6e6);
+
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  border: 2px solid transparent;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Text vàng */
+
+.text {
+  background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Icon X */
+
+.icon {
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tag:hover {
+  background-image:
+    linear-gradient(#5a5a5a, #5a5a5a), linear-gradient(90deg, #e0c27a, #ffffff);
+}
