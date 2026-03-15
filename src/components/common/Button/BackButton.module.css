@@ -28,7 +28,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* text gold gradient */
 .text {
   font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
   background: linear-gradient(90deg, #cbb37a, #e6e6e6);
