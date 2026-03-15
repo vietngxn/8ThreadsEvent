@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import FilterBar from "./components/FilterBar/FilterBar";
-import FilterTags from "./components/FilterTags/FilterTags";
+import FilterBar from "../../components/FilterBar/FilterBar";
+import FilterTags from "../../components/FilterTags/FilterTags";
 
 export default function ConcertsPage() {
   const [filters, setFilters] = useState({
