@@ -8,7 +8,9 @@ export default function VoucherDetail() {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <BackButton />
+          <div className={styles.backButtonWrap}>
+            <BackButton />
+          </div>
           <h2 className={styles.title}>Chi tiết voucher</h2>
         </div>
 
