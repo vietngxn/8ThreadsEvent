@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "../login/login.module.css";
-import Button from "@/components/common/Button/ConfirmButton";
+import Button from "@/components/common/Button/GoldButton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

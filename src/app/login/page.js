@@ -2,7 +2,7 @@
 
 import { useState, Suspense } from "react"; 
 import styles from "./login.module.css";
-import Button from "@/components/common/Button/ConfirmButton";
+import Button from "@/components/common/Button/GoldButton";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
