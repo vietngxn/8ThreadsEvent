@@ -1,5 +1,13 @@
+@font-face {
+  font-family: "KanitLocal";
+  src: url("/assets/fonts/Kanit/Kanit-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 25px;
   justify-content: center;
@@ -24,16 +32,19 @@
   background-origin: border-box;
   background-clip: padding-box, border-box;
 
-  border: 2px solid transparent;
+  border: 2px solid #ffffff;
 
   font-size: 14px;
   font-weight: 500;
+  font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
 }
 
 /* Text vàng */
 
 .text {
+  color: #f5f5f5;
   background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -42,8 +53,9 @@
 
 .icon {
   cursor: pointer;
-  color: white;
+  color: #f5f5f5;
   background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

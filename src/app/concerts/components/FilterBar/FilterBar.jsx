@@ -36,37 +36,46 @@ export default function FilterBar({ filters, setFilters }) {
     }));
   };
 
+  const resetAdvanced = () => {
+    setFilters((prev) => ({
+      ...prev,
+      price: null,
+      genre: null,
+    }));
+  };
+
   return (
     <div className={styles.wrapper}>
-      {/* City Filter */}
-
       <div className={styles.filterItem}>
         <button
-          className={styles.button}
+          className={`${styles.button} ${cityOpen ? styles.buttonOpen : ""}`}
           onClick={() => setCityOpen(!cityOpen)}
+          type="button"
         >
-          Thành phố Hồ Chí Minh
-          <ChevronDown size={18} />
+          {filters.city || "Thành phố Hồ Chí Minh"}
+          <ChevronDown
+            size={18}
+            className={cityOpen ? styles.iconRotated : ""}
+          />
         </button>
 
         {cityOpen && (
           <div className={styles.dropdown}>
             {cities.map((city) => (
-              <div
+              <button
                 key={city}
-                className={styles.option}
+                className={`${styles.option} ${filters.city === city ? styles.optionActive : ""}`}
                 onClick={() => selectCity(city)}
+                type="button"
               >
                 {city}
-              </div>
+              </button>
             ))}
           </div>
         )}
       </div>
 
-      {/* Sort */}
-
-      <button className={styles.button}>
+      <button className={styles.button} type="button">
         <ArrowUpDown size={18} />
         Sắp xếp
       </button>
@@ -75,8 +84,9 @@ export default function FilterBar({ filters, setFilters }) {
 
       <div className={styles.filterItem}>
         <button
-          className={styles.button}
+          className={`${styles.button} ${advancedOpen ? styles.buttonOpen : ""}`}
           onClick={() => setAdvancedOpen(!advancedOpen)}
+          type="button"
         >
           <Funnel size={18} />
           Bộ lọc nâng cao
@@ -84,33 +94,62 @@ export default function FilterBar({ filters, setFilters }) {
 
         {advancedOpen && (
           <div className={styles.advanced}>
+            <div className={styles.advancedHeader}>
+              <div>
+                <p className={styles.subTitle}>Tinh chỉnh kết quả</p>
+                <h3 className={styles.title}>Bộ lọc nâng cao</h3>
+              </div>
+
+              <button
+                className={styles.clearButton}
+                onClick={resetAdvanced}
+                type="button"
+              >
+                Xóa lọc
+              </button>
+            </div>
+
             <div className={styles.group}>
               <p>Giá</p>
 
-              {prices.map((price) => (
-                <div
-                  key={price}
-                  className={styles.option}
-                  onClick={() => selectPrice(price)}
-                >
-                  {price}
-                </div>
-              ))}
+              <div className={styles.optionGrid}>
+                {prices.map((price) => (
+                  <button
+                    key={price}
+                    className={`${styles.option} ${filters.price === price ? styles.optionActive : ""}`}
+                    onClick={() => selectPrice(price)}
+                    type="button"
+                  >
+                    {price}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className={styles.group}>
               <p>Thể loại</p>
 
-              {genres.map((genre) => (
-                <div
-                  key={genre}
-                  className={styles.option}
-                  onClick={() => selectGenre(genre)}
-                >
-                  {genre}
-                </div>
-              ))}
+              <div className={styles.optionGrid}>
+                {genres.map((genre) => (
+                  <button
+                    key={genre}
+                    className={`${styles.option} ${filters.genre === genre ? styles.optionActive : ""}`}
+                    onClick={() => selectGenre(genre)}
+                    type="button"
+                  >
+                    {genre}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            <button
+              className={styles.applyButton}
+              onClick={() => setAdvancedOpen(false)}
+              type="button"
+            >
+              Áp dụng bộ lọc
+            </button>
           </div>
         )}
       </div>
