@@ -1,16 +1,11 @@
-import Image from "next/image";
-import Button from "@/components/common/Button/GoldButton.jsx";
-import StartingPage from "./startingPage";
-import ConcertEventCard from "@/components/Card/ConcertEventCard";
-import ConcertBooking from "@/components/booking/ConcertBooking";
-import Footer from "@/components/common/Footer/Footer";
-import LoginPage from "./login/page";
-import Navbar from "@/components/common/Navbar/Navbar";
-import SearchBar from "@/components/common/SearchBar/SearchBar";
+import BackButton from "@/components/common/Button/BackButton";
+import GoldButton from "@/components/common/Button/GoldButton";
+import VoucherDetail from "@/components/common/VoucherDetail/VoucherDetail";
+import VoucherModal from "@/components/common/VoucherModal/VoucherModal";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-[#121212]">
     </div>
   );
 }
