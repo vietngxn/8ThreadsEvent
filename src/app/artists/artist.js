@@ -114,7 +114,6 @@ export default function Artist() {
                         transition: "transform 0.45s cubic-bezier(0.4,0,0.2,1)",
                     }}
                 >
-                    {/* Left panel — artist photo */}
                     <div
                         style={{
                             width: "520px",
@@ -307,8 +306,6 @@ export default function Artist() {
                     ))}
                 </nav>
             </div>
-
-            {/* Menu toggle button */}
             <button
                 onClick={() => setMenuOpen(v => !v)}
                 style={{
@@ -345,25 +342,18 @@ export default function Artist() {
                     <line x1="2" y1="18" x2="34" y2="18" stroke="white" strokeWidth="2" />
                 </svg>
             </button>
-
-            {/* Page content */}
             <div className="relative z-10 flex flex-col items-center min-h-screen text-white text-center px-6">
-                {/* Logo */}
                 <img
                     style={{ width: "150px" }}
                     src="/assets/images/logo.png"
                     alt="8Threads Logo"
                 />
-
-                {/* Clock */}
                 <div style={{ width: "1200px", marginTop: "100px", rotate: "-100deg", translate: "-50% -440px" }}>
                     <Clock
                         fontFamilyDigital={brunoace.style.fontFamily}
                         fontFamilyMessage={fogtwono5.style.fontFamily}
                     />
                 </div>
-
-                {/* Artist rows */}
                 {(() => {
                     const artists = artistData.anhTai;
                     const half = Math.ceil(artists.length / 2);
