@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
+  eventId: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   categoryId: { type: String, required: true },
   description: { type: String },
@@ -17,15 +18,15 @@ const eventSchema = new mongoose.Schema({
     address: { type: String }
   },
 
-  status: { 
-    type: String, 
-    enum: ["active", "inactive"], 
-    default: "active" 
+  status: {
+    type: String,
+    enum: ["active", "inactive"],
+    default: "active"
   },
 
   createdBy: { type: String }
 
-}, { 
+}, {
   timestamps: true,
   collection: "Events"
 });

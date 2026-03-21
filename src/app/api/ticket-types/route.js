@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/app/lib/mongodb";
 import TicketType from "@/models/TicketType";
 
 export async function GET() {
