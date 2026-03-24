@@ -1,59 +1,65 @@
-.navbar{
-  position: relative;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background: #000000;
-  border: none;
+  height: var(--navbar-height);
+  z-index: 50;
+
+  background-image: var(--background-image);
   color: white;
-  padding: 10px 24px;
+
+  padding: 0 24px;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Kanit", sans-serif;
+
 }
 
-.menu{
+.menu {
   display: flex;
   gap: 100px;
 }
 
-.link{
+.link {
   color: white;
   text-decoration: none;
   transition: 0.3s;
   font-size: 18px;
 }
 
-.link:hover{
+.link:hover {
   color: #9ca3af;
 }
 
-.userSection{
+.userSection {
   position: relative;
 }
 
-.userButton{
+.userButton {
   display: flex;
   align-items: center;
   gap: 12px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 20px;
+  padding: 6px 10px;
   border-radius: 8px;
   transition: 0.3s;
 }
 
-.userButton:hover{
-  background: rgba(255,255,255,0.05);
+.userButton:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.username{
-    font-size: 18px;
+.username {
+  font-size: 18px;
 }
 
-.avatar{
-  width: 60px;
-  height: 60px;
+.avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -62,14 +68,14 @@
   position: relative;
 }
 
-.rightSide{
-  display:flex;
-  align-items:center;
-  gap:50px;
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 50px;
   margin-right: 50px;
 }
 
-.dropdown{
+.dropdown {
   position: absolute;
   right: 0;
   margin-top: 12px;
@@ -77,12 +83,12 @@
   background: #262626;
   border: 1px solid #404040;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   padding: 8px 0;
   z-index: 20;
 }
 
-.dropdownItem{
+.dropdownItem {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -93,11 +99,11 @@
   font-size: 18px;
 }
 
-.dropdownItem:hover{
-  background: rgba(255,255,255,0.08);
+.dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.overlay{
+.overlay {
   position: fixed;
   inset: 0;
   z-index: 10;

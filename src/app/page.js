@@ -6,11 +6,11 @@ import FilterBar from "../components/FilterBar/FilterBar";
 import FilterTags from "../components/FilterTags/FilterTags";
 import Diagram from "@/components/Diagram/Diagram";
 import StartingPage from "./startingPage";
+import ConcertsPage from "./concerts/page";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#121212]">
-      <StartingPage />
-    </div>
+      <ConcertsPage />
+      
   );
 }
