@@ -7,6 +7,6 @@ const ticketTypeSchema = new mongoose.Schema({
   totalQuantity: Number,
   soldQuantity: Number,
   isActive: Boolean
-});
+}, { collection: "Ticket_types" });
 
-export default mongoose.models.TicketType || mongoose.model("Ticket_types", ticketTypeSchema);
+export default mongoose.models.TicketType || mongoose.model("TicketType", ticketTypeSchema);

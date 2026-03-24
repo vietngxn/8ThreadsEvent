@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --navbar-height: 130px;
+  --background-image: url('/FirstPage.png');
 }
 
 @theme inline {
