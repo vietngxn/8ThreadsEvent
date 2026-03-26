@@ -40,8 +40,8 @@ const menuItems = [
                 <Image
                     src="/assets/images/logo.png"
                     alt="8Threads Logo"
-                    width={150}
-                    height={80}
+                    width={120}
+                    height={40}
                 />
             </div>
 

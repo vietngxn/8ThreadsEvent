@@ -6,11 +6,7 @@ export async function GET() {
 
     await connectDB();
 
-    console.log("Collection:", Event.collection.name); // 👈 thêm ở đây
-
     const events = await Event.find();
-
-    console.log("Data:", events); // 👈 debug luôn
 
     return Response.json(events);
 }

@@ -10,7 +10,6 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin-top: 40px;
   position: relative;
 }
 
@@ -21,6 +20,7 @@
 .button {
   display: flex;
   align-items: center;
+  height: 44px;
   gap: 8px;
   padding: 14px 26px;
   border-radius: 999px;

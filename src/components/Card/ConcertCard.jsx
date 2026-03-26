@@ -5,35 +5,22 @@ import EventTitle from "../event/EventTitle";
 import EventDate from "../event/EventDate";
 import EventLocation from "../event/EventLocation";
 
-export default function ConcertCard() {
-    return (
-        <div className={styles.wrapper}>
-            <div className={styles.card}>
-
-                {/* Poster */}
-                <div className={styles.poster}>
-                    <img
-                        src="/poster.jpg"
-                        alt="Concert Poster"
-                        className={styles.posterImg}
-                    />
-                </div>
-
-                {/* Info */}
-                <div className={styles.info}>
-
-                    <EventTitle title="[CONCERT] ANH TRAI VƯỢT NGÀN CHÔNG GAI DAY3, DAY4" />
-
-                    <p className={styles.price}>Từ 800.000đ</p>
-
-                    <div className={styles.meta}>
-                        <EventDate date="22, 23 Tháng 3, 2025" />
-
-                        <EventLocation location="The Global City, TP Thủ Đức" />
-                    </div>
-
-                </div>
-            </div>
+export default function ConcertCard({ event }) {
+  return (
+    <div className={styles.card}>
+      <div className={styles.poster}>
+        <img src={event.img || "/poster.jpg"} alt={event.name} />
+      </div>
+      <div className={styles.info}>
+        <EventTitle title={event.name} />
+        <p className={styles.price}>
+          Giá từ: {event.minPrice?.toLocaleString()}đ
+        </p>
+        <div className={styles.meta}>
+          <EventDate date={event.startTime} />
+          <EventLocation location={event.venue?.address || "Địa điểm chưa cập nhật"} />
         </div>
-    );
+      </div>
+    </div>
+  );
 }

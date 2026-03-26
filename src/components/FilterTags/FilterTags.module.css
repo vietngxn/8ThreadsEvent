@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 25px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* Tag */
