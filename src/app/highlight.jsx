@@ -26,15 +26,27 @@ export default function Highlight() {
     const router = useRouter();
 
     const menuItems = [
-        { label: "TICKETS", href: "/", showArrow: true },
+        { label: "TICKETS", href: "/", showArrow: true, requireAuth: true, authTarget: "/concerts" },
         { label: "HIGHLIGHT", href: "#" },
         { label: "RETAIL", href: "#", showArrow: true },
         { label: "EXPERIENCE", href: "#" },
         { label: "ARTISTS", href: "/artists" },
         { label: "DROP", href: "#" },
         { label: "STORIES", href: "#" },
-
     ];
+
+    const handleMenuClick = (item) => {
+        if (!item.requireAuth) {
+            router.push(item.href);
+            return;
+        }
+        const isLoggedIn = localStorage.getItem("user_active") === "true";
+        if (isLoggedIn) {
+            router.push(item.authTarget);
+        } else {
+            router.push(`/login?redirect=${encodeURIComponent(item.authTarget)}`);
+        }
+    };
 
 
 
@@ -116,7 +128,7 @@ export default function Highlight() {
                     {menuItems.map((item, index) => (
                         <div
                             key={index}
-                            onClick={() => router.push(item.href)}
+                            onClick={() => handleMenuClick(item)}
                             style={{
                                 fontFamily: fogtwono5.style.fontFamily,
                                 fontSize: "clamp(48px, 8vw, 110px)",
