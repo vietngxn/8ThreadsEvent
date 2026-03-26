@@ -32,3 +32,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.blackText {
+  color: #000;
+  background: none;
+  -webkit-text-fill-color: #000;
+}
