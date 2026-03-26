@@ -1,13 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./ConcertCard.module.css";
 import EventTitle from "../event/EventTitle";
 import EventDate from "../event/EventDate";
 import EventLocation from "../event/EventLocation";
 
 export default function ConcertCard({ event }) {
+  const [hover, setHover] = useState(false);
+
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <div className={styles.poster}>
         <img src={event.img || "/poster.jpg"} alt={event.name} />
       </div>
@@ -17,8 +24,11 @@ export default function ConcertCard({ event }) {
           Giá từ: {event.minPrice?.toLocaleString()}đ
         </p>
         <div className={styles.meta}>
-          <EventDate date={event.startTime} />
-          <EventLocation location={event.venue?.address || "Địa điểm chưa cập nhật"} />
+          <EventDate date={event.startTime} isHover={hover} />
+          <EventLocation
+            location={event.venue?.address || "Địa điểm chưa cập nhật"}
+            isHover={hover}
+          />
         </div>
       </div>
     </div>
