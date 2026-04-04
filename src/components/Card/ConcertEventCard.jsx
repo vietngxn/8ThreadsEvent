@@ -15,7 +15,7 @@ export default function ConcertEventCard() {
 
                 <EventTitle title="[CONCERT] ANH TRAI VƯỢT NGÀN CHÔNG GAI DAY3, DAY4" />
 
-                <EventDate date="22, 23 Tháng 3, 2025" />
+                <EventDate date="2025-03-22" />
 
                 <EventLocation location="The Global City, TP Thủ Đức" />
 

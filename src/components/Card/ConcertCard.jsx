@@ -18,15 +18,26 @@ export default function ConcertCard({ event }) {
       <div className={styles.poster}>
         <img src={event.img || "/poster.jpg"} alt={event.name} />
       </div>
+
       <div className={styles.info}>
         <EventTitle title={event.name} />
+
         <p className={styles.price}>
-          Giá từ: {event.minPrice?.toLocaleString()}đ
+          Giá từ: {event.minPrice ? event.minPrice.toLocaleString() : "Đang cập nhật"}đ
         </p>
+
         <div className={styles.meta}>
-          <EventDate date={event.startTime} isHover={hover} />
+          <EventDate
+            date={event.time?.event?.start}
+            isHover={hover}
+          />
+
           <EventLocation
-            location={event.venue?.address || "Địa điểm chưa cập nhật"}
+            location={
+              event.venue
+                ? `${event.venue.name}, ${event.venue.city}`
+                : "Địa điểm chưa cập nhật"
+            }
             isHover={hover}
           />
         </div>

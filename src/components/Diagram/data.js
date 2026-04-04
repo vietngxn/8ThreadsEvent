@@ -1,5 +1,3 @@
-export const WING_WIDTH = 390
-
 export const WING_BASE = [
   {
     key: "thanh-xuan",
@@ -29,14 +27,14 @@ export const WING_BASE = [
     label: "Bí ẩn",
     fill: "#FFA500",
     path: `
-    M 0,0
-    L 75,0
-    L 75,100
-    L 120,125
-    L 120,275
-    L 0,275
-    Z
-  `,
+      M 0,0
+      L 75,0
+      L 75,100
+      L 120,125
+      L 120,275
+      L 0,275
+      Z
+    `,
     x: 185,
     y: 0
   },
@@ -66,6 +64,53 @@ export const WING_BASE = [
     x: 120,
     y: 285
   },
+  {
+    key: "suc-soi",
+    label: "Sục sôi",
+    fill: "#00bfa5",
+    shape: "rect",
+    x: 0,
+    y: 0,
+    w: 150,
+    h: 80,
+    transform: `translate(-35, 73) rotate(73)`
+  },
+  {
+    key: "huyen-thoai",
+    label: "Huyền thoại",
+    fill: "#007062",
+    shape: "rect",
+    x: 10,
+    y: 50,
+    w: 150,
+    h: 32,
+    transform: `translate(-120, 98) rotate(72)`
+  },
+  {
+    key: "xuan-ha-thu-dong",
+    label: "Xuân hạ thu đông",
+    fill: "#c477ff",
+    shape: "rect",
+    x: 0,
+    y: 0,
+    w: 195,
+    h: 40,
+    transform: `translate(-8, 246) rotate(39)`
+  },
+  {
+    key: "dam-me",
+    label: "Đam mê",
+    fill: "#e8274b",
+    shape: "rect",
+    x: 0,
+    y: 0,
+    w: 195,
+    h: 195,
+    transform: `translate(-122, 323) rotate(40, 99, 97)`
+  },
+
+  // ====== giữ nguyên phần còn lại ======
+
   {
     key: "s-vip",
     label: "S-Vip",
@@ -116,128 +161,91 @@ export const WING_BASE = [
     w: 300,
     h: 70
   },
-  //line
+
+  // line
   {
     key: "line",
     label: "",
     fill: "#808080",
     path: `
-    M 200,0
-    L -10,0
-    L -210,-160
-    L -260,-320
+      M 200,0
+      L -10,0
+      L -210,-160
+      L -260,-320
 
-    L -270.6,-316.0
-    L -219.6,-155.0
-    L -15,10
-    L 200,10
-    Z
-  `,
+      L -270.6,-316.0
+      L -219.6,-155.0
+      L -15,10
+      L 200,10
+      Z
+    `,
     x: 150,
     y: 415
   },
 
   {
-    key: "suc-soi",
-    label: "Sục sôi",
-    fill: "#00bfa5",
-    shape: "rect",
-    x: 0,
-    y: 0,
-    w: 150,
-    h: 80,
-  },
-  {
-    key: "huyen-thoai",
-    label: "Huyền thoại",
-    fill: "#007062",
-    shape: "rect",
-    x: 10,
-    y: 50,
-    w: 32,
-    h: 150,
-  },
-  {
-    key: "xuan-ha-thu-dong",
-    label: "Xuân hạ thu đông",
-    fill: "#c477ff",
-    shape: "rect",
-    x: 0,
-    y: 0,
-    w: 195,
-    h: 40,
-  },
-  {
-    key: "dam-me",
-    label: "Đam mê",
-    fill: "#e8274b",
-    shape: "rect",
-    x: 0,
-    y: 0,
-    w: 195,
-    h: 195,
-  },
-  {
     key: "block-phu",
     label: "",
     fill: "#808080",
     path: `
-    M 0,-20
-    L 10,-20
-    L 10,-40
-    L 30,-40
-    L 30,40
-    L 0,40
-    Z
-  `,
+      M 0,-20
+      L 10,-20
+      L 10,-40
+      L 30,-40
+      L 30,40
+      L 0,40
+      Z
+    `,
     x: 320,
     y: 360
   },
+
   {
     key: "block-phu-top",
     label: "",
     fill: "#808080",
     path: `
-    M 0,-20
-    L 20,-20
-    L 20,-40
-    L 50,-40
-    L 50,10
-    L 130,10
-    L 130,220
-    L 120,220
+      M 0,-20
+      L 20,-20
+      L 20,-40
+      L 50,-40
+      L 50,10
+      L 130,10
+      L 130,220
+      L 120,220
 
-    Q 100,190 50,170
-    Q 70,125 50,80
-    Q 70,70 70,60 
+      Q 100,190 50,170
+      Q 70,125 50,80
+      Q 70,70 70,60 
 
-    L 70,30
-    L 35,30
-    L 35,20
-    L 0,20
+      L 70,30
+      L 35,30
+      L 35,20
+      L 0,20
 
-    Z
-  `,
+      Z
+    `,
     x: 220,
     y: -80
   },
+
   {
     key: "ruc-lua",
     label: "Rực lửa",
     fill: "#5dbbee",
     path: `
-    M 0,0
-    L 40, 0 
-    L 40, 130
-    L 30, 130  
+      M 0,0
+      L 40, 0 
+      L 40, 130
+      L 30, 130  
 
-    Q 20,115 -10,100
-    Q 0,60 -10,20
-    Q 0,10 0,0
+      Q 20,115 -10,100
+      Q 0,60 -10,20
+      Q 0,10 0,0
 
-    Z
-  `,
+      Z
+    `,
     x: 300,
     y: -20
   }
-]
+];
