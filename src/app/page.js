@@ -6,11 +6,12 @@ import FilterBar from "../components/FilterBar/FilterBar";
 import FilterTags from "../components/FilterTags/FilterTags";
 import Diagram from "@/components/Diagram/Diagram";
 import StartingPage from "./startingPage";
+import ViewTicketPageTest from "./page/viewticket/viewticket";
 import ConcertsPage from "./page/concerts/page";
 
 export default function Home() {
   return (
-    <Diagram />
+    <ConcertsPage />
 
   );
 }
