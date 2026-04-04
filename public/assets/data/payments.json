@@ -1,0 +1,61 @@
+[{
+	"_id": {
+		"$oid": "69cfde7317fb506092787dbe"
+	},
+	"paymentId": "p001",
+	"orderId": "o001",
+	"method": "vnpay",
+	"amount": 300,
+	"currency": "VND",
+	"status": "success",
+	"paidAt": "2026-03-19T12:01:00Z"
+},
+{
+	"_id": {
+		"$oid": "69cfde7317fb506092787dc2"
+	},
+	"paymentId": "p005",
+	"orderId": "o005",
+	"method": "cash",
+	"amount": 120,
+	"currency": "VND",
+	"status": "success",
+	"paidAt": "2026-03-19T12:41:00Z"
+},
+{
+	"_id": {
+		"$oid": "69cfde7317fb506092787dc1"
+	},
+	"paymentId": "p004",
+	"orderId": "o004",
+	"method": "momo",
+	"amount": 120,
+	"currency": "VND",
+	"status": "failed",
+	"paidAt": null
+},
+{
+	"_id": {
+		"$oid": "69cfde7317fb506092787dc0"
+	},
+	"paymentId": "p003",
+	"orderId": "o003",
+	"method": "vnpay",
+	"amount": 100,
+	"currency": "VND",
+	"status": "success",
+	"paidAt": "2026-03-19T12:21:00Z"
+},
+{
+	"_id": {
+		"$oid": "69cfde7317fb506092787dbf"
+	},
+	"paymentId": "p002",
+	"orderId": "o002",
+	"method": "cash",
+	"amount": 150,
+	"currency": "VND",
+	"status": "pending",
+	"paidAt": null
+}]
+

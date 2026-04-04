@@ -59,7 +59,6 @@ export default function ConcertsPage() {
       style={{ backgroundImage: "var(--background-image)" }}
     >
       <div className="relative z-10">
-        <Navbar />
 
         <div className="max-w-[2000px] mx-auto pt-[calc(var(--navbar-height)*1.5)]">
           <div className="w-full px-30">

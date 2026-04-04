@@ -1,0 +1,154 @@
+[{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf794641"
+	},
+	"userId": "user_01",
+	"firstName": "Nam",
+	"lastName": "Nguyen",
+	"email": "nam@example.com",
+	"phone": "0988000000",
+	"avatar": "f.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:00:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": [
+		{
+			"voucherId": "v001",
+			"status": "available",
+			"receivedAt": {
+				"$date": "2026-04-04T15:54:08.445Z"
+			},
+			"usedAt": null
+		}
+	]
+},
+{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf79463e"
+	},
+	"userId": "user_04",
+	"firstName": "Chi",
+	"lastName": "Pham",
+	"email": "chi@example.com",
+	"phone": "0900000001",
+	"avatar": "c.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:30:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": []
+},
+{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf794640"
+	},
+	"userId": "user_06",
+	"firstName": "Huy",
+	"lastName": "Nguyen",
+	"email": "huy@example.com",
+	"phone": "0900000003",
+	"avatar": "e.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:50:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": []
+},
+{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf79463f"
+	},
+	"userId": "user_05",
+	"firstName": "Dung",
+	"lastName": "Vo",
+	"email": "dung@example.com",
+	"phone": "0900000002",
+	"avatar": "d.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:40:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": [
+		{
+			"voucherId": "v001",
+			"status": "available",
+			"receivedAt": {
+				"$date": "2026-04-04T15:54:08.445Z"
+			},
+			"usedAt": null
+		}
+	]
+},
+{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf79463d"
+	},
+	"userId": "user_03",
+	"firstName": "Binh",
+	"lastName": "Le",
+	"email": "binh@example.com",
+	"phone": "0911222333",
+	"avatar": "b.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:20:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": [
+		{
+			"voucherId": "v001",
+			"status": "available",
+			"receivedAt": {
+				"$date": "2026-04-04T15:54:08.445Z"
+			},
+			"usedAt": null
+		}
+	]
+},
+{
+	"_id": {
+		"$oid": "69bcc5e96530ef53bf79463c"
+	},
+	"userId": "user_02",
+	"firstName": "An",
+	"lastName": "Tran",
+	"email": "an@example.com",
+	"phone": "0987654321",
+	"avatar": "a.jpg",
+	"role": "customer",
+	"status": "active",
+	"createdAt": {
+		"$date": "2026-03-19T10:10:00Z"
+	},
+	"password": "hashed",
+	"cart": [],
+	"authProvider": "local",
+	"providerId": null,
+	"vouchers": []
+}]
+
