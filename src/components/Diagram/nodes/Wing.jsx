@@ -2,9 +2,6 @@
 
 import Node from "./Node";
 import { WING_BASE } from "../data";
-import {
-  DIAGONAL_TRANSFORMS,
-} from "./diagonalConfig";
 
 export default function Wing({
   side = "left",
@@ -16,9 +13,7 @@ export default function Wing({
   return (
     <g>
       {WING_BASE.map((n) => {
-        const transform =
-          DIAGONAL_TRANSFORMS[n.key] ??
-          `translate(${n.x} ${n.y})`;
+        const transform = n.transform ?? `translate(${n.x} ${n.y})`;
 
         return (
           <Node
