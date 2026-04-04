@@ -1,0 +1,170 @@
+[{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8d9e"
+	},
+	"voucherId": "v001",
+	"voucherName": "Giảm 10% toàn bộ đơn",
+	"condition": "minOrder >= 100",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-04-30T23:59:59Z",
+	"promotion": "Spring Sale",
+	"voucherType": "percent",
+	"value": 10,
+	"appliedEvent": [
+		"e001",
+		"e002"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8d9f"
+	},
+	"voucherId": "v002",
+	"voucherName": "Giảm 20% concert hot",
+	"condition": "minOrder >= 200",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-04-15T23:59:59Z",
+	"promotion": "Hot Event Discount",
+	"voucherType": "percent",
+	"value": 20,
+	"appliedEvent": [
+		"e003"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da0"
+	},
+	"voucherId": "v003",
+	"voucherName": "Giảm 50k cho đơn đầu tiên",
+	"condition": "firstOrder == true",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-05-01T00:00:00Z",
+	"promotion": "New User",
+	"voucherType": "minus",
+	"value": 50,
+	"appliedEvent": [
+		"e001",
+		"e004"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da1"
+	},
+	"voucherId": "v004",
+	"voucherName": "Giảm 15% sự kiện EDM",
+	"condition": "minOrder >= 150",
+	"timeStart": "2026-04-05T00:00:00Z",
+	"timeEnd": "2026-04-20T23:59:59Z",
+	"promotion": "EDM Festival",
+	"voucherType": "percent",
+	"value": 15,
+	"appliedEvent": [
+		"e005"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da2"
+	},
+	"voucherId": "v005",
+	"voucherName": "Giảm 30k weekend",
+	"condition": "minOrder >= 120",
+	"timeStart": "2026-04-06T00:00:00Z",
+	"timeEnd": "2026-04-28T23:59:59Z",
+	"promotion": "Weekend Deal",
+	"voucherType": "minus",
+	"value": 30,
+	"appliedEvent": [
+		"e002",
+		"e003"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da3"
+	},
+	"voucherId": "v006",
+	"voucherName": "Giảm 25% VIP ticket",
+	"condition": "ticketType == VIP",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-04-10T23:59:59Z",
+	"promotion": "VIP Exclusive",
+	"voucherType": "percent",
+	"value": 25,
+	"appliedEvent": [
+		"e006"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da4"
+	},
+	"voucherId": "v007",
+	"voucherName": "Giảm 100k đơn lớn",
+	"condition": "minOrder >= 500",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-06-01T00:00:00Z",
+	"promotion": "Big Order Deal",
+	"voucherType": "minus",
+	"value": 100,
+	"appliedEvent": [
+		"e001",
+		"e002",
+		"e003"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da5"
+	},
+	"voucherId": "v008",
+	"voucherName": "Giảm 12% all events",
+	"condition": "none",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-04-30T23:59:59Z",
+	"promotion": "All Event Sale",
+	"voucherType": "percent",
+	"value": 12,
+	"appliedEvent": [
+		"all"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da6"
+	},
+	"voucherId": "v009",
+	"voucherName": "Giảm 40k sinh viên",
+	"condition": "userType == student",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-05-15T23:59:59Z",
+	"promotion": "Student Deal",
+	"voucherType": "minus",
+	"value": 40,
+	"appliedEvent": [
+		"e004",
+		"e005"
+	]
+},
+{
+	"_id": {
+		"$oid": "69d130e0f28e30f0034a8da7"
+	},
+	"voucherId": "v010",
+	"voucherName": "Giảm 5% early bird",
+	"condition": "purchaseTime < eventStart - 7d",
+	"timeStart": "2026-04-01T00:00:00Z",
+	"timeEnd": "2026-04-25T23:59:59Z",
+	"promotion": "Early Bird",
+	"voucherType": "percent",
+	"value": 5,
+	"appliedEvent": [
+		"e001",
+		"e002",
+		"e003",
+		"e004"
+	]
+}]
+

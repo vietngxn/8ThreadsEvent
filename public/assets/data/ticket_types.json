@@ -1,0 +1,131 @@
+[{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d95"
+	},
+	"ticketTypeId": "tt003",
+	"eventId": "e002",
+	"name": "Standard",
+	"type": "standard",
+	"price": 50,
+	"totalQuantity": 300,
+	"soldQuantity": 30,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d96"
+	},
+	"ticketTypeId": "tt004",
+	"eventId": "e003",
+	"name": "Early Bird",
+	"type": "early",
+	"price": 100,
+	"totalQuantity": 150,
+	"soldQuantity": 20,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d99"
+	},
+	"ticketTypeId": "tt007",
+	"eventId": "e006",
+	"name": "VIP",
+	"type": "vip",
+	"price": 200,
+	"totalQuantity": 50,
+	"soldQuantity": 5,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d93"
+	},
+	"ticketTypeId": "tt001",
+	"eventId": "e001",
+	"name": "VIP",
+	"type": "vip",
+	"price": 150,
+	"totalQuantity": 100,
+	"soldQuantity": 10,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d9a"
+	},
+	"ticketTypeId": "tt008",
+	"eventId": "e007",
+	"name": "Startup Pass",
+	"type": "pass",
+	"price": 90,
+	"totalQuantity": 300,
+	"soldQuantity": 100,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d98"
+	},
+	"ticketTypeId": "tt006",
+	"eventId": "e005",
+	"name": "Standard",
+	"type": "standard",
+	"price": 60,
+	"totalQuantity": 120,
+	"soldQuantity": 40,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d9b"
+	},
+	"ticketTypeId": "tt009",
+	"eventId": "e008",
+	"name": "Dance Entry",
+	"type": "entry",
+	"price": 40,
+	"totalQuantity": 500,
+	"soldQuantity": 120,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d9c"
+	},
+	"ticketTypeId": "tt010",
+	"eventId": "e009",
+	"name": "Book Pass",
+	"type": "pass",
+	"price": 20,
+	"totalQuantity": 1000,
+	"soldQuantity": 300,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d94"
+	},
+	"ticketTypeId": "tt002",
+	"eventId": "e001",
+	"name": "Normal",
+	"type": "normal",
+	"price": 80,
+	"totalQuantity": 200,
+	"soldQuantity": 50,
+	"isActive": true
+},
+{
+	"_id": {
+		"$oid": "69cfdbe117fb506092787d97"
+	},
+	"ticketTypeId": "tt005",
+	"eventId": "e004",
+	"name": "VIP",
+	"type": "vip",
+	"price": 120,
+	"totalQuantity": 80,
+	"soldQuantity": 10,
+	"isActive": true
+}]
+

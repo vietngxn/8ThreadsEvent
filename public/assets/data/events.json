@@ -1,0 +1,271 @@
+[{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e57"
+	},
+	"eventId": "e003",
+	"name": "Tech Conference",
+	"categoryId": "tech",
+	"description": "AI and future tech talks",
+	"img": "tech.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-10T08:00:00Z",
+			"end": "2026-06-10T17:00:00Z"
+		},
+		"sale": {
+			"start": "2026-04-15T00:00:00Z",
+			"end": "2026-06-09T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Convention Hall",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e5b"
+	},
+	"eventId": "e007",
+	"name": "Startup Pitch",
+	"categoryId": "tech",
+	"description": "Startup competition",
+	"img": "startup.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-28T17:00:00Z",
+			"end": "2026-06-28T22:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-01T00:00:00Z",
+			"end": "2026-06-27T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Tech Hub Arena",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e5e"
+	},
+	"eventId": "e010",
+	"name": "Gaming Tournament",
+	"categoryId": "gaming",
+	"description": "Esports event",
+	"img": "game.jpg",
+	"time": {
+		"event": {
+			"start": "2026-08-10T10:00:00Z",
+			"end": "2026-08-10T20:00:00Z"
+		},
+		"sale": {
+			"start": "2026-06-01T00:00:00Z",
+			"end": "2026-08-09T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Esports Arena",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e58"
+	},
+	"eventId": "e004",
+	"name": "Food Carnival",
+	"categoryId": "food",
+	"description": "Street food festival",
+	"img": "food.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-15T10:00:00Z",
+			"end": "2026-06-15T22:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-01T00:00:00Z",
+			"end": "2026-06-14T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "City Square",
+		"city": "Da Nang",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e55"
+	},
+	"eventId": "e001",
+	"name": "Music Festival 2026",
+	"categoryId": "music",
+	"description": "Biggest music festival of the year",
+	"img": "event.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-01T17:00:00Z",
+			"end": "2026-06-01T23:00:00Z"
+		},
+		"sale": {
+			"start": "2026-04-01T00:00:00Z",
+			"end": "2026-05-30T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Central Park Stage",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e56"
+	},
+	"eventId": "e002",
+	"name": "Art Exhibition",
+	"categoryId": "art",
+	"description": "Modern art showcase",
+	"img": "art.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-05T09:00:00Z",
+			"end": "2026-06-05T18:00:00Z"
+		},
+		"sale": {
+			"start": "2026-04-10T00:00:00Z",
+			"end": "2026-06-04T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Art Center",
+		"city": "Hanoi",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e5a"
+	},
+	"eventId": "e006",
+	"name": "Dance Festival",
+	"categoryId": "dance",
+	"description": "Street dance competition",
+	"img": "dance.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-25T18:00:00Z",
+			"end": "2026-06-25T23:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-15T00:00:00Z",
+			"end": "2026-06-24T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Arena Stage",
+		"city": "Hanoi",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e5d"
+	},
+	"eventId": "e009",
+	"name": "Book Fair",
+	"categoryId": "education",
+	"description": "Book exhibition",
+	"img": "book.jpg",
+	"time": {
+		"event": {
+			"start": "2026-07-05T09:00:00Z",
+			"end": "2026-07-07T18:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-15T00:00:00Z",
+			"end": "2026-07-04T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Convention Center",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e59"
+	},
+	"eventId": "e005",
+	"name": "Startup Meetup",
+	"categoryId": "business",
+	"description": "Entrepreneur networking",
+	"img": "startup.jpg",
+	"time": {
+		"event": {
+			"start": "2026-06-20T14:00:00Z",
+			"end": "2026-06-20T18:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-10T00:00:00Z",
+			"end": "2026-06-19T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Startup Hub",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+},
+{
+	"_id": {
+		"$oid": "69cfe41cead085d554b55e5c"
+	},
+	"eventId": "e008",
+	"name": "Dance Battle",
+	"categoryId": "dance",
+	"description": "Hip-hop battle",
+	"img": "dance.jpg",
+	"time": {
+		"event": {
+			"start": "2026-07-01T18:00:00Z",
+			"end": "2026-07-01T22:00:00Z"
+		},
+		"sale": {
+			"start": "2026-05-10T00:00:00Z",
+			"end": "2026-06-30T23:59:59Z"
+		}
+	},
+	"venue": {
+		"name": "Urban Stage Arena",
+		"city": "Ho Chi Minh City",
+		"country": "Vietnam"
+	},
+	"status": "active",
+	"createdBy": "admin001"
+}]
+

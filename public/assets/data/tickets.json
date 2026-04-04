@@ -1,0 +1,61 @@
+[{
+	"_id": {
+		"$oid": "69cfde1017fb506092787db7"
+	},
+	"ticketId": "t001",
+	"eventId": "e001",
+	"ticketTypeId": "tt001",
+	"orderId": "o001",
+	"ownerId": "u001",
+	"qrCode": "QR001",
+	"status": "valid"
+},
+{
+	"_id": {
+		"$oid": "69cfde1017fb506092787db8"
+	},
+	"ticketId": "t002",
+	"eventId": "e002",
+	"ticketTypeId": "tt003",
+	"orderId": "o002",
+	"ownerId": "u002",
+	"qrCode": "QR002",
+	"status": "valid"
+},
+{
+	"_id": {
+		"$oid": "69cfde1017fb506092787db9"
+	},
+	"ticketId": "t003",
+	"eventId": "e003",
+	"ticketTypeId": "tt004",
+	"orderId": "o003",
+	"ownerId": "u003",
+	"qrCode": "QR003",
+	"status": "valid"
+},
+{
+	"_id": {
+		"$oid": "69cfde1017fb506092787dbb"
+	},
+	"ticketId": "t005",
+	"eventId": "e005",
+	"ticketTypeId": "tt006",
+	"orderId": "o005",
+	"ownerId": "u005",
+	"qrCode": "QR005",
+	"status": "valid"
+},
+{
+	"_id": {
+		"$oid": "69cfde1017fb506092787dba"
+	},
+	"ticketId": "t004",
+	"eventId": "e004",
+	"ticketTypeId": "tt005",
+	"orderId": "o004",
+	"ownerId": "u004",
+	"qrCode": "QR004",
+	"status": "invalid"
+}]
+
