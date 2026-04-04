@@ -10,7 +10,7 @@ import ConcertsPage from "./page/concerts/page";
 
 export default function Home() {
   return (
-    <ConcertsPage />
+    <Diagram />
 
   );
 }

@@ -18,6 +18,7 @@ export default function Node({
 
   const shapeRef = useRef(null);
   const textRef = useRef(null);
+  const measureRef = useRef(null);
 
   const [bbox, setBbox] = useState({ width: w, height: h });
   const [lines, setLines] = useState([label]);
@@ -38,35 +39,32 @@ export default function Node({
      2️⃣ Tự chia dòng thông minh
   =============================== */
   useEffect(() => {
-    if (!bbox.width) return;
+    if (!bbox.width || !measureRef.current) return;
 
-    const limit = bbox.width * 0.8;
     const words = label.split(" ");
+    const maxWidth = bbox.width * 0.8;
 
-    // Nếu chỉ 1 từ → cắt đôi
-    if (words.length === 1) {
-      const mid = Math.ceil(label.length / 2);
-      setLines([label.slice(0, mid), label.slice(mid)]);
-      return;
-    }
+    let currentLine = "";
+    let result = [];
 
-    // Tìm cách chia cân nhất
-    let best = [label];
-    let minDiff = Infinity;
+    words.forEach((word) => {
+      const testLine = currentLine ? currentLine + " " + word : word;
 
-    for (let i = 1; i < words.length; i++) {
-      const l1 = words.slice(0, i).join(" ");
-      const l2 = words.slice(i).join(" ");
+      // 👉 đo bằng text ẩn
+      measureRef.current.textContent = testLine;
+      const textWidth = measureRef.current.getComputedTextLength();
 
-      const diff = Math.abs(l1.length - l2.length);
-
-      if (diff < minDiff) {
-        minDiff = diff;
-        best = [l1, l2];
+      if (textWidth > maxWidth) {
+        if (currentLine) result.push(currentLine);
+        currentLine = word;
+      } else {
+        currentLine = testLine;
       }
-    }
+    });
 
-    setLines(best);
+    if (currentLine) result.push(currentLine);
+
+    setLines(result);
   }, [label, bbox.width]);
 
   const centerX = bbox.width / 2;
@@ -85,14 +83,22 @@ export default function Node({
         <rect ref={shapeRef} x={0} y={0} width={w} height={h} fill={fill} />
       )}
 
+      <text
+        ref={measureRef}
+        fontSize="14"
+        fontWeight="700"
+        style={{ visibility: "hidden" }}
+      >
+        {label}
+      </text>
+
       {/* Text */}
       <text
         ref={textRef}
         textAnchor="middle"
         dominantBaseline="middle"
-        transform={`translate(${centerX} ${centerY}) ${
-          mirrorText ? "scale(-1 1)" : ""
-        }`}
+        transform={`translate(${centerX} ${centerY}) ${mirrorText ? "scale(-1 1)" : ""
+          }`}
         fill="white"
         fontWeight="700"
         fontSize="14"
@@ -104,7 +110,7 @@ export default function Node({
           </tspan>
         ))}
 
-        {value && <tspan> {value}</tspan>}
+        {label && value && <tspan> {value}</tspan>}
       </text>
     </g>
   );
