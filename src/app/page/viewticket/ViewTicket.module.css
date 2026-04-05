@@ -1,0 +1,51 @@
+.pageContainer {
+  background: #0a0a0a;
+  min-height: 100vh;
+  padding: 130px 20px 60px 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation, 
+.section, 
+.detailSection {
+  width: 100%;
+  max-width: 1040px; 
+  margin-bottom: 24px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.section {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.detailSection {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Hiệu ứng responsive cho màn hình nhỏ */
+@media (max-width: 1024px) {
+  .pageContainer {
+    padding: 20px 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 15px 20px;
+  }
+  
+  .detailSection {
+    padding: 20px;
+  }
+}
