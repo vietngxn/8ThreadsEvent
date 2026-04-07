@@ -1,0 +1,528 @@
+@font-face {
+  font-family: "KanitLocal";
+  src: url("/assets/fonts/Kanit/Kanit-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "KanitSemiBoldLocal";
+  src: url("/assets/fonts/Kanit/Kanit-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+.wrapper {
+  width: 100%;
+  font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
+}
+
+.checkoutContainer {
+  display: grid;
+  grid-template-columns: 1.1fr 400px;
+  gap: 20px;
+  width: 100%;
+}
+
+.panel {
+  background: rgba(90, 89, 89, 0.7);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.mainPanel {
+  position: relative;
+  padding-top: 52px;
+}
+
+.holdBox {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  min-width: 132px;
+  padding: 8px 10px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 9px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.holdLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.holdTime {
+  margin: 2px 0 0;
+  font-size: 34px;
+  font-weight: 600;
+  font-family: "KanitSemiBoldLocal", "KanitLocal", sans-serif;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #d7b56f;
+  background-image: url("/assets/images/common-panel 1.png");
+  background-size: cover;
+  background-position: center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  font-size: 33px;
+  font-weight: 600;
+  font-family: "KanitSemiBoldLocal", "KanitLocal", sans-serif;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #fff;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.9;
+}
+
+.subTitle {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.8;
+}
+
+.metaRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: -16px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metaIcon {
+  color: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.metaText {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+}
+
+.termsSection {
+  margin: 12px 0 20px;
+}
+
+.termsTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.termsSub {
+  margin: 4px 0 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.58);
+  font-style: italic;
+}
+
+.agreeRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.agreeInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.agreeIcon {
+  color: #cbb37a;
+  flex-shrink: 0;
+}
+
+.agreeIconMuted {
+  color: rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.termsError {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #ff8080;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 14px 20px;
+  color: #fff;
+  font-size: 14px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #cbb37a;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.promoBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  min-height: 40px;
+  padding: 0 25px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.promoRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.appliedVoucherChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: #d4bf8c;
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.appliedVoucherChipEnter {
+  animation:
+    voucher-pop-in 560ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    voucher-chip-glow 900ms ease-out;
+}
+
+.appliedVoucherChipEnter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-20deg);
+  animation: voucher-chip-shine 720ms 120ms ease-out forwards;
+}
+
+@keyframes voucher-pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes voucher-chip-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(212, 191, 140, 0);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  45% {
+    box-shadow: 0 0 16px rgba(212, 191, 140, 0.45);
+    border-color: rgba(212, 191, 140, 0.95);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(212, 191, 140, 0);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes voucher-chip-shine {
+  0% {
+    left: -40%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+.removeVoucherBtn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.paymentBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 25px;
+}
+
+.vnpayLogo {
+  height: 24px;
+  object-fit: contain;
+}
+
+.ticketPanel {
+  padding: 26px 20px 20px;
+}
+
+.ticketPanelTitle {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 600;
+  font-family: "KanitSemiBoldLocal", "KanitLocal", sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ticketHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.ticketCard {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-left-color: rgba(203, 179, 122, 0.95);
+  margin-bottom: 26px;
+}
+
+.ticketTypeName {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.ticketPriceSub {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ticketCardRight {
+  text-align: right;
+}
+
+.ticketQty {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "KanitSemiBoldLocal", "KanitLocal", sans-serif;
+}
+
+.ticketPrice {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.goldText {
+  color: #d7b56f;
+  background-image: url("/assets/images/common-panel 1.png");
+  background-size: cover;
+  background-position: center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.summarySection {
+  margin-top: 110px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding-top: 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.totalValue {
+  font-size: 22px;
+}
+
+.legalText {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.btnThanhToan {
+  display: block;
+  width: calc(100% - 44px);
+  margin: 18px auto 0;
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .checkoutContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .holdTime {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .metaText {
+    font-size: 17px;
+  }
+
+  .ticketPanelTitle {
+    font-size: 34px;
+  }
+
+  .summarySection {
+    margin-top: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .panel {
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .mainPanel {
+    padding-top: 120px;
+  }
+
+  .holdBox {
+    left: 24px;
+    right: auto;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fullWidth {
+    grid-column: span 1;
+  }
+
+  .ticketPanel {
+    padding: 22px 16px 18px;
+  }
+
+  .ticketPanelTitle {
+    font-size: 28px;
+  }
+
+  .ticketQty {
+    font-size: 24px;
+  }
+}
