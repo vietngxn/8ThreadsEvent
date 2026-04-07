@@ -1,24 +1,24 @@
 .wrapper {
   font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
-  background: #111;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  display: block;
+  padding: 0;
+  background: transparent; 
+  min-height: auto;
 }
 
 .card {
   width: 100%;
-  max-width: 860px;
+  max-width: 1040px; 
+  margin: 0 auto;
   border-radius: 14px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 260px;
+  grid-template-columns: 1fr 300px; 
   background: #1c1c20;
   border: 1px solid #2e2e35;
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
+
 
 .leftPanel {
   padding: 28px 28px 22px;
@@ -38,9 +38,9 @@
 }
 
 .price {
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 .rightPanel {
@@ -48,4 +48,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+
+.leftPanel :global(h2), 
+.leftPanel :global(.title) {
+    color: #ffffff !important;
+}
+
+.leftPanel :global(div) {
+    color: #ffffff;
 }
