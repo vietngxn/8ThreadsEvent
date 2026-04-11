@@ -1,0 +1,70 @@
+.legendContainer {
+  width: 280px; /* Độ rộng thoải mái để chữ không bị rớt dòng */
+  color: #fff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.legendTitle {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.legendGroup {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.legendLabel {
+  font-size: 13px;
+  font-weight: 700;
+  width: 80px; /* Đủ rộng cho chữ VIP Lounge */
+  text-align: right;
+  color: #e5e5e5;
+  white-space: nowrap; /* Khóa không cho rớt dòng */
+}
+
+.legendItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  white-space: nowrap; /* Khóa tên khu vực không cho rớt dòng */
+}
+
+.colorBox {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  /* Thêm viền trắng mờ và hiệu ứng phát sáng nhẹ như đèn LED */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 8px currentColor; /* Lấy màu của chính nó làm màu phát sáng */
+}
+
+/* Thêm hiệu ứng hover sáng lên khi di chuột vào từng dòng */
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #d1d5db;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.legendItem:hover {
+  color: #fff;
+  transform: translateX(5px); /* Trượt nhẹ sang phải */
+}
