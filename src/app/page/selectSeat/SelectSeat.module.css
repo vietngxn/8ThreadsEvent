@@ -1,0 +1,232 @@
+/* Tổng thể trang và Ảnh nền */
+.wrapper {
+  background-image: url('/FirstPage.png');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px 40px;
+}
+
+/* Phần chữ "CHỌN VÉ" ở trên cùng */
+.pageHeader {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.subTitle {
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 3px;
+  opacity: 0.8;
+}
+
+/* --- BỐ CỤC CHÍNH (Layout bành trướng) --- */
+.mainLayout {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 25px;
+  width: 100%;
+  max-width: 1850px; /* Layout cực rộng cho Sơ đồ tỏa sáng */
+  margin: 0 auto;
+  height: calc(100vh - 160px); 
+}
+
+/* --- ANIMATION XUẤT HIỆN --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. KHU VỰC SƠ ĐỒ (Được ưu tiên không gian nhất) */
+.diagramArea {
+  flex: 1.2; /* Dành nhiều đất diễn cho Sơ đồ */
+  height: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  position: relative; 
+  animation: fadeInUp 0.8s ease-out forwards; 
+}
+
+/* Quầng sáng mờ ảo phía sau Sơ đồ */
+.diagramArea::before {
+  content: '';
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  background: radial-gradient(circle, rgba(203, 179, 122, 0.12) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hack size Sơ đồ: Zoom lên kịch kim */
+.diagramArea :global(svg) {
+  position: relative; 
+  z-index: 1; /* Nổi lên trên quầng sáng */
+  width: 100%;
+  max-width: 970px; 
+  height: auto;
+  max-height: 150vh;
+  transform: scale(1.35); /* Hack zoom lên 25% */
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6)); /* Đổ bóng sâu */
+}
+
+/* 2. KHU VỰC GHI CHÚ */
+.legendArea {
+  flex: 0 0 250px; 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  opacity: 0; 
+  animation: fadeInUp 0.8s ease-out 0.2s forwards; /* Trễ 0.2s tạo nhịp điệu */
+}
+
+/* 3. KHU VỰC GIỎ VÉ */
+.cartArea {
+  flex: 0 0 400px; 
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  opacity: 0; 
+  animation: fadeInUp 0.8s ease-out 0.4s forwards; /* Trễ 0.4s */
+}
+
+/* Hiệu ứng Glassmorphism siêu cao cấp (Diamond Glass) */
+.cartContent {
+  width: 100%;
+  background: linear-gradient(145deg, rgba(40,40,40,0.5) 0%, rgba(20,20,20,0.3) 100%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Cạnh bắt sáng */
+  border-left: 1px solid rgba(255, 255, 255, 0.1); 
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.8);
+  border-radius: 32px;
+  padding: 30px; 
+  display: flex;
+  flex-direction: column;
+  max-height: 85%;
+}
+
+/* Chữ Giỏ vé ánh kim (Gold Gradient) */
+.cartTitle {
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #cbb37a, #e6e6e6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Danh sách vé */
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+/* Scrollbar tinh tế */
+.cartItems::-webkit-scrollbar {
+  width: 4px;
+}
+.cartItems::-webkit-scrollbar-thumb {
+  background: rgba(203, 179, 122, 0.4);
+  border-radius: 10px;
+}
+
+/* Tổng tiền và Nút */
+.cartFooter {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.totalRow {
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: baseline;
+}
+
+.totalLabel {
+  opacity: 0.7;
+}
+
+.totalPrice {
+  font-weight: 800;
+  font-size: 20px;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.btnWrapper {
+  width: 70%;
+}
+
+/* --- REPONSIVE (Xử lý khi màn hình bị thu nhỏ) --- */
+@media (max-width: 1400px) {
+  .mainLayout {
+    gap: 30px;
+    max-width: 100%;
+  }
+  .cartArea {
+    flex: 0 0 380px;
+  }
+  .diagramArea :global(svg) {
+    transform: scale(1.1); /* Giảm zoom đi một chút để tránh vỡ khung */
+  }
+}
+
+@media (max-width: 1100px) {
+  .mainLayout {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+  .diagramArea, .legendArea, .cartArea {
+    width: 100%;
+    flex: none;
+    justify-content: center;
+  }
+  .legendArea {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .cartArea {
+    margin-top: 40px;
+  }
+}
