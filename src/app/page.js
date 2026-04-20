@@ -15,10 +15,12 @@ import SelectSeatPage from "./page/selectSeat/page";
 import ViewTicketPage from "./page/viewticket/viewticket";
 import CheckoutRoutePage from "./page/checkout/page";
 import HighlightPage from "./highlight/page";
+import LoginPage from "./page/login/page";
+
+import { redirect } from "next/navigation";
 
 export default function Home() {
   return (
-    <HighlightPage />
-
-  );
+    <ConcertsPage />
+  )
 }

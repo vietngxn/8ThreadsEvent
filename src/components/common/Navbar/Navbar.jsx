@@ -4,11 +4,28 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const userData = localStorage.getItem("user");
+
+        setIsLoggedIn(!!token);
+
+        if (userData) {
+            setUser(JSON.parse(userData));
+        }
+
+        setLoading(false);
+    }, []);
 
     const router = useRouter();
 
@@ -38,7 +55,10 @@ const Navbar = () => {
     const handleAction = (item) => {
         if (item.action === "logout") {
             localStorage.removeItem("token");
-            router.push("/login");
+            localStorage.removeItem("user");
+            setIsLoggedIn(false);
+            setUser(null);
+            router.push("/page/login");
             return;
         }
 
@@ -49,6 +69,7 @@ const Navbar = () => {
         setIsOpen(false);
     };
 
+    if (loading) return null;
 
     return (
         <nav className={styles.navbar}>
@@ -65,42 +86,57 @@ const Navbar = () => {
             <div className={styles.rightSide}>
                 <div className={styles.menu}>
                     <Link href="/" className={styles.link}>Trang chủ</Link>
-                    <Link href="/buy-ticket" className={styles.link}>Mua vé</Link>
+                    <Link href="/page/concerts" className={styles.link}>
+                        Mua vé
+                    </Link>
                     <Link href="/products" className={styles.link}>Sản phẩm</Link>
                 </div>
 
                 <div className={styles.userSection}>
-                    <button onClick={() => setIsOpen(!isOpen)} className={styles.userButton}>
-                        <div className={styles.avatar}>
-                            <Image
-                                src="/image 22.svg"
-                                alt="User"
-                                fill
-                            />
-                        </div>
-                        <span className={styles.username}>Việt Nguyễn</span>
-                        <ChevronDown
-                            size={16}
-                            className={`${styles.arrow} ${isOpen ? styles.rotate : ""}`}
-                        />
-                    </button>
-
-                    {isOpen && (
+                    {!isLoggedIn ? (
+                        <button
+                            className={styles.loginButton}
+                            onClick={() => router.push("/page/login")}
+                        >
+                            Đăng nhập
+                        </button>
+                    ) : (
                         <>
-                            <div className={styles.overlay} onClick={() => setIsOpen(false)} />
+                            <button onClick={() => setIsOpen(!isOpen)} className={styles.userButton}>
+                                <div className={styles.avatar}>
+                                    <Image
+                                        src="/image 22.svg"
+                                        alt="User"
+                                        fill
+                                    />
+                                </div>
+                                <span className={styles.username}>
+                                    {user?.name || "User"}
+                                </span>
+                                <ChevronDown
+                                    size={16}
+                                    className={`${styles.arrow} ${isOpen ? styles.rotate : ""}`}
+                                />
+                            </button>
 
-                            <div className={styles.dropdown}>
-                                {menuItems.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className={styles.dropdownItem}
-                                        onClick={() => handleAction(item)}
-                                    >
-                                        <Image src={item.icon} alt={item.label} width={25} height={25} />
-                                        <span>{item.label}</span>
+                            {isOpen && (
+                                <>
+                                    <div className={styles.overlay} onClick={() => setIsOpen(false)} />
+
+                                    <div className={styles.dropdown}>
+                                        {menuItems.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className={styles.dropdownItem}
+                                                onClick={() => handleAction(item)}
+                                            >
+                                                <Image src={item.icon} alt={item.label} width={25} height={25} />
+                                                <span>{item.label}</span>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
+                                </>
+                            )}
                         </>
                     )}
                 </div>

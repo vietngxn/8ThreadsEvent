@@ -16,6 +16,7 @@ const EyeOffIcon = () => (
 function LoginForm() {
   const searchParams = useSearchParams();
   const [account, setAccount] = useState(searchParams.get("account") || "");
+  const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
 
   const handleLogin = async (e) => {
@@ -28,8 +29,12 @@ function LoginForm() {
     });
 
     if (res.ok) {
-      localStorage.setItem("user_active", "true");
-      const redirect = searchParams.get("redirect") || "/highlight";
+      const data = await res.json();
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      const redirect = searchParams.get("redirect") || "/";
       window.location.href = redirect;
     } else {
       alert("Sai tài khoản hoặc mật khẩu");
@@ -61,6 +66,8 @@ function LoginForm() {
         <div className={styles.inputGroup}>
           <input
             type={showPass ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             required
           />
