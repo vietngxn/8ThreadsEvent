@@ -1,6 +1,15 @@
 .pageContainer {
   background: #0a0a0a;
   min-height: 100vh;
+
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  overflow: hidden;
+
   padding: 130px 20px 60px 20px; 
   display: flex;
   flex-direction: column;
@@ -48,4 +57,20 @@
   .detailSection {
     padding: 20px;
   }
+}
+
+.pageContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    circle 180px at var(--mx) var(--my),
+    rgba(255,255,255,0.12) 0%,
+    transparent 100%
+  );
+
+  transition: background 0.05s ease;
 }
