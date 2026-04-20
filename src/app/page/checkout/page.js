@@ -59,6 +59,13 @@ export default function CheckoutRoutePage() {
   const [voucherFxSeed, setVoucherFxSeed] = useState(0);
   const [voucherListClosing, setVoucherListClosing] = useState(false);
   const [voucherDetailClosing, setVoucherDetailClosing] = useState(false);
+  const [isVoucherInitialized, setIsVoucherInitialized] = useState(false);
+  const [isPaymentSelected, setIsPaymentSelected] = useState(false);
+  const [paymentError, setPaymentError] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -103,10 +110,11 @@ export default function CheckoutRoutePage() {
   );
 
   useEffect(() => {
-    if (!pendingOrder || appliedVoucherId) return;
-    setAppliedVoucherId(pendingOrder.voucherId || null);
-    setVoucherDraftId(pendingOrder.voucherId || null);
-  }, [pendingOrder, appliedVoucherId]);
+    if (!pendingOrder || isVoucherInitialized) return;
+    setAppliedVoucherId(null);
+    setVoucherDraftId(null);
+    setIsVoucherInitialized(true);
+  }, [pendingOrder, isVoucherInitialized]);
 
   const checkoutData = useMemo(() => {
     const order = pendingOrder;
@@ -117,8 +125,8 @@ export default function CheckoutRoutePage() {
         eventName: "Đang cập nhật sự kiện",
         eventTime: "Đang cập nhật",
         eventVenue: "Đang cập nhật địa điểm",
-        ticketLabel: "Đang cập nhật loại vé",
-        quantity: 0,
+        items: [],
+        totalQuantity: 0,
         subtotal: 0,
         discount: 0,
         total: 0,
@@ -126,11 +134,28 @@ export default function CheckoutRoutePage() {
     }
 
     const event = events.find((item) => item.eventId === order.eventId);
-    const firstItem = order.items?.[0];
-    const ticketType = ticketTypes.find(
-      (item) => item.ticketTypeId === firstItem?.ticketTypeId,
-    );
-    const subtotal = Number(order.subtotal || 0);
+
+    let subtotal = 0;
+    let totalQuantity = 0;
+    const items = (order.items || []).map((item) => {
+      const ticketType = ticketTypes.find(
+        (tt) => tt.ticketTypeId === item.ticketTypeId,
+      );
+      const quantity = Number(item.quantity || 0);
+      const unitPrice = ticketType?.price || 0;
+      const itemTotal = quantity * unitPrice;
+
+      subtotal += itemTotal;
+      totalQuantity += quantity;
+
+      return {
+        ticketTypeId: item.ticketTypeId,
+        ticketName: ticketType?.name || item.ticketTypeId,
+        quantity,
+        unitPrice,
+        itemTotal,
+      };
+    });
 
     const chosenVoucher = vouchers.find(
       (item) => item.voucherId === appliedVoucherId,
@@ -144,8 +169,8 @@ export default function CheckoutRoutePage() {
       eventName: event?.name || `Sự kiện ${order.eventId}`,
       eventTime: formatDateRange(event?.time?.event?.start),
       eventVenue: `${event?.venue?.name || ""}${event?.venue?.city ? `, ${event.venue.city}` : ""}`,
-      ticketLabel: ticketType?.name || firstItem?.ticketTypeId || "Ticket",
-      quantity: Number(firstItem?.quantity || 0),
+      items,
+      totalQuantity,
       subtotal,
       discount,
       total,
@@ -183,15 +208,41 @@ export default function CheckoutRoutePage() {
   const secondText = String(timeLeft % 60).padStart(2, "0");
 
   const handlePayment = () => {
+    let hasError = false;
+
+    if (!fullName.trim()) {
+      setNameError("Vui lòng nhập họ và tên");
+      hasError = true;
+    } else {
+      setNameError("");
+    }
+
+    if (!phone.trim()) {
+      setPhoneError("Vui lòng nhập số điện thoại");
+      hasError = true;
+    } else {
+      setPhoneError("");
+    }
+
     if (!hasAgreedTerms) {
       setTermsError(
         "Bạn cần tích chọn đồng ý điều khoản trước khi thanh toán.",
       );
-      return;
+      hasError = true;
+    } else {
+      setTermsError("");
     }
 
-    setTermsError("");
-    window.alert("Thanh toán thành công");
+    if (!isPaymentSelected) {
+      setPaymentError("Vui lòng chọn phương thức thanh toán");
+      hasError = true;
+    } else {
+      setPaymentError("");
+    }
+
+    if (!hasError) {
+      window.alert("Thanh toán thành công");
+    }
   };
 
   const openVoucherModal = () => {
@@ -317,11 +368,28 @@ export default function CheckoutRoutePage() {
               </div>
 
               <div className={styles.formGrid}>
-                <input className={styles.input} placeholder="Nhập họ và tên" />
-                <input
-                  className={styles.input}
-                  placeholder="Nhập số điện thoại"
-                />
+                <div>
+                  <input
+                    className={styles.input}
+                    placeholder="Nhập họ và tên"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                  />
+                  {nameError ? (
+                    <p className={styles.termsError}>{nameError}</p>
+                  ) : null}
+                </div>
+                <div>
+                  <input
+                    className={styles.input}
+                    placeholder="Nhập số điện thoại"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                  {phoneError ? (
+                    <p className={styles.termsError}>{phoneError}</p>
+                  ) : null}
+                </div>
               </div>
 
               <div style={{ marginTop: "35px" }}>
@@ -353,33 +421,30 @@ export default function CheckoutRoutePage() {
 
               <div style={{ marginTop: "45px" }}>
                 <h3 className={styles.title}>Phương thức thanh toán</h3>
-                <div className={styles.paymentBox}>
-                  <input
-                    type="radio"
-                    checked
-                    readOnly
-                    style={{
-                      accentColor: "#cbb37a",
-                      width: "18px",
-                      height: "18px",
-                    }}
-                  />
+                <div
+                  className={styles.paymentBox}
+                  onClick={() => setIsPaymentSelected(!isPaymentSelected)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {isPaymentSelected ? (
+                    <CircleCheck size={18} className={styles.paymentIcon} />
+                  ) : (
+                    <Circle size={18} className={styles.paymentIconMuted} />
+                  )}
                   <img
                     src="/assets/images/image 10.png"
                     alt="VNPAY"
                     className={styles.vnpayLogo}
                   />
                   <span
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: 500,
-                      marginLeft: "5px",
-                      color: "#fff",
-                    }}
+                    style={{ fontSize: "14px", fontWeight: 500, color: "#fff" }}
                   >
                     VNPAY/Ứng dụng ngân hàng
                   </span>
                 </div>
+                {paymentError ? (
+                  <p className={styles.termsError}>{paymentError}</p>
+                ) : null}
               </div>
             </div>
 
@@ -391,29 +456,29 @@ export default function CheckoutRoutePage() {
                 <span>Số lượng</span>
               </div>
 
-              <div className={styles.ticketCard}>
-                <div>
-                  <h4 className={styles.ticketTypeName}>
-                    {checkoutData.ticketLabel}
-                  </h4>
-                  <p className={styles.ticketPriceSub}>
-                    {formatCurrency(checkoutData.subtotal)}
-                  </p>
-                </div>
+              {checkoutData.items.map((item) => (
+                <div key={item.ticketTypeId} className={styles.ticketCard}>
+                  <div>
+                    <h4 className={styles.ticketTypeName}>{item.ticketName}</h4>
+                    <p className={styles.ticketPriceSub}>
+                      {formatCurrency(item.unitPrice)}
+                    </p>
+                  </div>
 
-                <div className={styles.ticketCardRight}>
-                  <p className={styles.ticketQty}>
-                    {String(checkoutData.quantity).padStart(2, "0")}
-                  </p>
-                  <p className={styles.ticketPrice}>
-                    {formatCurrency(checkoutData.subtotal)}
-                  </p>
+                  <div className={styles.ticketCardRight}>
+                    <p className={styles.ticketQty}>
+                      {String(item.quantity).padStart(2, "0")}
+                    </p>
+                    <p className={styles.ticketPrice}>
+                      {formatCurrency(item.itemTotal)}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ))}
 
               <div className={styles.summarySection}>
                 <div className={styles.summaryRow}>
-                  <span>Tạm tính 1 ghế</span>
+                  <span>Tạm tính {checkoutData.totalQuantity} ghế</span>
                   <span className={styles.goldText}>
                     {formatCurrency(checkoutData.subtotal)}
                   </span>
