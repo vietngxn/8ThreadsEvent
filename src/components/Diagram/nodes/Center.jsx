@@ -1,11 +1,11 @@
 import Node from "./Node";
 
-export default function Center({ active, setActive }) {
+export default function Center({ active, setActive, onZoneClick }) {
   const gap = 100;
+  const bridgeId = "center-bridge"; 
 
   return (
     <g>
-      {/* Node trên */}
       <g transform={`translate(0 ${-gap / 2})`}>
         <Node
           id="da-sac"
@@ -16,24 +16,29 @@ export default function Center({ active, setActive }) {
           h={55}
           active={active}
           setActive={setActive}
+          onZoneClick={onZoneClick}
+          price={3000000}
         />
       </g>
 
-      {/* Shape nối */}
-      <path transform="translate(20 3)"
+      <path 
+        transform="translate(20 3)"
+        className={`clickable-zone ${active === bridgeId ? "active" : ""}`}
         d={`
-        M -35 10
-        L 35 10
-        L 35 30
-        L 20 40
-        L -20 40
-        L -35 30
-        Z
-      `}
+          M -35 10
+          L 35 10
+          L 35 30
+          L 20 40
+          L -20 40
+          L -35 30
+          Z
+        `}
         fill="#808080"
+        onMouseEnter={() => setActive(bridgeId)}
+        onMouseLeave={() => setActive(null)}
+        style={{ cursor: "default", transition: "all 0.3s" }}
       />
 
-      {/* Node dưới */}
       <g transform={`translate(0 ${gap / 2})`}>
         <Node
           id="da-hinh"
@@ -44,6 +49,8 @@ export default function Center({ active, setActive }) {
           h={70}
           active={active}
           setActive={setActive}
+          onZoneClick={onZoneClick}
+          price={2500000}
         />
       </g>
     </g>
