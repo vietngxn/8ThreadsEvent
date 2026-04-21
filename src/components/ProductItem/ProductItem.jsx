@@ -1,16 +1,15 @@
 "use client";
-
-import { useState } from "react";
 import "./ProductItem.css";
 
 function ProductItem({
+  id,               
   color,
   name,
   price,
-  initialQty = 1,
+  qty,              
+  onQuantityChange  
 }) {
-  const [qty, setQty] = useState(initialQty);
-
+  
   const formatPrice = (value) =>
     value.toLocaleString("vi-VN") + "đ";
 
@@ -31,7 +30,7 @@ function ProductItem({
       <div className="qty-wrapper">
         <button
           className="qty-btn"
-          onClick={() => setQty((q) => Math.max(0, q - 1))}
+          onClick={() => onQuantityChange(id, qty - 1)}
         >
           −
         </button>
@@ -40,7 +39,7 @@ function ProductItem({
 
         <button
           className="qty-btn"
-          onClick={() => setQty((q) => q + 1)}
+          onClick={() => onQuantityChange(id, qty + 1)}
         >
           +
         </button>

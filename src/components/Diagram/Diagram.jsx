@@ -1,17 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Diagram.css";
 
 import Center from "./nodes/Center";
 import Wing from "./nodes/Wing";
 
-export default function Diagram() {
+export default function Diagram({ onZoneClick }) {
   const [active, setActive] = useState(null);
+  const [viewWidth, setViewWidth] = useState(1200); 
 
-  const viewWidth = window.innerWidth;
+  useEffect(() => {
+    const handleResize = () => {
+      setViewWidth(window.innerWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const centerX = viewWidth / 2;
-
   const WING_REAL_WIDTH = 350;
 
   const leftX = centerX - WING_REAL_WIDTH;
@@ -30,12 +41,16 @@ export default function Diagram() {
           translate(${-viewWidth / 2} 0)
         `}
       >
-        {/* LEFT */}
+
         <g transform={`translate(${leftX} 150)`}>
-          <Wing side="left" active={active} setActive={setActive} />
+          <Wing 
+            side="left" 
+            active={active} 
+            setActive={setActive} 
+            onZoneClick={onZoneClick}
+          />
         </g>
 
-        {/* RIGHT (mirror chuẩn) */}
         <g
           transform={`
             translate(${rightX} 150)
@@ -43,12 +58,20 @@ export default function Diagram() {
             translate(-${WING_REAL_WIDTH} 0)
           `}
         >
-          <Wing side="right" active={active} setActive={setActive} />
+          <Wing 
+            side="right" 
+            active={active} 
+            setActive={setActive} 
+            onZoneClick={onZoneClick} 
+          />
         </g>
 
-        {/* CENTER */}
         <g transform={`translate(${centerX - 20} ${350})`}>
-          <Center active={active} setActive={setActive} />
+          <Center 
+            active={active} 
+            setActive={setActive} 
+            onZoneClick={onZoneClick} 
+          />
         </g>
       </g>
     </svg>
