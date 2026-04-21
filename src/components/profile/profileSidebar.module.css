@@ -1,0 +1,48 @@
+@font-face {
+    font-family: "fogtwono5";
+    src: url("/assets/fonts/fogtwono5/FogtwoNo5.otf");
+}
+
+@font-face {
+    font-family: "Kanit-Regular";
+    src: url("/assets/fonts/Kanit/Kanit-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Kanit-Bold";
+    src: url("/assets/fonts/Kanit/Kanit-Bold.ttf");
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+}
+
+.userBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userNameBox {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.title {
+    font-family: "Kanit-Regular";
+    font-size: 16px;
+    color: #fff;
+}
+
+.name {
+    font-family: "Kanit-Bold";
+    font-size: 20px;
+    color: #fff;
+}
