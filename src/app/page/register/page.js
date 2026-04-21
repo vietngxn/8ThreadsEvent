@@ -7,31 +7,58 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
 );
 const EyeOffIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" /><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" /><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" /><line x1="2" y1="2" x2="22" y2="22" /></svg>
 );
 
 export default function RegisterPage() {
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
-  const [formData, setFormData] = useState({ username: "", email: "", password: "", confirmPassword: "" });
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       alert("Mật khẩu xác nhận không khớp!");
       return;
     }
-    router.push(`/login?account=${encodeURIComponent(formData.username)}`);
+
+    const res = await fetch("/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      router.push("/");
+    } else {
+      alert(data.error);
+    }
   };
 
-return (
+  return (
     <div className={styles.container}>
-      <img 
-        src="/FirstPage.png" 
-        alt="Stage Ready Background" 
+      <img
+        src="/FirstPage.png"
+        alt="Stage Ready Background"
         className="absolute inset-0 w-full h-full object-cover z-0 opacity-40 pointer-events-none"
       />
 
@@ -40,9 +67,9 @@ return (
       <div className="relative z-10 w-full flex justify-center">
         <div className={styles.loginCard}>
           <Link href="/" className="absolute top-6 left-6 text-gray-400 text-sm flex items-center gap-2 hover:text-white transition italic z-20">
-             ← Trở về
+            ← Trở về
           </Link>
-          
+
           <div className={styles.logoArea}>
             <img src="/assets/images/logo.png" alt="8THREADS" style={{ width: "100px" }} />
             <h2 className={styles.title}>REGISTER</h2>
@@ -50,22 +77,36 @@ return (
 
           <form onSubmit={handleRegister}>
             <div className={styles.inputGroup}>
-              <input type="text" placeholder="Username" required onChange={(e) => setFormData({...formData, username: e.target.value})} />
+              <input
+                type="text"
+                placeholder="First Name"
+                required
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+              />
             </div>
 
             <div className={styles.inputGroup}>
-              <input type="email" placeholder="Email Address" required onChange={(e) => setFormData({...formData, email: e.target.value})} />
+              <input
+                type="text"
+                placeholder="Last Name"
+                required
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+              />
             </div>
 
             <div className={styles.inputGroup}>
-              <input type={showPass ? "text" : "password"} placeholder="Password" required onChange={(e) => setFormData({...formData, password: e.target.value})} />
+              <input type="email" placeholder="Email Address" required onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <input type={showPass ? "text" : "password"} placeholder="Password" required onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
               <button type="button" onClick={() => setShowPass(!showPass)} className={styles.eyeButton}>
                 {showPass ? <EyeOffIcon /> : <EyeIcon />}
               </button>
             </div>
 
             <div className={styles.inputGroup}>
-              <input type={showPass ? "text" : "password"} placeholder="Confirm Password" required onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} />
+              <input type={showPass ? "text" : "password"} placeholder="Confirm Password" required onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} />
               <button type="button" onClick={() => setShowPass(!showPass)} className={styles.eyeButton}>
                 {showPass ? <EyeOffIcon /> : <EyeIcon />}
               </button>
@@ -85,7 +126,7 @@ return (
           </div>
 
           <p className="text-center mt-6 text-gray-400 text-[14px]">
-            Already have an account? <Link href="/login" className="text-[#a0a0a0] hover:text-[#cbb37a] transition ml-1">Login here</Link>
+            Already have an account? <Link href="/page/login" className="text-[#a0a0a0] hover:text-[#cbb37a] transition ml-1">Login here</Link>
           </p>
         </div>
       </div>

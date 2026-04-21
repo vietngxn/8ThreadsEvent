@@ -92,7 +92,7 @@ function LoginForm() {
       </div>
 
       <div className="text-center text-[12px] text-gray-500">
-        Don&apos;t have an account? <Link href="/register" className="text-[#cbb37a] hover:underline ml-1">Register now</Link>
+        Don&apos;t have an account? <Link href="/page/register" className="text-[#cbb37a] hover:underline ml-1">Register now</Link>
       </div>
     </div>
   );
