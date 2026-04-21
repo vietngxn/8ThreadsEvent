@@ -28,7 +28,7 @@ export default function ConcertCard({ event }) {
             date={event.time?.event?.start}
             isHover={hover}
           />          <EventLocation
-            location={event.venue?.address || "Địa điểm chưa cập nhật"}
+            location={event.venue?.name + ", " + event.venue?.city || "Địa điểm chưa cập nhật"}
             isHover={hover}
           />
         </div>
