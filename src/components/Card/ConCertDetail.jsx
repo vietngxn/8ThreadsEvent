@@ -1,7 +1,7 @@
 import styles from "./ConcertDetail.module.css";
 
 export default function ConcertDetail({ data }) {
-  if (!data) return null;
+  if (!data) return <p>Loading...</p>;
 
   return (
     <div className={styles.wrapper}>
@@ -18,8 +18,8 @@ export default function ConcertDetail({ data }) {
 
         <div className={styles.imageWrapper}>
           <img
-            src={`/${data.img}`}
-            alt="Detail"
+            src={data.img || "/poster.jpg"}
+            alt={data.name}
             className={styles.image}
           />
         </div>

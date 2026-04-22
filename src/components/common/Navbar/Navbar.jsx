@@ -9,12 +9,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+    const router = useRouter();
+
     const [isOpen, setIsOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+
         const token = localStorage.getItem("token");
         const userData = localStorage.getItem("user");
 
@@ -24,10 +28,9 @@ const Navbar = () => {
             setUser(JSON.parse(userData));
         }
 
-        setLoading(false);
     }, []);
 
-    const router = useRouter();
+    if (!mounted) return null;
 
     const menuItems = [
         {
@@ -68,8 +71,6 @@ const Navbar = () => {
 
         setIsOpen(false);
     };
-
-    if (loading) return null;
 
     return (
         <nav className={styles.navbar}>

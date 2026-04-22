@@ -6,14 +6,18 @@ import EventTitle from "../event/EventTitle";
 import EventDate from "../event/EventDate";
 import EventLocation from "../event/EventLocation";
 
+import { useRouter } from "next/navigation";
+
 export default function ConcertCard({ event }) {
   const [hover, setHover] = useState(false);
+  const router = useRouter();
 
   return (
     <div
       className={styles.card}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={() => router.push(`/page/concerts/${event._id}`)}
     >
       <div className={styles.poster}>
         <img src={event.img || "/poster.jpg"} alt={event.name} />
