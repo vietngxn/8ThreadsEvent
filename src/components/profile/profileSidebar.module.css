@@ -46,3 +46,22 @@
     font-size: 20px;
     color: #fff;
 }
+
+.menuBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profileSidebarContainer {
+    width: 250px;
+    height: 100vh;
+    background-color: #000;
+}

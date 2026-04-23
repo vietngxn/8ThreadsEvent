@@ -16,11 +16,14 @@ import ViewTicketPage from "./page/viewticket/viewticket";
 import CheckoutRoutePage from "./page/checkout/page";
 import HighlightPage from "./highlight/page";
 import LoginPage from "./page/login/page";
+import ProfileSidebar from "@/components/profile/ProfileSidebar";
+import ProfileInfomation from "@/components/profile/ProfileInfomation/ProfileInfomation";
+import MyTickets from "@/components/MyTicket/MyTicket";
 
 import { redirect } from "next/navigation";
 
 export default function Home() {
   return (
-    <ConcertsPage />
+    <MyTickets />
   )
 }

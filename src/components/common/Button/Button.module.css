@@ -46,3 +46,7 @@
   background-image:
     linear-gradient(#5a5a5a, #5a5a5a), linear-gradient(90deg, #e0c27a, #ffffff);
 }
+
+.text {
+  font-family: "Kanit-Bold";
+}

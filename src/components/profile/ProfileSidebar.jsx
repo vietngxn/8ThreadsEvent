@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./profileSidebar.module.css"
+import Link from "next/link";
 export default function ProfileSidebar() {
     const menuItems = [
         {
@@ -24,7 +25,7 @@ export default function ProfileSidebar() {
         },
     ];
     return (
-        <div>
+        <div className={styles.profileSidebarContainer}>
             <div className={styles.userBox}>
                 <div >
                     <Image
@@ -43,15 +44,42 @@ export default function ProfileSidebar() {
             </div>
 
             <div className={styles.menuBox}>
-                <div className={styles.menuItem}>
+                <Link className={styles.menuItem} href="/profile">
                     <Image
-                        src="/image 22.svg"
+                        src="/user.svg"
                         alt="User"
-                        width={50}
-                        height={50}
+                        width={30}
+                        height={30}
                     />
-                    <span>Thông tin cá nhân</span>
-                </div>
+                    <span className={styles.title}>Thông tin tài khoản</span>
+                </Link>
+                <Link className={styles.menuItem} href="/my-ticket">
+                    <Image
+                        src="/ticket.svg"
+                        alt="Ticket"
+                        width={30}
+                        height={30}
+                    />
+                    <span className={styles.title}>Vé của tôi</span>
+                </Link>
+                <Link className={styles.menuItem} href="/cart">
+                    <Image
+                        src="/shopping-cart.svg"
+                        alt="Cart"
+                        width={30}
+                        height={30}
+                    />
+                    <span className={styles.title}>Giỏ hàng</span>
+                </Link>
+                <Link className={styles.menuItem} href="/logout">
+                    <Image
+                        src="/logout.svg"
+                        alt="Logout"
+                        width={30}
+                        height={30}
+                    />
+                    <span className={styles.title}>Đăng xuất</span>
+                </Link>
             </div>
         </div >
     );
