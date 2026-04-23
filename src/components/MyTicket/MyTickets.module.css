@@ -1,0 +1,324 @@
+/* =============================================
+   MyTickets.module.css
+   Dark festival ticket UI — retro warmth on black
+   ============================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap");
+
+/* ---------- Root variables ---------- */
+.wrapper {
+    --gold: #c9a84c;
+    --gold-light: #e2c06a;
+    --gold-dim: rgba(201, 168, 76, 0.18);
+    --bg: #0e0c0a;
+    --surface: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #f0ebe2;
+    --muted: #7a6f62;
+    --radius: 10px;
+
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    overflow: hidden;
+}
+
+/* ---------- Noise overlay ---------- */
+.noise {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+}
+
+/* ---------- Background watermark text ---------- */
+.bgWatermark {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow: hidden;
+    opacity: 0.07;
+    user-select: none;
+    line-height: 1;
+}
+
+.bgWatermark span {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1rem, 4vw, 1.4rem);
+    letter-spacing: 0.3em;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.bgLarge {
+    font-family: "Bebas Neue", sans-serif !important;
+    font-size: clamp(4rem, 18vw, 9rem) !important;
+    letter-spacing: 0.04em !important;
+    color: var(--text);
+}
+
+/* ---------- Main container ---------- */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+}
+
+/* ---------- Heading ---------- */
+.heading {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin: 0 0 28px;
+}
+
+/* ---------- Status tabs (top row) ---------- */
+.statusTabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.statusTab {
+    padding: 9px 20px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.statusTab:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold-light);
+}
+
+.statusTabActive {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #1a1200;
+    font-weight: 600;
+}
+
+/* ---------- Sub tabs (Sắp diễn ra / Đã kết thúc) ---------- */
+.subTabs {
+    display: flex;
+    gap: 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+}
+
+.subTab {
+    position: relative;
+    padding: 0 2px 12px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.subTab::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.subTab:hover {
+    color: var(--text);
+}
+
+.subTabActive {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.subTabActive::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Content area ---------- */
+.content {
+    display: flex;
+    justify-content: center;
+}
+
+/* ---------- Empty state ---------- */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.illustrationWrap {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #2a1a0a, 0 8px 40px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(201, 168, 76, 0.1);
+    animation: floatIdle 3.5s ease-in-out infinite;
+}
+
+@keyframes floatIdle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.illustration {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.emptyText {
+    font-size: 0.95rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+/* ---------- Buy button ---------- */
+.buyBtn {
+    margin-top: 4px;
+    padding: 12px 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--gold-light);
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.25s, box-shadow 0.25s;
+}
+
+.buyBtn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-101%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+}
+
+.buyBtn span,
+.buyBtn {
+    position: relative;
+    z-index: 1;
+}
+
+.buyBtn:hover {
+    color: #1a1200;
+    box-shadow: 0 0 24px rgba(201, 168, 76, 0.35);
+}
+
+.buyBtn:hover::before {
+    transform: translateX(0);
+}
+
+/* ---------- Ticket grid (when tickets exist) ---------- */
+.ticketGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+.ticketCard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.ticketCard:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-2px);
+}
+
+.ticketCard h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+    color: var(--text);
+}
+
+.ticketCard p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+    .statusTabs {
+        gap: 8px;
+    }
+
+    .statusTab {
+        padding: 7px 14px;
+        font-size: 0.8rem;
+    }
+
+    .illustrationWrap {
+        width: 150px;
+        height: 150px;
+    }
+}

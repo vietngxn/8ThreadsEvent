@@ -7,8 +7,11 @@ import EventTitle from "../event/EventTitle";
 import EventDate from "../event/EventDate";
 import EventLocation from "../event/EventLocation";
 
+import { useRouter } from "next/navigation";
+
 export default function ConcertCard({ event }) {
   const [hover, setHover] = useState(false);
+  const router = useRouter();
 
   return (
     <Link href={`/page/viewticket/${event._id}`}>
