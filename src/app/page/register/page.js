@@ -48,7 +48,7 @@ export default function RegisterPage() {
     const data = await res.json();
 
     if (res.ok) {
-      router.push("/");
+      router.push("/page/login");
     } else {
       alert(data.error);
     }
