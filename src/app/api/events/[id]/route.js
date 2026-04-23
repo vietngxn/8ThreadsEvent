@@ -1,26 +1,40 @@
 import { connectDB } from "@/app/lib/mongodb";
 import Event from "@/models/Event";
-import mongoose from "mongoose";
+import TicketType from "@/models/TicketType";
 
 export async function GET(req, { params }) {
-  await connectDB();
+    try {
+        await connectDB();
+        const { id } = await params;
+        console.log("ID:", id);
+        const event = await Event.findById(id).lean();
 
-  const { id } = await params;
+        if (!event) {
+            return Response.json(
+                { message: "Không tìm thấy event" },
+                { status: 404 }
+            );
+        }
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return Response.json({ error: "Invalid ID" }, { status: 400 });
-  }
+        const ticketTypes = await TicketType.find({
+            eventId: event.eventId,
+            isActive: true
+        }).lean();
 
-  try {
-    const event = await Event.findById(id);
+        const minPrice =
+        ticketTypes.length > 0
+            ? Math.min(...ticketTypes.map(t => t.price))
+            : null;
 
-    if (!event) {
-      return Response.json({ error: "Not found" }, { status: 404 });
+        return Response.json({
+            ...event,
+            minPrice
+        });
+
+    } catch (error) {
+            return Response.json(
+            { error: error.message },
+            { status: 500 }
+        );
     }
-
-    return Response.json(event);
-  } catch (err) {
-    console.error(err);
-    return Response.json({ error: err.message }, { status: 500 });
-  }
-}
+ }
