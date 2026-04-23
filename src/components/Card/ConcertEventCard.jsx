@@ -8,11 +8,10 @@ import EventLocation from "../event/EventLocation";
 export default function ConcertEventCard({ data }) {
     if (!data) return null;
 
-    // Logic định dạng giá:
-    // Nếu data.price = 100 -> 2.500.000đ
-    const formattedPrice = data.price 
-        ? (data.price * 25000).toLocaleString('vi-VN') + "đ" 
-        : "Đang cập nhật";
+    const formattedPrice =
+        data.minPrice != null
+            ? Number(data.minPrice).toLocaleString("vi-VN") + "đ"
+            : "Đang cập nhật";
 
     return (
         <div className={styles.card}>
