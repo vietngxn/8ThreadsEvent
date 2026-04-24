@@ -25,10 +25,10 @@ export default function Artist() {
     const router = useRouter();
 
     const menuItems = [
-        { label: "TICKETS", href: "/", showArrow: true },
+        { label: "TICKETS", href: "/page/concerts", showArrow: true },
         { label: "HIGHLIGHT", href: "/highlight" },
         { label: "RETAIL", href: "#", showArrow: true },
-        { label: "EXPERIENCE", href: "#" },
+        { label: "EXPERIENCE", href: "/" },
         { label: "ARTISTS", href: "/artists" },
         { label: "DROP", href: "#" },
         { label: "STORIES", href: "#" },
