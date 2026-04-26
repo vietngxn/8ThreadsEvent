@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import GoldButton from "@/components/common/Button/GoldButton";
 import styles from "./ProfileInfomation.module.css";
 export default function ProfileInfomation() {
@@ -13,6 +13,18 @@ export default function ProfileInfomation() {
             setAvatarSrc(url);
         }
     };
+    const [userName, setUserName] = useState("...");
+    useEffect(() => {
+        const raw = localStorage.getItem("user");
+        if (raw) {
+            const user = JSON.parse(raw);
+            setUserName(user?.name || "Người dùng");
+            console.log("User:", user)
+        } else {
+            window.location.href = "/page/login";
+        }
+
+    }, []);
     return (
         <div>
             <span className={styles.title}>Thông tin tài khoản</span>
@@ -38,7 +50,7 @@ export default function ProfileInfomation() {
                             onChange={handleAvatarChange}
                         />
                     </div>
-                    <span className={styles.name}>Việt Nguyễn</span>
+                    <span className={styles.name}>{userName}</span>
                 </div>
                 <div className={styles.formContainer}>
                     <div style={{ display: "flex", gap: "20px" }}>

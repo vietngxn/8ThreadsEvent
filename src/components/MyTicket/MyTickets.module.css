@@ -223,6 +223,7 @@
 .buyBtn {
     position: relative;
     z-index: 1;
+
 }
 
 .buyBtn:hover {
@@ -232,6 +233,8 @@
 
 .buyBtn:hover::before {
     transform: translateX(0);
+    color: #1a1200;
+
 }
 
 /* ---------- Ticket grid — full width list ---------- */
