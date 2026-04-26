@@ -53,7 +53,7 @@ export default function ProfileSidebar() {
                     <Image src="/ticket.svg" alt="Ticket" width={30} height={30} />
                     <span className={styles.title}>Vé của tôi</span>
                 </Link>
-                <Link className={styles.menuItem} href="/cart">
+                <Link className={styles.menuItem} href="#">
                     <Image src="/shopping-cart.svg" alt="Cart" width={30} height={30} />
                     <span className={styles.title}>Giỏ hàng</span>
                 </Link>
