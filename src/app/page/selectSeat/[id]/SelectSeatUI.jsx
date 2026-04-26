@@ -13,7 +13,7 @@ import NotificationModal from "@/components/common/Notification/NotificationModa
 
 export default function SelectSeatUI({ ticketTypes, eventId }) {
   const [cart, setCart] = useState([]);
-  const router = useRouter(); 
+  const router = useRouter();
 
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
@@ -42,14 +42,14 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
   const handleAddToCart = (ticket) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === ticket.id);
-      
+
       if (existingItem) {
         if (existingItem.qty >= ticket.maxQty) {
           openModal({
             message: "Đại ca thông cảm, khu vực này",
             subMessage: `chỉ còn đúng ${ticket.maxQty} vé thôi ạ!`,
           });
-          return prevCart; 
+          return prevCart;
         }
         return prevCart.map((item) =>
           item.id === ticket.id ? { ...item, qty: item.qty + 1 } : item
@@ -79,7 +79,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
               openModal({
                 message: `Khu vực này chỉ còn tối đa ${item.maxQty} vé!`,
               });
-              return item; 
+              return item;
             }
             return { ...item, qty: newQty };
           }
@@ -116,7 +116,6 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
 
   return (
     <div className={styles.wrapper}>
-      <Navbar />
       <div className={styles.container}>
         <div className={styles.pageHeader}>
           <p className={styles.subTitle}>Chọn vé</p>
@@ -138,13 +137,13 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
                   </p>
                 ) : (
                   cart.map((item) => (
-                    <ProductItem 
+                    <ProductItem
                       key={item.id}
                       id={item.id}
-                      name={item.name} 
-                      price={item.price} 
-                      color={item.color} 
-                      qty={item.qty} 
+                      name={item.name}
+                      price={item.price}
+                      color={item.color}
+                      qty={item.qty}
                       onQuantityChange={handleUpdateQuantity}
                     />
                   ))
@@ -166,7 +165,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
         </div>
       </div>
 
-      <NotificationModal 
+      <NotificationModal
         isOpen={modalConfig.isOpen}
         type={modalConfig.type}
         message={modalConfig.message}
