@@ -36,17 +36,16 @@ const Navbar = () => {
         {
             label: "Vé của tôi",
             icon: "/ticket.svg",
-            path: "/tickets",
+            path: "/my-ticket",
         },
         {
             label: "Giỏ hàng",
-            icon: "/shopping-cart.svg",
-            path: "/cart",
+            icon: "/shopping-cart.svg"
         },
         {
             label: "Tài khoản",
             icon: "/user.svg",
-            path: "/profile",
+            path: "/infomation",
         },
         {
             label: "Đăng xuất",

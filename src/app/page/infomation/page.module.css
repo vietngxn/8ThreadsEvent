@@ -1,0 +1,42 @@
+   body {
+       background-image: url("/FirstPage.png");
+   }
+
+   .pageWrapper {
+       display: flex;
+       flex-direction: row;
+       min-height: 100vh;
+       width: 1400px;
+       margin: 170px auto auto auto;
+   }
+
+   .sidebar {
+       flex-shrink: 0;
+       width: 260px;
+       position: sticky;
+       top: 30px;
+       height: 90vh;
+   }
+
+   .content {
+       flex: 1;
+       padding: 40px 48px;
+       overflow-y: auto;
+       min-width: 0;
+   }
+
+   @media (max-width: 768px) {
+       .pageWrapper {
+           flex-direction: column;
+       }
+
+       .sidebar {
+           width: 100%;
+           height: auto;
+           position: static;
+       }
+
+       .content {
+           padding: 24px 20px;
+       }
+   }

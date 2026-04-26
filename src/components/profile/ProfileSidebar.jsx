@@ -1,33 +1,28 @@
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./profileSidebar.module.css"
 import Link from "next/link";
+
 export default function ProfileSidebar() {
-    const menuItems = [
-        {
-            label: "Thông tin tài khoản",
-            icon: "/ticket.svg",
-            path: "/tickets",
-        },
-        {
-            label: "Giỏ hàng",
-            icon: "/shopping-cart.svg",
-            path: "/cart",
-        },
-        {
-            label: "Tài khoản",
-            icon: "/user.svg",
-            path: "/profile",
-        },
-        {
-            label: "Đăng xuất",
-            icon: "/logout.svg",
-            action: "logout",
-        },
-    ];
+    const [userName, setUserName] = useState("...");
+
+    useEffect(() => {
+        try {
+            const raw = localStorage.getItem("user");
+            if (raw) {
+                const user = JSON.parse(raw);
+                setUserName(user?.name || "Người dùng");
+            }
+        } catch {
+            setUserName("Người dùng");
+        }
+    }, []);
+
     return (
         <div className={styles.profileSidebarContainer}>
             <div className={styles.userBox}>
-                <div >
+                <div>
                     <Image
                         src="/image 22.svg"
                         alt="User"
@@ -38,49 +33,28 @@ export default function ProfileSidebar() {
 
                 <div className={styles.userNameBox}>
                     <span className={styles.title}>Tài khoản của</span>
-                    <span className={styles.name}>Việt Nguyễn</span>
+                    <span className={styles.name}>{userName}</span>
                 </div>
-
             </div>
 
             <div className={styles.menuBox}>
-                <Link className={styles.menuItem} href="/profile">
-                    <Image
-                        src="/user.svg"
-                        alt="User"
-                        width={30}
-                        height={30}
-                    />
+                <Link className={styles.menuItem} href="/infomation">
+                    <Image src="/user.svg" alt="User" width={30} height={30} />
                     <span className={styles.title}>Thông tin tài khoản</span>
                 </Link>
                 <Link className={styles.menuItem} href="/my-ticket">
-                    <Image
-                        src="/ticket.svg"
-                        alt="Ticket"
-                        width={30}
-                        height={30}
-                    />
+                    <Image src="/ticket.svg" alt="Ticket" width={30} height={30} />
                     <span className={styles.title}>Vé của tôi</span>
                 </Link>
                 <Link className={styles.menuItem} href="/cart">
-                    <Image
-                        src="/shopping-cart.svg"
-                        alt="Cart"
-                        width={30}
-                        height={30}
-                    />
+                    <Image src="/shopping-cart.svg" alt="Cart" width={30} height={30} />
                     <span className={styles.title}>Giỏ hàng</span>
                 </Link>
                 <Link className={styles.menuItem} href="/logout">
-                    <Image
-                        src="/logout.svg"
-                        alt="Logout"
-                        width={30}
-                        height={30}
-                    />
+                    <Image src="/logout.svg" alt="Logout" width={30} height={30} />
                     <span className={styles.title}>Đăng xuất</span>
                 </Link>
             </div>
-        </div >
+        </div>
     );
 }

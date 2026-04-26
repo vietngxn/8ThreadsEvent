@@ -6,7 +6,10 @@ const ticketTypeSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-
+    ticketTypeId: {
+      type: String,
+      required: true
+    },
     eventId: {
       type: String,
       required: true
