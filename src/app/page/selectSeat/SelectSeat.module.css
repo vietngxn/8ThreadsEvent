@@ -1,13 +1,14 @@
 /* Tổng thể trang và Ảnh nền */
 .wrapper {
   background-image: url('/FirstPage.png');
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: 'Be Vietnam Pro', sans-serif;
+  margin-top: 150px;
 }
 
 .container {
@@ -34,13 +35,13 @@
 
 .mainLayout {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   gap: 25px;
   width: 100%;
   max-width: 1850px;
   margin: 0 auto;
-  height: calc(100vh - 160px); 
+  height: calc(100vh - 160px);
 }
 
 @keyframes fadeInUp {
@@ -48,6 +49,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -58,10 +60,10 @@
   flex: 1.2;
   height: 100%;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  position: relative; 
-  animation: fadeInUp 0.8s ease-out forwards; 
+  position: relative;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .diagramArea::before {
@@ -76,51 +78,57 @@
 
 /* Hack size Sơ đồ: Zoom lên kịch kim */
 .diagramArea :global(svg) {
-  position: relative; 
-  z-index: 1; /* Nổi lên trên quầng sáng */
+  position: relative;
+  z-index: 1;
+  /* Nổi lên trên quầng sáng */
   width: 100%;
-  max-width: 970px; 
+  max-width: 970px;
   height: auto;
   max-height: 150vh;
-  transform: scale(1.35); /* Hack zoom lên 25% */
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6)); /* Đổ bóng sâu */
+  transform: scale(1.35);
+  /* Hack zoom lên 25% */
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+  /* Đổ bóng sâu */
 }
 
 /* 2. KHU VỰC GHI CHÚ */
 .legendArea {
-  flex: 0 0 250px; 
+  flex: 0 0 250px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  opacity: 0; 
-  animation: fadeInUp 0.8s ease-out 0.2s forwards; /* Trễ 0.2s tạo nhịp điệu */
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  /* Trễ 0.2s tạo nhịp điệu */
 }
 
 /* 3. KHU VỰC GIỎ VÉ */
 .cartArea {
-  flex: 0 0 400px; 
+  flex: 0 0 400px;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end; 
-  opacity: 0; 
-  animation: fadeInUp 0.8s ease-out 0.4s forwards; /* Trễ 0.4s */
+  justify-content: flex-end;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  /* Trễ 0.4s */
 }
 
 /* Hiệu ứng Glassmorphism siêu cao cấp (Diamond Glass) */
 .cartContent {
   width: 100%;
-  background: linear-gradient(145deg, rgba(40,40,40,0.5) 0%, rgba(20,20,20,0.3) 100%);
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.5) 0%, rgba(20, 20, 20, 0.3) 100%);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Cạnh bắt sáng */
-  border-left: 1px solid rgba(255, 255, 255, 0.1); 
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  /* Cạnh bắt sáng */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   border-right: 1px solid rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.8);
   border-radius: 32px;
-  padding: 30px; 
+  padding: 30px;
   display: flex;
   flex-direction: column;
   max-height: 85%;
@@ -154,6 +162,7 @@
 .cartItems::-webkit-scrollbar {
   width: 4px;
 }
+
 .cartItems::-webkit-scrollbar-thumb {
   background: rgba(203, 179, 122, 0.4);
   border-radius: 10px;
@@ -198,11 +207,14 @@
     gap: 30px;
     max-width: 100%;
   }
+
   .cartArea {
     flex: 0 0 380px;
   }
+
   .diagramArea :global(svg) {
-    transform: scale(1.1); /* Giảm zoom đi một chút để tránh vỡ khung */
+    transform: scale(1.1);
+    /* Giảm zoom đi một chút để tránh vỡ khung */
   }
 }
 
@@ -212,16 +224,21 @@
     height: auto;
     align-items: center;
   }
-  .diagramArea, .legendArea, .cartArea {
+
+  .diagramArea,
+  .legendArea,
+  .cartArea {
     width: 100%;
     flex: none;
     justify-content: center;
   }
+
   .legendArea {
     padding: 20px 0;
     display: flex;
     justify-content: center;
   }
+
   .cartArea {
     margin-top: 40px;
   }

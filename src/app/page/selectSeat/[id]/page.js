@@ -10,11 +10,22 @@ export default function SelectSeatSmartPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const raw = localStorage.getItem("user");
+    if (raw) {
+      const user = JSON.parse(raw);
+      console.log("User:", user)
+    } else {
+      window.location.href = "/page/login";
+    }
+
+  }, []);
+
+  useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        
-        const eventRes = await fetch(`/api/events/${id}`); 
+
+        const eventRes = await fetch(`/api/events/${id}`);
         const eventData = await eventRes.json();
 
         if (!eventData || !eventData.eventId) {
