@@ -7,7 +7,8 @@ export default function Wing({
   side = "left",
   active,
   setActive,
-  onZoneClick 
+  onZoneClick,
+  ticketTypes,
 }) {
   const isRight = side === "right";
 
@@ -23,7 +24,7 @@ export default function Wing({
             key={n.key}
             id={`${n.key}-${isRight ? 2 : 1}`}
             label={n.label}
-            fullName={fullName} 
+            fullName={fullName}
             value={isRight ? "2" : "1"}
             fill={n.fill}
             path={n.path}
@@ -34,8 +35,9 @@ export default function Wing({
             mirrorText={isRight}
             active={active}
             setActive={setActive}
-            onZoneClick={onZoneClick} 
-            price={n.price || 1200000} 
+            onZoneClick={onZoneClick}
+            price={n.price || 1200000}
+            ticketTypes={ticketTypes}
           />
         );
       })}

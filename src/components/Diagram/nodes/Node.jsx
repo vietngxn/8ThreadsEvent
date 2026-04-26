@@ -4,8 +4,8 @@ export default function Node({
   id,
   label,
   value,
-  fullName,     
-  price,        
+  fullName,
+  price,
   fill,
   transform,
   active,
@@ -15,7 +15,8 @@ export default function Node({
   w = 0,
   h = 0,
   mirrorText = false,
-  onZoneClick   
+  onZoneClick,
+  ticketTypes, // 🚀 Nhận data từ API truyền xuống
 }) {
   const isActive = active === id;
 
@@ -27,6 +28,52 @@ export default function Node({
   const [lines, setLines] = useState([label || ""]);
 
   const isDecorative = !label || label.trim() === "";
+
+  const ID_MAPPING = {
+    "thanh-xuan-1": "TX1",
+    "thanh-xuan-2": "TX2",
+    "nham-thach-1": "NT1",
+    "nham-thach-2": "NT2",
+    "bi-an-1": "B1",
+    "bi-an-2": "B2",
+    "xuong-rong-1": "XR1",
+    "xuong-rong-2": "XR2",
+    "sao-sang-1": "SS1",
+    "sao-sang-2": "SS2",
+    "tai-sinh-1": "TS1",
+    "tai-sinh-2": "TS2",
+    "ngu-hanh-1": "NH1",
+    "ngu-hanh-2": "NH2",
+    "dam-me-1": "DM1",
+    "dam-me-2": "DM2",
+    "xuan-ha-thu-dong-1": "XHTD1",
+    "xuan-ha-thu-dong-2": "XHTD2",
+    "suc-soi-1": "SSO1",
+    "suc-soi-2": "SSO2",
+    "huyen-thoai-1": "HT1",
+    "huyen-thoai-2": "HT2",
+    "s-vip-1": "SVIP1",
+    "s-vip-2": "SVIP2",
+    "da-sac": "DS",
+    "da-tinh": "DT",
+    "da-hinh": "DT",
+    "nha-hat-1": "NHAT1",
+    "nha-hat-2": "NHAT2",
+    "ruc-lua-1": "RL1",
+    "ruc-lua-2": "RL2",
+  };
+
+  const dbCode = ID_MAPPING[id] || id;
+
+  const zoneData = ticketTypes?.find(
+    (t) => t.name === dbCode || t.type === dbCode,
+  );
+
+  const stock = zoneData ? zoneData.totalQuantity - zoneData.soldQuantity : 0;
+
+  const isSoldOut = stock <= 0;
+
+  const realPrice = zoneData ? zoneData.price : price;
 
   useEffect(() => {
     if (shapeRef.current) {
@@ -75,7 +122,7 @@ export default function Node({
   const centerY = bbox.height / 2;
 
   const handleClick = () => {
-    if (isDecorative) return;
+    if (isDecorative || isSoldOut) return;
 
     if (setActive) setActive(id);
 
@@ -83,43 +130,53 @@ export default function Node({
       onZoneClick({
         id: id,
         name: fullName || `${label} ${value || ""}`.trim(),
-        price: price || 1200000, 
-        color: fill
+        price: realPrice || 1200000,
+        color: fill,
+        maxQty: stock,
       });
     }
   };
 
   return (
     <g
-      className={`node ${isActive && !isDecorative ? "active" : ""}`}
+      className={`node ${isActive && !isDecorative && !isSoldOut ? "active" : ""} ${isSoldOut ? "sold-out" : ""}`}
       transform={transform}
-      onClick={isDecorative ? undefined : handleClick}
-      onMouseEnter={isDecorative ? undefined : () => setActive && setActive(id)}
-      onMouseLeave={isDecorative ? undefined : () => setActive && setActive(null)}
-      style={{ 
-        cursor: isDecorative ? "default" : "pointer",
-        pointerEvents: isDecorative ? "none" : "auto" 
+      onClick={isDecorative || isSoldOut ? undefined : handleClick}
+      onMouseEnter={
+        isDecorative || isSoldOut ? undefined : () => setActive && setActive(id)
+      }
+      onMouseLeave={
+        isDecorative || isSoldOut
+          ? undefined
+          : () => setActive && setActive(null)
+      }
+      style={{
+        cursor: isDecorative
+          ? "default"
+          : isSoldOut
+            ? "not-allowed"
+            : "pointer",
+        pointerEvents: isDecorative ? "none" : "auto",
       }}
     >
-
       {path && (
-        <path 
-          ref={shapeRef} 
-          d={path} 
-          fill={fill} 
-          className={!isDecorative ? "clickable-zone" : ""} 
+        <path
+          ref={shapeRef}
+          d={path}
+          fill={fill}
+          className={!isDecorative ? "clickable-zone" : ""}
         />
       )}
-      
+
       {shape === "rect" && (
-        <rect 
-          ref={shapeRef} 
-          x={0} 
-          y={0} 
-          width={w} 
-          height={h} 
-          fill={fill} 
-          className={!isDecorative ? "clickable-zone" : ""} 
+        <rect
+          ref={shapeRef}
+          x={0}
+          y={0}
+          width={w}
+          height={h}
+          fill={fill}
+          className={!isDecorative ? "clickable-zone" : ""}
         />
       )}
 

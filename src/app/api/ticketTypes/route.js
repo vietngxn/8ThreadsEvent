@@ -1,11 +1,18 @@
 import { connectDB } from "@/app/lib/mongodb";
 import TicketType from "@/models/TicketType";
 
-export async function GET() {
+export async function GET(req) {
   try {
     await connectDB();
-    const tickets = await TicketType.find();
+
+    const { searchParams } = new URL(req.url);
+    const eventId = searchParams.get("eventId");
+
+    const query = eventId ? { eventId: eventId } : {};
+    
+    const tickets = await TicketType.find(query);
     console.log("Tickets from DB:", tickets);
+    
     return new Response(JSON.stringify(tickets), {
       status: 200,
       headers: { "Content-Type": "application/json" },

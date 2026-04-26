@@ -11,7 +11,7 @@ import ConcertsPage from "./page/concerts/page";
 import ConcertEventCard from "@/components/Card/ConcertEventCard";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import ConcertCard from "@/components/Card/ConcertCard";
-import SelectSeatPage from "./page/selectSeat/page";
+import SelectSeatPage from "./page/selectSeat/[id]/SelectSeatUI";
 import ViewTicketPage from "./page/viewticket/viewticket";
 import CheckoutRoutePage from "./page/checkout/page";
 import HighlightPage from "./highlight/page";
