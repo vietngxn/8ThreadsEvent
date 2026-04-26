@@ -21,6 +21,7 @@ import ProfileInfomation from "@/components/profile/ProfileInfomation/ProfileInf
 import MyTickets from "@/components/MyTicket/MyTicket";
 
 import { redirect } from "next/navigation";
+import ProfilePage from "./page/infomation/page";
 
 export default function Home() {
   return (

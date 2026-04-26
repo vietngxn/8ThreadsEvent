@@ -26,10 +26,10 @@ export default function Highlight() {
     const router = useRouter();
 
     const menuItems = [
-        { label: "TICKETS", href: "/", showArrow: true, requireAuth: true, authTarget: "/concerts" },
+        { label: "TICKETS", href: "/page/concerts", showArrow: true, requireAuth: false, authTarget: "/concerts" },
         { label: "HIGHLIGHT", href: "#" },
         { label: "RETAIL", href: "#", showArrow: true },
-        { label: "EXPERIENCE", href: "#" },
+        { label: "EXPERIENCE", href: "/" },
         { label: "ARTISTS", href: "/artists" },
         { label: "DROP", href: "#" },
         { label: "STORIES", href: "#" },
