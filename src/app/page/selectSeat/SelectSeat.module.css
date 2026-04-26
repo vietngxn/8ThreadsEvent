@@ -32,19 +32,17 @@
   opacity: 0.8;
 }
 
-/* --- BỐ CỤC CHÍNH (Layout bành trướng) --- */
 .mainLayout {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
   gap: 25px;
   width: 100%;
-  max-width: 1850px; /* Layout cực rộng cho Sơ đồ tỏa sáng */
+  max-width: 1850px;
   margin: 0 auto;
   height: calc(100vh - 160px); 
 }
 
-/* --- ANIMATION XUẤT HIỆN --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -56,9 +54,8 @@
   }
 }
 
-/* 1. KHU VỰC SƠ ĐỒ (Được ưu tiên không gian nhất) */
 .diagramArea {
-  flex: 1.2; /* Dành nhiều đất diễn cho Sơ đồ */
+  flex: 1.2;
   height: 100%;
   display: flex;
   justify-content: center; 
@@ -67,7 +64,6 @@
   animation: fadeInUp 0.8s ease-out forwards; 
 }
 
-/* Quầng sáng mờ ảo phía sau Sơ đồ */
 .diagramArea::before {
   content: '';
   position: absolute;

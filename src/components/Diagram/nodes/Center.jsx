@@ -1,8 +1,13 @@
 import Node from "./Node";
 
-export default function Center({ active, setActive, onZoneClick }) {
+export default function Center({
+  active,
+  setActive,
+  onZoneClick,
+  ticketTypes,
+}) {
   const gap = 100;
-  const bridgeId = "center-bridge"; 
+  const bridgeId = "center-bridge";
 
   return (
     <g>
@@ -18,10 +23,11 @@ export default function Center({ active, setActive, onZoneClick }) {
           setActive={setActive}
           onZoneClick={onZoneClick}
           price={3000000}
+          ticketTypes={ticketTypes}
         />
       </g>
 
-      <path 
+      <path
         transform="translate(20 3)"
         className={`clickable-zone ${active === bridgeId ? "active" : ""}`}
         d={`
@@ -51,6 +57,7 @@ export default function Center({ active, setActive, onZoneClick }) {
           setActive={setActive}
           onZoneClick={onZoneClick}
           price={2500000}
+          ticketTypes={ticketTypes}
         />
       </g>
     </g>

@@ -29,3 +29,8 @@
   pointer-events: none;
   user-select: none;
 }
+
+.node.sold-out {
+  filter: grayscale(100%) opacity(0.25) !important;
+  pointer-events: none;
+}

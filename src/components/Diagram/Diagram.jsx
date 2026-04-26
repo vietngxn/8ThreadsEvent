@@ -6,7 +6,7 @@ import "./Diagram.css";
 import Center from "./nodes/Center";
 import Wing from "./nodes/Wing";
 
-export default function Diagram({ onZoneClick }) {
+export default function Diagram({ onZoneClick, ticketTypes }) {
   const [active, setActive] = useState(null);
   const [viewWidth, setViewWidth] = useState(1200); 
 
@@ -48,6 +48,7 @@ export default function Diagram({ onZoneClick }) {
             active={active} 
             setActive={setActive} 
             onZoneClick={onZoneClick}
+            ticketTypes={ticketTypes}
           />
         </g>
 
@@ -63,6 +64,7 @@ export default function Diagram({ onZoneClick }) {
             active={active} 
             setActive={setActive} 
             onZoneClick={onZoneClick} 
+            ticketTypes={ticketTypes}
           />
         </g>
 
@@ -71,6 +73,7 @@ export default function Diagram({ onZoneClick }) {
             active={active} 
             setActive={setActive} 
             onZoneClick={onZoneClick} 
+            ticketTypes={ticketTypes} 
           />
         </g>
       </g>
