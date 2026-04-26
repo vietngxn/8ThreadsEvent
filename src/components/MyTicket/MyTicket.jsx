@@ -159,7 +159,7 @@ export default function MyTickets() {
                                 <img src="/doraemon.png" alt="" />
                             </div>
                             <p className={styles.emptyText}>Bạn chưa có vé nào</p>
-                            <button className={styles.buyBtn}>Mua vé ngay</button>
+                            <button onClick={() => { window.location.href = "/page/concerts" }} className={styles.buyBtn}>Mua vé ngay</button>
                         </div>
                     ) : (
                         <div className={styles.ticketGrid}>

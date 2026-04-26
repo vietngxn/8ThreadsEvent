@@ -8,15 +8,15 @@ export default function ProfileSidebar() {
     const [userName, setUserName] = useState("...");
 
     useEffect(() => {
-        try {
-            const raw = localStorage.getItem("user");
-            if (raw) {
-                const user = JSON.parse(raw);
-                setUserName(user?.name || "Người dùng");
-            }
-        } catch {
-            setUserName("Người dùng");
+        const raw = localStorage.getItem("user");
+        if (raw) {
+            const user = JSON.parse(raw);
+            setUserName(user?.name || "Người dùng");
+            console.log("User:", user)
+        } else {
+            window.location.href = "/page/login";
         }
+
     }, []);
 
     return (
