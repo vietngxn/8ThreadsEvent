@@ -18,16 +18,23 @@ export default function ProfileSidebar() {
         }
 
     }, []);
+    const [avatarSrc, setAvatarSrc] = useState("/image 22.svg");
 
+    useEffect(() => {
+        const raw = localStorage.getItem("user");
+        if (raw) {
+            const user = JSON.parse(raw);
+            if (user?.avatar) setAvatarSrc(user.avatar);
+        }
+    }, []);
     return (
         <div className={styles.profileSidebarContainer}>
             <div className={styles.userBox}>
                 <div>
-                    <Image
-                        src="/image 22.svg"
+                    <img
+                        src={avatarSrc}
                         alt="User"
-                        width={50}
-                        height={50}
+                        style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                     />
                 </div>
 

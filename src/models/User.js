@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     phone: { type: String },
     avatar: { type: String },
+    avatarPublicId: { type: String, default: null },
 
     role: {
       type: String,
