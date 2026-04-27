@@ -115,13 +115,13 @@ Client (Next.js)
 ## Database Design (MongoDB)
 
 Collections:
-- users
-- events
-- tickets
-- orders
-- products
-- carts
-- vouchers
+- Users
+- Events
+- Tickets
+- Orders
+- Payments
+- Ticket_types
+- Vouchers
 
 ---
 
