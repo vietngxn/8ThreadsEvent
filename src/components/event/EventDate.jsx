@@ -15,7 +15,7 @@ export default function EventDate({ date, isHover }) {
       <CalendarIcon isHover={isHover} />
       <span
         className={
-          isHover ? styles.blackText : styles.gradientText
+          isHover ? styles.whiteText : styles.gradientText
         }
       >
         {formatted}

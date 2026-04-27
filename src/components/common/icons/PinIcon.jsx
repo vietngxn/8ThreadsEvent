@@ -5,7 +5,7 @@ export default function PinIcon({ size = 15, isHover }) {
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={isHover ? "#000" : "url(#goldSilverPin)"}
+      stroke={isHover ? "#fff" : "url(#goldSilverPin)"}
       strokeWidth="2"
     >
       {!isHover && (

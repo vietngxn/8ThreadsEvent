@@ -29,7 +29,14 @@ export default function ConcertCard({ event }) {
           <EventTitle title={event.name} />
 
           <p className={styles.price}>
-            Giá từ: {event.minPrice?.toLocaleString()}đ
+            Giá từ: {
+              event.minPrice
+                ? new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(event.minPrice)
+                : "Đang cập nhật"
+            }
           </p>
 
           <div className={styles.meta}>

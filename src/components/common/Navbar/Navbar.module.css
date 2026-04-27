@@ -111,6 +111,7 @@
   color: #e5e5e5;
   transition: 0.2s;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .dropdownItem:hover {

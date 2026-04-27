@@ -23,14 +23,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-.blackText {
-  color: #000;
+.whiteText {
+  color: white;
   background: none;
-  -webkit-text-fill-color: #000;
-}
-
-.blackText {
-  color: #000;
-  background: none;
-  -webkit-text-fill-color: #000;
+  -webkit-text-fill-color: white;
 }
