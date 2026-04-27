@@ -31,8 +31,8 @@ Users can browse events, book tickets, purchase related products, and complete p
 ### Authentication
 - JWT / NextAuth (optional)
 
-### Payment Integration (planned)
-- VNPay / MoMo / ZaloPay
+### Payment Integration
+- VNPay
 
 ---
 
