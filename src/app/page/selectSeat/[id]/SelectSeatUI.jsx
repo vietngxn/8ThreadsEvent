@@ -46,7 +46,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
       if (existingItem) {
         if (existingItem.qty >= ticket.maxQty) {
           openModal({
-            message: "Đại ca thông cảm, khu vực này",
+            message: "Thông cảm khu vực này",
             subMessage: `chỉ còn đúng ${ticket.maxQty} vé thôi ạ!`,
           });
           return prevCart;
@@ -190,6 +190,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
         subMessage={modalConfig.subMessage}
         buttonText={modalConfig.buttonText}
         onConfirm={modalConfig.onConfirm}
+        onClose={closeModal}
       />
     </div>
   );

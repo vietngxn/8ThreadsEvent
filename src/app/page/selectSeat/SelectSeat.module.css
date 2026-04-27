@@ -15,11 +15,15 @@
   display: flex;
   flex-direction: column;
   padding: 10px 40px 40px;
+
+  width: 100%;
+  max-width: 1850px;
+  margin: 0 auto;
 }
 
 .headerRow {
   display: flex;
-  align-items: center;
+  align-items: flex-start; 
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -33,6 +37,7 @@
 .pageHeader {
   flex: 2;
   text-align: center;
+  margin-top: 17px;
 }
 
 .placeholder {
@@ -55,7 +60,7 @@
   align-items: center;
   gap: 25px;
   width: 100%;
-  max-width: 1850px;
+  /* max-width: 1850px; */
   margin: 0 auto;
   height: calc(100vh - 160px);
 }
