@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Event Booking & E-commerce Platform
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is a web-based platform for event ticket booking and merchandise shopping. The system is built using Next.js, MongoDB Atlas, and Cloudinary to provide a fast, scalable, and user-friendly experience.
+
+Users can browse events, book tickets, purchase related products, and complete payments online. The platform also supports e-ticket delivery via QR code.
+
+---
+
+## Tech Stack
+
+### Frontend
+- Next.js (React)
+- TailwindCSS / CSS Modules
+- Axios / Fetch API
+
+### Backend
+- Next.js API Routes
+- Node.js
+
+### Database
+- MongoDB Atlas
+
+### Media Storage
+- Cloudinary
+
+### Authentication
+- JWT / NextAuth (optional)
+
+### Payment Integration (planned)
+- VNPay / MoMo / ZaloPay
+
+---
+
+## Features
+
+### Event Booking
+- View event list
+- View event details (time, location, ticket types)
+- Search and filter events
+- Select ticket type and quantity
+- Apply discount vouchers
+- Online payment
+- Receive e-ticket via email (QR code)
+
+### E-commerce
+- View product list
+- View product details
+- Search and filter products
+- Add to cart
+- Checkout and payment
+- Track orders
+
+### User Management
+- Register and login
+- Update profile (name, avatar, phone, email)
+- View booked tickets
+- Track order status
+
+---
+
+## System Architecture
+
+Client (Next.js)  
+→ API Routes (Next.js Backend)  
+→ MongoDB Atlas  
+→ Cloudinary  
+
+---
+
+## Core Modules
+
+### Event Module
+- Event listing
+- Event details
+- Ticket management
+
+### Booking Module
+- Ticket selection
+- Payment processing
+- QR code generation
+
+### Product Module
+- Product catalog
+- Shopping cart
+- Order processing
+
+### User Module
+- Authentication
+- Profile management
+
+---
+
+## Main Workflows
+
+### Booking Flow
+1. User logs in
+2. Browse events
+3. Select event and ticket
+4. Apply voucher (optional)
+5. Make payment
+6. Receive QR ticket via email
+
+### Shopping Flow
+1. Browse products
+2. Add to cart
+3. Checkout
+4. Enter shipping information
+5. Payment
+6. Track order
+
+---
+
+## Database Design (MongoDB)
+
+Collections:
+- users
+- events
+- tickets
+- orders
+- products
+- carts
+- vouchers
+
+---
+
+## Cloudinary Usage
+
+- Store event banners
+- Store product images
+- Store user avatars
+- Optimize images for performance
+
+---
+
+## Non-functional Requirements
+
+- Responsive UI
+- Fast performance
+- Secure payment
+- Scalable architecture
+- Easy-to-use interface
+
+---
+
+## Installation
 
 ```bash
+git clone <your-repo>
+cd <project-folder>
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
