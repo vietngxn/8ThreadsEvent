@@ -44,6 +44,18 @@
     background: rgba(255, 255, 255, 0.05);
 }
 
+.inputError {
+    outline: none;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(182, 29, 29, 0.774);
+    border-radius: 14px;
+    padding: 14px 20px;
+    color: rgba(182, 29, 29, 0.774);
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -85,3 +97,21 @@
     transform: scale(1.12);
     box-shadow: 0 0 10px rgba(203, 179, 122, 0.6);
 }
+
+.errorText {
+    font-family: "Kanit-Regular", sans-serif;
+    font-size: 12px;
+    color: rgba(220, 60, 60, 0.9);
+    margin-top: 5px;
+    padding-left: 4px;
+    min-height: 16px;
+    display: block;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.errorTextVisible {
+    opacity: 1;
+    transform: translateY(0);
+}

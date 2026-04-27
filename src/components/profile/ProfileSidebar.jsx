@@ -57,7 +57,11 @@ export default function ProfileSidebar() {
                     <Image src="/shopping-cart.svg" alt="Cart" width={30} height={30} />
                     <span className={styles.title}>Giỏ hàng</span>
                 </Link>
-                <Link className={styles.menuItem} href="/logout">
+                <Link className={styles.menuItem} href="#" onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    window.location.href = "/page/login";
+                }}>
                     <Image src="/logout.svg" alt="Logout" width={30} height={30} />
                     <span className={styles.title}>Đăng xuất</span>
                 </Link>

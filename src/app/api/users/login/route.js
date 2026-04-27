@@ -37,6 +37,7 @@ export async function POST(req) {
         name: user.firstName + " " + user.lastName,
         email: user.email,
         avatar: user.avatar,
+        _id: user._id
       },
       token: "test-token-123",
     });
