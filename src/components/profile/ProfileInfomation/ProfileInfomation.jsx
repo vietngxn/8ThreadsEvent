@@ -5,15 +5,19 @@ import ErrorPopup from "@/components/common/ErrorPopup/ErrorPopup";
 import styles from "./ProfileInfomation.module.css";
 export default function ProfileInfomation() {
     const fileInputRef = useRef(null);
+
     const [uploading, setUploading] = useState(false);
-    const [errorPopup, setErrorPopup] = useState({ show: false, title: "", message: "" });
-
-    const showError = (message, title = "Đã xảy ra lỗi") => {
-        setErrorPopup({ show: true, title, message });
-    };
-    const closeError = () => setErrorPopup({ show: false, title: "", message: "" });
-
     const [avatarSrc, setAvatarSrc] = useState("/image 22.svg");
+
+    const [errorPopup, setErrorPopup] = useState({
+        show: false,
+        title: "",
+        message: ""
+    });
+
+    const [userLocal, setUserLocal] = useState(null);
+    const [userName, setUserName] = useState("...");
+    const [userId, setUserId] = useState(null);
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -21,78 +25,156 @@ export default function ProfileInfomation() {
         phone: "",
         email: ""
     });
+
     const [defaultData, setDefaultData] = useState({
         firstName: "",
         lastName: "",
         phone: "",
         email: ""
     });
+
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: ""
+    });
+
     const emailRef = useRef(null);
     const phoneRef = useRef(null);
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
 
-    const [emailError, setEmailError] = useState(
-        { email: true, message: "", styles: styles.input }
-    );
-    const [phoneError, setPhoneError] = useState(
-        { phone: true, message: "", styles: styles.input }
-    );
-    const [firstNameError, setFirstNameError] = useState(
-        { firstName: true, message: "", styles: styles.input }
-    );
-    const [lastNameError, setLastNameError] = useState(
-        { lastName: true, message: "", styles: styles.input }
-    );
+    const [emailError, setEmailError] = useState({
+        email: true,
+        message: "",
+        styles: styles.input
+    });
 
-    const [userLocal, setUserLocal] = useState(null);
+    const [phoneError, setPhoneError] = useState({
+        phone: true,
+        message: "",
+        styles: styles.input
+    });
+
+    const [firstNameError, setFirstNameError] = useState({
+        firstName: true,
+        message: "",
+        styles: styles.input
+    });
+
+    const [lastNameError, setLastNameError] = useState({
+        lastName: true,
+        message: "",
+        styles: styles.input
+    });
+
+    const showError = (message, title = "Đã xảy ra lỗi") => {
+        setErrorPopup({
+            show: true,
+            title,
+            message
+        });
+    };
+
+    const closeError = () => {
+        setErrorPopup({
+            show: false,
+            title: "",
+            message: ""
+        });
+    };
+
+    // Đọc localStorage 1 lần
     useEffect(() => {
         const raw = localStorage.getItem("user");
-        if (raw) {
-            const user = JSON.parse(raw);
-            setUserLocal(user);
-            if (user?.avatar) setAvatarSrc(user.avatar);
+
+        if (!raw) {
+            window.location.href = "/page/login";
+            return;
+        }
+
+        const user = JSON.parse(raw);
+
+        setUserLocal(user);
+        setUserName(user?.name || "Người dùng");
+        setUserId(user?._id || null);
+
+        if (user?.avatar) {
+            setAvatarSrc(user.avatar);
         }
     }, []);
 
+    // Fetch user detail khi có userLocal
     useEffect(() => {
-        const userInfo = fetch("/api/users/" + userLocal?._id).then((res) => res.json());
-        userInfo.then((data) => {
-            setDefaultData({
-                firstName: data.firstName,
-                lastName: data.lastName,
-                phone: data.phone,
-                email: data.email
+        if (!userLocal?._id) return;
+
+        fetch("/api/users/" + userLocal._id)
+            .then((res) => res.json())
+            .then((data) => {
+                const userData = {
+                    firstName: data.firstName || "",
+                    lastName: data.lastName || "",
+                    phone: data.phone || "",
+                    email: data.email || ""
+                };
+
+                setDefaultData(userData);
+                setFormData(userData);
+            })
+            .catch(() => {
+                showError("Không thể tải thông tin người dùng");
             });
-            setFormData({
-                firstName: data.firstName,
-                lastName: data.lastName,
-                phone: data.phone,
-                email: data.email
-            });
-        });
     }, [userLocal]);
+
+    function checkEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function checkPhone(phone) {
+        const phoneRegex = /^[0-9]{10}$/;
+        return phoneRegex.test(phone);
+    }
+
+    function checkFullName(fullName) {
+        const fullNameRegex =
+            /^[A-Za-zÀ-ÖØ-ößığĞñÑáéíóúÁÉÍÓÚüÜçÇĐđ ]{2,}$/;
+        return fullNameRegex.test(fullName);
+    }
+
     const handleAvatarChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
         setAvatarSrc(URL.createObjectURL(file));
 
         try {
             setUploading(true);
-            const formData = new FormData();
-            formData.append("file", file);
-            if (userId) formData.append("userId", userId);
+
+            const form = new FormData();
+            form.append("file", file);
+
+            if (userId) {
+                form.append("userId", userId);
+            }
 
             const res = await fetch("/api/upload/avatar", {
                 method: "POST",
-                body: formData,
+                body: form
             });
 
-            if (!res.ok) throw new Error("Upload thất bại");
+            if (!res.ok) {
+                throw new Error("Upload thất bại");
+            }
 
             const data = await res.json();
+
             setAvatarSrc(data.url);
-            const existingUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+            const existingUser = JSON.parse(
+                localStorage.getItem("user") || "{}"
+            );
+
             localStorage.setItem(
                 "user",
                 JSON.stringify({
@@ -110,77 +192,135 @@ export default function ProfileInfomation() {
         }
     };
 
-    const [userName, setUserName] = useState("...");
-    const [userId, setUserId] = useState(null);
-    useEffect(() => {
-        const raw = localStorage.getItem("user");
-        if (raw) {
-            const user = JSON.parse(raw);
-            setUserName(user?.name || "Người dùng");
-            setUserId(user?.userId || null);
-            if (user?.avatar) setAvatarSrc(user.avatar);
-        } else {
-            window.location.href = "/page/login";
-        }
-
-    }, []);
-    function checkEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-    function checkPhone(phone) {
-        const phoneRegex = /^[0-9]{10}$/;
-        return phoneRegex.test(phone);
-    }
-    function checkFullName(fullName) {
-        const fullNameRegex = /^[A-Za-zÀ-ÖØ-ößığĞñÑáéíóúÁÉÍÓÚüÜçÇĐđ ]{2,}$/;
-        return fullNameRegex.test(fullName);
-    }
     function handleUpdate() {
-        if (formData.firstName === null) {
-            formData.firstName = defaultData.firstName;
-        }
-        if (formData.lastName === null) {
-            formData.lastName = defaultData.lastName;
-        }
-        if (formData.phone === null) {
-            formData.phone = defaultData.phone;
-        }
-        if (formData.email === null) {
-            formData.email = defaultData.email;
-        }
-        if (firstNameRef.current.value === "" && lastNameRef.current.value === "" && phoneRef.current.value === "" && emailRef.current.value === "") {
-            showError("Vui lòng nhập thông tin cần sửa đổi", "Thông tin không hợp lệ");
+        const finalData = {
+            firstName: formData.firstName || defaultData.firstName,
+            lastName: formData.lastName || defaultData.lastName,
+            phone: formData.phone || defaultData.phone,
+            email: formData.email || defaultData.email
+        };
+
+        if (
+            !firstNameRef.current.value &&
+            !lastNameRef.current.value &&
+            !phoneRef.current.value &&
+            !emailRef.current.value
+        ) {
+            showError(
+                "Vui lòng nhập thông tin cần sửa đổi",
+                "Thông tin không hợp lệ"
+            );
             return;
         }
+
         fetch("/api/users/" + userLocal?._id, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(finalData)
         }).then((res) => {
             if (res.ok) {
                 const raw = localStorage.getItem("user");
+
                 if (raw) {
                     const user = JSON.parse(raw);
-                    user.name = formData.firstName + " " + formData.lastName;
-                    user.phone = formData.phone;
-                    user.email = formData.email;
-                    user.avatar = avatarSrc;
-                    localStorage.setItem("user", JSON.stringify(user));
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify({
+                            ...user,
+                            name:
+                                finalData.firstName +
+                                " " +
+                                finalData.lastName,
+                            phone: finalData.phone,
+                            email: finalData.email,
+                            avatar: avatarSrc
+                        })
+                    );
                 }
+
                 window.location.reload();
             } else {
-                showError("Cập nhật thông tin thất bại. Vui lòng thử lại sau.", "Cập nhật thất bại");
+                showError(
+                    "Cập nhật thông tin thất bại. Vui lòng thử lại sau.",
+                    "Cập nhật thất bại"
+                );
             }
         });
+    }
 
+    async function handleChangePassword() {
+        if (
+            !passwordData.currentPassword ||
+            !passwordData.newPassword ||
+            !passwordData.confirmPassword
+        ) {
+            showError("Vui lòng nhập đầy đủ thông tin");
+            return;
+        }
 
+        if (
+            passwordData.currentPassword ===
+            passwordData.newPassword
+        ) {
+            showError("Mật khẩu mới phải khác mật khẩu cũ");
+            return;
+        }
 
+        if (passwordData.newPassword.length < 8) {
+            showError("Mật khẩu mới phải có ít nhất 8 ký tự");
+            return;
+        }
 
+        if (
+            passwordData.newPassword !==
+            passwordData.confirmPassword
+        ) {
+            showError("Xác nhận mật khẩu không khớp");
+            return;
+        }
 
+        try {
+            const res = await fetch(
+                `/api/users/change-password/${userLocal?._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        currentPassword:
+                            passwordData.currentPassword,
+                        newPassword: passwordData.newPassword
+                    })
+                }
+            );
 
+            const data = await res.json();
+
+            if (res.ok) {
+                showError(
+                    "Đổi mật khẩu thành công",
+                    "Thành công"
+                );
+
+                setPasswordData({
+                    currentPassword: "",
+                    newPassword: "",
+                    confirmPassword: ""
+                });
+            } else {
+                showError(
+                    data.message || "Đổi mật khẩu thất bại"
+                );
+            }
+        } catch {
+            showError(
+                "Không thể đổi mật khẩu. Vui lòng thử lại."
+            );
+        }
     }
 
     return (
@@ -290,14 +430,49 @@ export default function ProfileInfomation() {
                 <div className={styles.formContainer}>
 
                     <div>
-                        <input className={styles.input} type="text" placeholder="Mật khẩu cũ" />
+                        <input
+                            className={styles.input}
+                            type="password"
+                            placeholder="Mật khẩu cũ"
+                            value={passwordData.currentPassword}
+                            onChange={(e) =>
+                                setPasswordData({
+                                    ...passwordData,
+                                    currentPassword: e.target.value
+                                })
+                            }
+                        />
                     </div>
                     <div style={{ display: "flex", gap: "20px" }}>
-                        <input className={styles.input} type="text" placeholder="Mật khẩu mới" />
-                        <input className={styles.input} type="text" placeholder="Xác nhận mật khẩu mới" />
+                        <input
+                            className={styles.input}
+                            type="password"
+                            placeholder="Mật khẩu mới"
+                            value={passwordData.newPassword}
+                            onChange={(e) =>
+                                setPasswordData({
+                                    ...passwordData,
+                                    newPassword: e.target.value
+                                })
+                            }
+                        />
+                        <input
+                            className={styles.input}
+                            type="password"
+                            placeholder="Xác nhận mật khẩu mới"
+                            value={passwordData.confirmPassword}
+                            onChange={(e) =>
+                                setPasswordData({
+                                    ...passwordData,
+                                    confirmPassword: e.target.value
+                                })
+                            }
+                        />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center" }}>
-                        <GoldButton>ĐỔI MẬT KHẨU</GoldButton>
+                        <GoldButton onClick={handleChangePassword}>
+                            ĐỔI MẬT KHẨU
+                        </GoldButton>
                     </div>
                 </div>
 
