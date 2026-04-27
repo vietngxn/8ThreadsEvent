@@ -47,7 +47,7 @@ Users can browse events, book tickets, purchase related products, and complete p
 - Online payment
 - Receive e-ticket via email (QR code)
 
-### E-commerce
+### E-commerce (UPDATING)
 - View product list
 - View product details
 - Search and filter products
@@ -84,7 +84,7 @@ Client (Next.js)
 - Payment processing
 - QR code generation
 
-### Product Module
+### Product Module (UPDATING)
 - Product catalog
 - Shopping cart
 - Order processing
@@ -105,7 +105,7 @@ Client (Next.js)
 5. Make payment
 6. Receive QR ticket via email
 
-### Shopping Flow
+### Shopping Flow (UPDATING)
 1. Browse products
 2. Add to cart
 3. Checkout
@@ -135,7 +135,7 @@ Database Schema:
 ## Cloudinary Usage
 
 - Store event banners
-- Store product images
+- Store product images (UPDATING)
 - Store user avatars
 - Optimize images for performance
 
