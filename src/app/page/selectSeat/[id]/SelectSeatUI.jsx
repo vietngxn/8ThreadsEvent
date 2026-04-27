@@ -8,8 +8,8 @@ import Diagram from "@/components/Diagram/Diagram";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import GoldButton from "@/components/common/Button/GoldButton";
 import SeatLegend from "@/components/Diagram/Legend/SeatLegend";
-// 🚀 Import Component Modal dùng chung
 import NotificationModal from "@/components/common/Notification/NotificationModal.jsx";
+import BackButton from "@/components/common/Button/BackButton";
 
 export default function SelectSeatUI({ ticketTypes, eventId }) {
   const [cart, setCart] = useState([]);
@@ -52,7 +52,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
           return prevCart;
         }
         return prevCart.map((item) =>
-          item.id === ticket.id ? { ...item, qty: item.qty + 1 } : item
+          item.id === ticket.id ? { ...item, qty: item.qty + 1 } : item,
         );
       }
 
@@ -84,7 +84,7 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
             return { ...item, qty: newQty };
           }
           return item;
-        })
+        }),
       );
     }
   };
@@ -110,16 +110,27 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
       onConfirm: () => {
         localStorage.setItem("temp_cart", JSON.stringify(cart));
         router.push(`/page/checkout?eventId=${eventId}`);
-      }
+      },
     });
   };
 
   return (
     <div className={styles.wrapper}>
+      <Navbar />
+
       <div className={styles.container}>
-        <div className={styles.pageHeader}>
-          <p className={styles.subTitle}>Chọn vé</p>
+        <div className={styles.headerRow}>
+          <div className={styles.navigation}>
+            <BackButton label="Trở về" />
+          </div>
+
+          <div className={styles.pageHeader}>
+            <p className={styles.subTitle}>Chọn vé</p>
+          </div>
+
+          <div className={styles.placeholder}></div>
         </div>
+
         <div className={styles.mainLayout}>
           <div className={styles.diagramArea}>
             <Diagram onZoneClick={handleAddToCart} ticketTypes={ticketTypes} />
@@ -132,7 +143,14 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
               <h3 className={styles.cartTitle}>Giỏ vé</h3>
               <div className={styles.cartItems}>
                 {cart.length === 0 ? (
-                  <p style={{ color: "rgba(255,255,255,0.5)", textAlign: "center", fontSize: "14px", marginTop: "20px" }}>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.5)",
+                      textAlign: "center",
+                      fontSize: "14px",
+                      marginTop: "20px",
+                    }}
+                  >
                     Chưa có vé nào. Vui lòng chọn khu vực trên sơ đồ!
                   </p>
                 ) : (
