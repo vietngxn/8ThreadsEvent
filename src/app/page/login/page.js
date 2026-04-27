@@ -26,6 +26,7 @@ const EyeOffIcon = () => (
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [error, setError] = useState("");
 
   const [account, setAccount] = useState(searchParams.get("account") || "");
   const [password, setPassword] = useState("");
@@ -34,6 +35,7 @@ function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(""); // reset lỗi cũ
 
     const res = await fetch("/api/users/login", {
       method: "POST",
@@ -44,13 +46,13 @@ function LoginForm() {
     if (res.ok) {
       const data = await res.json();
 
-      // dùng context
       login(data.token, data.user);
 
       const redirect = searchParams.get("redirect") || "/";
       router.replace(redirect);
     } else {
-      alert("Sai tài khoản hoặc mật khẩu");
+      const data = await res.json();
+      setError(data.message || "Sai tài khoản hoặc mật khẩu");
     }
   };
 
@@ -84,10 +86,15 @@ function LoginForm() {
             placeholder="••••••••"
             required
           />
+
           <button type="button" onClick={() => setShowPass(!showPass)} className={styles.eyeButton}>
             {showPass ? <EyeOffIcon /> : <EyeIcon />}
           </button>
         </div>
+
+        <p className={styles.errorText}>
+          {error || "\u00A0"}
+        </p>
 
         <div className="text-right mb-6">
           <a href="#" className="text-[11px] text-gray-500 hover:text-[#cbb37a] transition">

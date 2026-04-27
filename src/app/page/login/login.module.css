@@ -29,6 +29,13 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
+.errorText {
+  color: #ff4d4f;
+  font-size: 16px;
+  margin-top: 6px;
+  min-height: 16px;
+}
+
 .logoArea {
   display: flex;
   flex-direction: column;
@@ -76,16 +83,16 @@
 .eyeButton {
   position: absolute;
   right: 18px;
-  top: 50%;
-  transform: translateY(-50%); 
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #a0a0a0;
   cursor: pointer;
   background: none;
   border: none;
-  display: flex;
-  align-items: center;
   padding: 0;
-  transition: color 0.3s;
 }
 
 .eyeButton:hover {
