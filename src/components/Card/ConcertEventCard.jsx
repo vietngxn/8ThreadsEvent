@@ -38,7 +38,7 @@ export default function ConcertEventCard({ data }) {
       </div>
 
       <div className={styles.rightPanel}>
-        <img src={`/${data.img}`} alt="Poster" />
+        <img src={data.img} alt="Poster" style={{ height: "100%", objectFit: "cover" }} />
       </div>
     </div>
   );
