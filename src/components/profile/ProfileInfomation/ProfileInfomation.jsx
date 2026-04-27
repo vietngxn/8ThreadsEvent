@@ -99,7 +99,9 @@ export default function ProfileInfomation() {
                     ...existingUser,
                     avatar: data.url
                 })
-            );
+            )
+            window.location.reload();
+            ;
         } catch (err) {
             console.error("Upload avatar lỗi:", err);
             showError("Không thể upload ảnh. Vui lòng thử lại.", "Upload thất bại");
