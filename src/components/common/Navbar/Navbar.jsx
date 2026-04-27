@@ -106,7 +106,7 @@ const Navbar = () => {
                             <button onClick={() => setIsOpen(!isOpen)} className={styles.userButton}>
                                 <div className={styles.avatar}>
                                     <img
-                                        src={user.avatar}
+                                        src={user?.avatar || "/image 22.svg"}
                                         alt="User"
                                     />
                                 </div>
