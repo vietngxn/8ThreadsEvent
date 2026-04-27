@@ -7,6 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { userData } from "three/src/nodes/accessors/UserDataNode";
 
 const Navbar = () => {
     const router = useRouter();
@@ -104,10 +105,9 @@ const Navbar = () => {
                         <>
                             <button onClick={() => setIsOpen(!isOpen)} className={styles.userButton}>
                                 <div className={styles.avatar}>
-                                    <Image
-                                        src="/image 22.svg"
+                                    <img
+                                        src={user.avatar}
                                         alt="User"
-                                        fill
                                     />
                                 </div>
                                 <span className={styles.username}>
