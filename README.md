@@ -123,6 +123,10 @@ Collections:
 - Ticket_types
 - Vouchers
 
+Database Schema:
+
+<img width="856" height="613" alt="image" src="https://github.com/user-attachments/assets/35dd59aa-92f6-4462-9e60-d111de47c7ff" />
+
 ---
 
 ## Cloudinary Usage
