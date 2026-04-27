@@ -5,7 +5,7 @@ export default function CalendarIcon({ size = 16, isHover }) {
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={isHover ? "#000" : "url(#goldSilverCalendar)"}
+      stroke={isHover ? "#fff" : "url(#goldSilverCalendar)"}
       strokeWidth="2"
     >
       {!isHover && (

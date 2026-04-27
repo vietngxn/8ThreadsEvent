@@ -5,6 +5,7 @@ import Button from "@/components/common/Button/GoldButton";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 const EyeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,6 +30,7 @@ function LoginForm() {
   const [account, setAccount] = useState(searchParams.get("account") || "");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,8 +44,8 @@ function LoginForm() {
     if (res.ok) {
       const data = await res.json();
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // dùng context
+      login(data.token, data.user);
 
       const redirect = searchParams.get("redirect") || "/";
       router.replace(redirect);

@@ -6,7 +6,7 @@ export default function EventLocation({ location, isHover }) {
     <div className={styles.locationRow}>
       <PinIcon isHover={isHover} />
       <p
-        className={`${styles.locationName} ${isHover ? styles.blackText : styles.gradientText
+        className={`${styles.locationName} ${isHover ? styles.whiteText : styles.gradientText
           }`}
       >
         {location}

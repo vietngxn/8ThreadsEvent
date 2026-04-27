@@ -8,30 +8,15 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { userData } from "three/src/nodes/accessors/UserDataNode";
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
     const router = useRouter();
+    const { user, isLoggedIn, logout, loading } = useAuth();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
-    const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-
-        const token = localStorage.getItem("token");
-        const userData = localStorage.getItem("user");
-
-        setIsLoggedIn(!!token);
-
-        if (userData) {
-            setUser(JSON.parse(userData));
-        }
-
-    }, []);
-
-    if (!mounted) return null;
+    if (loading) return null;
 
     const menuItems = [
         {
@@ -57,10 +42,7 @@ const Navbar = () => {
 
     const handleAction = (item) => {
         if (item.action === "logout") {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            setIsLoggedIn(false);
-            setUser(null);
+            logout();
             router.push("/page/login");
             return;
         }

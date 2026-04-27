@@ -9,4 +9,5 @@
   overflow: hidden;
 
   min-height: calc(1.3em * 2);
+  word-break: break-word;
 }
