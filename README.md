@@ -1,7 +1,7 @@
 <img width="501" height="425" alt="logo" src="https://github.com/user-attachments/assets/2968c091-28b7-4b21-8495-4d863ca9cec4" />
 
 
-# 8THREADSEVENT
+# 8THREADS EVENT
 
 ## Overview
 
