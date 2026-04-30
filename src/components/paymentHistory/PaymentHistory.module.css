@@ -1,5 +1,239 @@
-.title {
-    font-family: "Kanit-Bold";
-    font-size: 24px;
-    color: #fff;
+@font-face {
+  font-family: "Kanit";
+  src: url("/assets/fonts/Kanit/Kanit-Regular.ttf");
+}
+
+.wrapper {
+  --gold: #8c7240;
+  --gold-light: #f8da8d;
+  --text: #ffffff;
+  --muted: #cfcfcf;
+  --border: rgba(255,255,255,.08);
+
+  color: var(--text);
+  font-family: "Kanit", sans-serif;
+}
+
+.title{
+  font-size:24px;
+  margin-bottom:24px;
+  font-family:"Kanit-Bold", sans-serif;
+}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:24px;
+}
+
+.tabs button{
+  min-width:170px;
+  padding:10px 22px;
+  border:none;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  color:#ffffff; 
+  cursor:pointer;
+  font-size:14px;
+  font-family:"Kanit-Bold", sans-serif;
+  border:1px solid rgba(255,255,255,.10);
+  transition:.2s;
+}
+
+.tabs button:hover{
+  background:rgba(255,255,255,.24);
+  color:#fff;
+  border-color:var(--gold);
+}
+
+/* nút đang chọn */
+.active{
+  background:var(--gold) !important;
+  color:#fff !important;
+  border-color:var(--gold) !important;
+}
+
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.card{
+  display:grid;
+  grid-template-columns:140px 1fr 260px;
+  gap:18px;
+  padding:0;
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  border-color:rgba(140,114,64,.8);
+}
+
+.poster{
+  width:140px;
+  height:100%;
+  min-height:220px;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.info{
+  padding:18px 0;
+}
+
+.topRow{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:flex-start;
+}
+
+.topRow h3{
+  margin:0;
+  font-size:20px;
+  line-height:1.35;
+  font-family:"Kanit-Bold", sans-serif;
+}
+
+.metaRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  margin-top:10px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.metaRow span{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.icon{
+  width:16px;
+  height:16px;
+  object-fit:contain;
+}
+
+.ticketWrap{
+  display:flex;
+  gap:40px;
+  margin-top:24px;
+  margin-bottom: 24px;
+  font-size:15px;
+}
+
+.ticketWrap strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.payment{
+  margin-top:16px;
+  font-size:15px;
+  color:#e6e6e6;
+}
+
+.success,
+.pending,
+.cancelled{
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.success{ color:#52ff28; }
+.pending{ color:#ffd44d; }
+.cancelled{ color:#ff6b6b; }
+
+.total{
+  padding:18px 18px 18px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:14px;
+}
+
+.totalStatus{
+  text-align:right;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.total div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:18px;
+}
+
+.total span{
+  color:#fff;
+}
+
+.total strong{
+  color:var(--gold-light);
+  font-size:18px;
+  font-weight:900;
+}
+
+.final span,
+.final strong{
+  font-size:18px;
+  color:var(--gold-light);
+}
+
+.empty{
+  padding:30px 0;
+  text-align:center;
+  color:#aaa;
+}
+
+@media (max-width:992px){
+  .card{
+    grid-template-columns:1fr;
+  }
+
+  .poster{
+    width:100%;
+    min-height:240px;
+  }
+
+  .info{
+    padding:18px;
+  }
+
+  .total{
+    padding:0 18px 18px;
+  }
+
+  .totalStatus{
+    text-align:left;
+  }
+}
+
+@media (max-width:768px){
+  .tabs button{
+    flex:1;
+    min-width:unset;
+  }
+
+  .topRow{
+    grid-template-columns:1fr;
+  }
+
+  .ticketWrap,
+  .metaRow{
+    flex-direction:column;
+    gap:12px;
+  }
 }

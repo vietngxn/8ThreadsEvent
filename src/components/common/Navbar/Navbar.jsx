@@ -25,6 +25,11 @@ const Navbar = () => {
             path: "/my-ticket",
         },
         {
+            label: "Lịch sử mua vé",
+            icon: "history",
+            path: "/payment-history",
+        },
+        {
             label: "Giỏ hàng",
             icon: "/shopping-cart.svg"
         },
@@ -112,7 +117,24 @@ const Navbar = () => {
                                                 className={styles.dropdownItem}
                                                 onClick={() => handleAction(item)}
                                             >
-                                                <Image src={item.icon} alt={item.label} width={25} height={25} />
+                                                {item.icon === "history" ? (
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="22"
+                                                        height="22"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    >
+                                                        <path d="M12 8v4l2 2" />
+                                                        <path d="M3.05 11a9 9 0 1 1 .5 4M3 21v-5h5" />
+                                                    </svg>
+                                                ) : (
+                                                    <Image src={item.icon} alt={item.label} width={25} height={25} />
+                                                )}
                                                 <span>{item.label}</span>
                                             </div>
                                         ))}
