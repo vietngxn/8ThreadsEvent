@@ -11,7 +11,7 @@ import SeatLegend from "@/components/Diagram/Legend/SeatLegend";
 import NotificationModal from "@/components/common/Notification/NotificationModal.jsx";
 import BackButton from "@/components/common/Button/BackButton";
 
-export default function SelectSeatUI({ ticketTypes, eventId }) {
+export default function SelectSeatUI({ ticketTypes, eventId, eventInfo }) {
   const [cart, setCart] = useState([]);
   const router = useRouter();
 
@@ -109,6 +109,10 @@ export default function SelectSeatUI({ ticketTypes, eventId }) {
       buttonText: "Tiếp tục",
       onConfirm: () => {
         localStorage.setItem("temp_cart", JSON.stringify(cart));
+        localStorage.setItem(
+          "temp_checkout_context",
+          JSON.stringify({ event: eventInfo || null, cart }),
+        );
         router.push(`/page/checkout?eventId=${eventId}`);
       },
     });

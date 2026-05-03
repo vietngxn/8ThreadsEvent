@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { CalendarDays, Circle, CircleCheck, MapPin } from "lucide-react";
 import Navbar from "@/components/common/Navbar/Navbar";
 import BackButton from "@/components/common/Button/BackButton";
@@ -24,7 +26,7 @@ function formatDateRange(isoStart) {
 }
 
 function formatCurrency(value) {
-  const normalized = Number(value || 0) * 1000;
+  const normalized = Number(value || 0);
   return `${new Intl.NumberFormat("vi-VN").format(normalized)}đ`;
 }
 
@@ -35,20 +37,25 @@ function getVoucherDiscountAmount(voucher, subtotal) {
       (Number(subtotal || 0) * Number(voucher.value || 0)) / 100,
     );
   }
-  return Number(voucher.value || 0);
+  return Number(voucher.value || 0) * 1000;
 }
 
 function extractMinOrder(condition) {
   if (!condition) return null;
   const matched = condition.match(/minOrder\s*>?=\s*(\d+)/i);
-  return matched ? Number(matched[1]) : null;
+  return matched ? Number(matched[1]) * 1000 : null;
 }
 
 export default function CheckoutRoutePage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedEventId = searchParams.get("eventId");
   const [events, setEvents] = useState([]);
   const [orders, setOrders] = useState([]);
   const [ticketTypes, setTicketTypes] = useState([]);
   const [vouchers, setVouchers] = useState([]);
+  const [storedCart, setStoredCart] = useState([]);
+  const [storedCheckoutContext, setStoredCheckoutContext] = useState(null);
   const [timeLeft, setTimeLeft] = useState(HOLD_SECONDS);
   const [hasAgreedTerms, setHasAgreedTerms] = useState(false);
   const [termsError, setTermsError] = useState("");
@@ -97,6 +104,28 @@ export default function CheckoutRoutePage() {
   }, []);
 
   useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("temp_cart");
+      const parsedCart = raw ? JSON.parse(raw) : [];
+      setStoredCart(Array.isArray(parsedCart) ? parsedCart : []);
+    } catch {
+      setStoredCart([]);
+    }
+
+    try {
+      const rawContext = window.localStorage.getItem("temp_checkout_context");
+      const parsedContext = rawContext ? JSON.parse(rawContext) : null;
+      setStoredCheckoutContext(
+        parsedContext && typeof parsedContext === "object"
+          ? parsedContext
+          : null,
+      );
+    } catch {
+      setStoredCheckoutContext(null);
+    }
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
@@ -105,7 +134,7 @@ export default function CheckoutRoutePage() {
   }, []);
 
   const pendingOrder = useMemo(
-    () => orders.find((item) => item.status === "pending") || orders[0] || null,
+    () => orders.find((item) => item.status === "pending") || null,
     [orders],
   );
 
@@ -118,8 +147,18 @@ export default function CheckoutRoutePage() {
 
   const checkoutData = useMemo(() => {
     const order = pendingOrder;
+    const contextEvent = storedCheckoutContext?.event || null;
+    const cartItems =
+      Array.isArray(storedCheckoutContext?.cart) &&
+      storedCheckoutContext.cart.length > 0
+        ? storedCheckoutContext.cart
+        : storedCart.length > 0
+          ? storedCart
+          : null;
+    const activeEventId =
+      contextEvent?.eventId || selectedEventId || order?.eventId || null;
 
-    if (!order) {
+    if (!cartItems && !order) {
       return {
         eventId: null,
         eventName: "Đang cập nhật sự kiện",
@@ -133,24 +172,29 @@ export default function CheckoutRoutePage() {
       };
     }
 
-    const event = events.find((item) => item.eventId === order.eventId);
+    const event =
+      contextEvent || events.find((item) => item.eventId === activeEventId);
 
     let subtotal = 0;
     let totalQuantity = 0;
-    const items = (order.items || []).map((item) => {
+    const sourceItems = cartItems || order.items || [];
+    const items = sourceItems.map((item) => {
       const ticketType = ticketTypes.find(
-        (tt) => tt.ticketTypeId === item.ticketTypeId,
+        (tt) => tt.ticketTypeId === (item.ticketTypeId || item.id),
       );
-      const quantity = Number(item.quantity || 0);
-      const unitPrice = ticketType?.price || 0;
+      const quantity = Number(item.quantity ?? item.qty ?? 0);
+      const unitPrice = Number(
+        item.unitPrice ?? item.price ?? ticketType?.price ?? 0,
+      );
       const itemTotal = quantity * unitPrice;
 
       subtotal += itemTotal;
       totalQuantity += quantity;
 
       return {
-        ticketTypeId: item.ticketTypeId,
-        ticketName: ticketType?.name || item.ticketTypeId,
+        ticketTypeId: item.ticketTypeId || item.id,
+        ticketName:
+          ticketType?.name || item.name || item.ticketTypeId || item.id,
         quantity,
         unitPrice,
         itemTotal,
@@ -165,8 +209,10 @@ export default function CheckoutRoutePage() {
     const total = Math.max(subtotal - discount, 0);
 
     return {
-      eventId: order.eventId,
-      eventName: event?.name || `Sự kiện ${order.eventId}`,
+      eventId: activeEventId,
+      eventName:
+        event?.name ||
+        (activeEventId ? `Sự kiện ${activeEventId}` : "Đang cập nhật sự kiện"),
       eventTime: formatDateRange(event?.time?.event?.start),
       eventVenue: `${event?.venue?.name || ""}${event?.venue?.city ? `, ${event.venue.city}` : ""}`,
       items,
@@ -176,7 +222,16 @@ export default function CheckoutRoutePage() {
       total,
       selectedVoucher: chosenVoucher || null,
     };
-  }, [events, pendingOrder, ticketTypes, vouchers, appliedVoucherId]);
+  }, [
+    events,
+    pendingOrder,
+    selectedEventId,
+    storedCart,
+    storedCheckoutContext,
+    ticketTypes,
+    vouchers,
+    appliedVoucherId,
+  ]);
 
   const filteredVouchers = useMemo(() => {
     const keyword = voucherSearch.trim().toLowerCase();
@@ -209,6 +264,14 @@ export default function CheckoutRoutePage() {
 
   const handlePayment = () => {
     let hasError = false;
+    const currentUserRaw = window.localStorage.getItem("user");
+    let currentUser = null;
+
+    try {
+      currentUser = currentUserRaw ? JSON.parse(currentUserRaw) : null;
+    } catch {
+      currentUser = null;
+    }
 
     if (!fullName.trim()) {
       setNameError("Vui lòng nhập họ và tên");
@@ -241,7 +304,32 @@ export default function CheckoutRoutePage() {
     }
 
     if (!hasError) {
-      window.alert("Thanh toán thành công");
+      const orderId = `VN${Date.now()}`;
+      const paymentContext = {
+        orderId,
+        userId: currentUser?.userId || currentUser?._id || "guest",
+        customer: {
+          fullName: fullName.trim(),
+          phone: phone.trim(),
+        },
+        eventId: checkoutData.eventId,
+        eventName: checkoutData.eventName,
+        eventTime: checkoutData.eventTime,
+        eventVenue: checkoutData.eventVenue,
+        items: checkoutData.items,
+        subtotal: checkoutData.subtotal,
+        discount: checkoutData.discount,
+        total: checkoutData.total,
+        selectedVoucher: checkoutData.selectedVoucher,
+        paymentMethod: "vnpay",
+        createdAt: new Date().toISOString(),
+      };
+
+      window.localStorage.setItem(
+        "temp_payment_context",
+        JSON.stringify(paymentContext),
+      );
+      router.push(`/page/payment?orderId=${orderId}`);
     }
   };
 
