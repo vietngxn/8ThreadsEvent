@@ -6,9 +6,13 @@ import Navbar from "@/components/common/Navbar/Navbar";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
 import FilterBar from "@/components/FilterBar/FilterBar";
 import FilterTags from "@/components/FilterTags/FilterTags";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ConcertsPage() {
   const [events, setEvents] = useState([]);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     Promise.all([
@@ -64,10 +68,34 @@ export default function ConcertsPage() {
   });
 
   const [filters, setFilters] = useState({
-    city: "All",
-    price: "",
-    genre: "All",
+    city: searchParams.get("city") || "All",
+    price: searchParams.get("price") || "",
+    genre: searchParams.get("genre") || "All",
   });
+
+  const [sortBy, setSortBy] = useState("date-nearest");
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (filters.city && filters.city !== "All") {
+      params.set("city", filters.city);
+    }
+
+    if (filters.genre && filters.genre !== "All") {
+      params.set("genre", filters.genre);
+    }
+
+    if (filters.price) {
+      params.set("price", filters.price);
+    }
+
+    if (sortBy) {
+      params.set("sort", sortBy);
+    }
+
+    router.push(`/page/concerts?${params.toString()}`);
+  }, [filters, sortBy, router]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
@@ -97,19 +125,39 @@ export default function ConcertsPage() {
     return matchCity && matchGenre && matchPrice;
   });
 
+  const sortedEvents = [...filteredEvents].sort((a, b) => {
+    if (sortBy === "price-desc") {
+      return b.minPrice - a.minPrice;
+    }
+
+    if (sortBy === "price-asc") {
+      return a.minPrice - b.minPrice;
+    }
+
+    if (sortBy === "date-nearest") {
+      return (
+        new Date(a.time?.event?.start).getTime() -
+        new Date(b.time?.event?.start).getTime()
+      );
+    }
+
+    return 0;
+  });
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentEvents = filteredEvents.slice(
+
+  const currentEvents = sortedEvents.slice(
     startIndex,
     startIndex + itemsPerPage
   );
 
   const totalPages = Math.ceil(
-    filteredEvents.length / itemsPerPage
+    sortedEvents.length / itemsPerPage
   );
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters]);
+  }, [filters, sortBy]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -133,6 +181,8 @@ export default function ConcertsPage() {
                 filters={filters}
                 setFilters={setFilters}
                 options={filterOptions}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
               />
             </div>
 
