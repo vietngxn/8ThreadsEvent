@@ -8,8 +8,11 @@ export default function FilterBar({
   filters,
   setFilters,
   options,
+  sortBy,
+  setSortBy,
 }) {
   const [cityOpen, setCityOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
 
   const cities = options?.cities || [];
@@ -17,6 +20,21 @@ export default function FilterBar({
   const prices = ["0k - 500k", "500k - 1000k", "1000k - 2000k", "2000k+"];
 
   const genres = options?.genres || [];
+
+  const sortOptions = [
+    {
+      label: "Giá cao đến thấp",
+      value: "price-desc",
+    },
+    {
+      label: "Giá thấp đến cao",
+      value: "price-asc",
+    },
+    {
+      label: "Ngày gần nhất",
+      value: "date-nearest",
+    },
+  ];
 
   const selectCity = (city) => {
     setFilters((prev) => ({
@@ -79,10 +97,39 @@ export default function FilterBar({
         )}
       </div>
 
-      <button className={styles.button} type="button">
-        <ArrowUpDown size={18} />
-        Sắp xếp
-      </button>
+      <div className={styles.filterItem}>
+        <button
+          className={`${styles.button} ${sortOpen ? styles.buttonOpen : ""}`}
+          onClick={() => setSortOpen(!sortOpen)}
+          type="button"
+        >
+          <ArrowUpDown size={18} />
+          Sắp xếp
+          <ChevronDown
+            size={18}
+            className={sortOpen ? styles.iconRotated : ""}
+          />
+        </button>
+
+        {sortOpen && (
+          <div className={styles.dropdown}>
+            {sortOptions.map((option) => (
+              <button
+                key={option.value}
+                className={`${styles.option} ${sortBy === option.value ? styles.optionActive : ""
+                  }`}
+                onClick={() => {
+                  setSortBy(option.value);
+                  setSortOpen(false);
+                }}
+                type="button"
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Advanced Filter */}
 
