@@ -4,15 +4,19 @@ import { useState } from "react";
 import styles from "./FilterBar.module.css";
 import { ChevronDown, ArrowUpDown, Funnel } from "lucide-react";
 
-export default function FilterBar({ filters, setFilters }) {
+export default function FilterBar({
+  filters,
+  setFilters,
+  options,
+}) {
   const [cityOpen, setCityOpen] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
 
-  const cities = ["TP HCM", "Hà Nội", "Đà Nẵng", "Nha Trang", "Cần Thơ"];
+  const cities = options?.cities || [];
 
   const prices = ["0k - 500k", "500k - 1000k", "1000k - 2000k", "2000k+"];
 
-  const genres = ["Rap", "Pop", "EDM", "Indie"];
+  const genres = options?.genres || [];
 
   const selectCity = (city) => {
     setFilters((prev) => ({
@@ -39,8 +43,8 @@ export default function FilterBar({ filters, setFilters }) {
   const resetAdvanced = () => {
     setFilters((prev) => ({
       ...prev,
-      price: null,
-      genre: null,
+      price: "",
+      genre: "",
     }));
   };
 
@@ -52,7 +56,7 @@ export default function FilterBar({ filters, setFilters }) {
           onClick={() => setCityOpen(!cityOpen)}
           type="button"
         >
-          {filters.city || "Thành phố Hồ Chí Minh"}
+          {filters.city}
           <ChevronDown
             size={18}
             className={cityOpen ? styles.iconRotated : ""}

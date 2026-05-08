@@ -32,22 +32,84 @@ export default function ConcertsPage() {
       }));
 
       setEvents(eventsWithPrice);
+
+      const cities = [
+        "All",
+        ...new Set(
+          eventsData
+            .map((event) => event.venue?.city)
+            .filter(Boolean)
+        ),
+      ];
+
+      const genres = [
+        "All",
+        ...new Set(
+          eventsData
+            .map((event) => event.categoryId)
+            .filter(Boolean)
+        ),
+      ];
+
+      setFilterOptions({
+        cities,
+        genres,
+      });
     });
   }, []);
 
+  const [filterOptions, setFilterOptions] = useState({
+    cities: [],
+    genres: [],
+  });
+
   const [filters, setFilters] = useState({
-    city: "Thành phố Hồ Chí Minh",
-    price: "0k - 500k",
-    genre: "Rap",
+    city: "All",
+    price: "",
+    genre: "All",
   });
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentEvents = events.slice(startIndex, startIndex + itemsPerPage);
+  const filteredEvents = events.filter((event) => {
+    const matchCity =
+      filters.city === "All" ||
+      event.venue?.city === filters.city;
 
-  const totalPages = Math.ceil(events.length / itemsPerPage);
+    const matchGenre =
+      filters.genre === "All" ||
+      event.categoryId === filters.genre;
+
+    const matchPrice =
+      filters.price === "" ||
+      (filters.price === "0k - 500k" &&
+        event.minPrice <= 500000) ||
+      (filters.price === "500k - 1000k" &&
+        event.minPrice > 500000 &&
+        event.minPrice <= 1000000) ||
+      (filters.price === "1000k - 2000k" &&
+        event.minPrice > 1000000 &&
+        event.minPrice <= 2000000) ||
+      (filters.price === "2000k+" &&
+        event.minPrice > 2000000);
+
+    return matchCity && matchGenre && matchPrice;
+  });
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentEvents = filteredEvents.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  const totalPages = Math.ceil(
+    filteredEvents.length / itemsPerPage
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -67,7 +129,11 @@ export default function ConcertsPage() {
               <div className="flex-1">
                 <SearchBar />
               </div>
-              <FilterBar filters={filters} setFilters={setFilters} />
+              <FilterBar
+                filters={filters}
+                setFilters={setFilters}
+                options={filterOptions}
+              />
             </div>
 
             <div className="mt-3">
@@ -79,7 +145,7 @@ export default function ConcertsPage() {
                 <ConcertCard key={event._id} event={event} />
               ))}
 
-              {events.length === 0 && (
+              {filteredEvents.length === 0 && (
                 <p className="text-white text-center col-span-full drop-shadow-lg">
                   Không có concert nào
                 </p>
