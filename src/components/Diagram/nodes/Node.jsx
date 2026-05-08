@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
+function normalizeSeatLabel(value = "") {
+  return String(value)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
+}
+
 export default function Node({
   id,
   label,
@@ -16,7 +25,7 @@ export default function Node({
   h = 0,
   mirrorText = false,
   onZoneClick,
-  ticketTypes, // 🚀 Nhận data từ API truyền xuống
+  ticketTypes,
 }) {
   const isActive = active === id;
 
@@ -65,13 +74,23 @@ export default function Node({
 
   const dbCode = ID_MAPPING[id] || id;
 
-  const zoneData = ticketTypes?.find(
-    (t) => t.name === dbCode || t.type === dbCode,
-  );
+  const zoneData = ticketTypes?.find((t) => {
+    const candidates = [t.ticketTypeId, t.name, t.type, t._id].map(
+      normalizeSeatLabel,
+    );
+
+    const normalizedDbCode = normalizeSeatLabel(dbCode);
+    const normalizedLabel = normalizeSeatLabel(label);
+
+    return (
+      candidates.includes(normalizedDbCode) ||
+      candidates.includes(normalizedLabel)
+    );
+  });
 
   const stock = zoneData ? zoneData.totalQuantity - zoneData.soldQuantity : 0;
 
-  const isSoldOut = stock <= 0;
+  const isSoldOut = zoneData ? stock <= 0 : false;
 
   const realPrice = zoneData ? zoneData.price : price;
 
@@ -129,10 +148,11 @@ export default function Node({
     if (onZoneClick) {
       onZoneClick({
         id: id,
+        ticketTypeId: zoneData?.ticketTypeId || dbCode || id,
         name: fullName || `${label} ${value || ""}`.trim(),
         price: realPrice || 1200000,
         color: fill,
-        maxQty: stock,
+        maxQty: zoneData ? stock : Number.MAX_SAFE_INTEGER,
       });
     }
   };

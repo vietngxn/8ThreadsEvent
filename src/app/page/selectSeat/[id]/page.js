@@ -7,17 +7,17 @@ import SelectSeatUI from "./SelectSeatUI";
 export default function SelectSeatSmartPage() {
   const { id } = useParams();
   const [ticketTypes, setTicketTypes] = useState(null);
+  const [eventInfo, setEventInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const raw = localStorage.getItem("user");
     if (raw) {
       const user = JSON.parse(raw);
-      console.log("User:", user)
+      console.log("User:", user);
     } else {
       window.location.href = "/page/login";
     }
-
   }, []);
 
   useEffect(() => {
@@ -35,9 +35,12 @@ export default function SelectSeatSmartPage() {
         }
 
         const realEventId = eventData.eventId;
+        setEventInfo(eventData);
         console.log("Tìm thấy mã thực tế:", realEventId);
 
-        const ticketRes = await fetch(`/api/ticketTypes?eventId=${realEventId}`);
+        const ticketRes = await fetch(
+          `/api/ticketTypes?eventId=${realEventId}`,
+        );
         const ticketData = await ticketRes.json();
 
         setTicketTypes(ticketData);
@@ -53,11 +56,24 @@ export default function SelectSeatSmartPage() {
 
   if (loading) {
     return (
-      <div style={{ color: "white", textAlign: "center", marginTop: "30vh", fontSize: "18px" }}>
+      <div
+        style={{
+          color: "white",
+          textAlign: "center",
+          marginTop: "30vh",
+          fontSize: "18px",
+        }}
+      >
         <p>Đang tải sơ đồ rạp...</p>
       </div>
     );
   }
 
-  return <SelectSeatUI ticketTypes={ticketTypes} eventId={id} />;
+  return (
+    <SelectSeatUI
+      ticketTypes={ticketTypes}
+      eventInfo={eventInfo}
+      eventId={eventInfo?.eventId || id}
+    />
+  );
 }

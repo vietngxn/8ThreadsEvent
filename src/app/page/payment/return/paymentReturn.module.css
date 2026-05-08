@@ -1,0 +1,78 @@
+.pageShell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(201, 172, 108, 0.18), transparent 32%),
+    linear-gradient(180deg, rgba(8, 8, 10, 0.98), rgba(13, 13, 16, 0.98));
+  color: #f5f0e6;
+}
+
+.main {
+  min-height: calc(100vh - var(--navbar-height));
+  display: grid;
+  place-items: center;
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: calc(var(--navbar-height) + 28px) 0 40px;
+}
+
+.card {
+  width: 100%;
+  padding: 36px;
+  border-radius: 28px;
+  background: rgba(26, 26, 30, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.card h1 {
+  margin: 16px 0 10px;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.card p {
+  margin: 0 auto;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.iconSpin {
+  animation: spin 1s linear infinite;
+  color: #ead6a9;
+}
+
+.successIcon {
+  color: #7ade93;
+}
+
+.errorIcon {
+  color: #ff8080;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.secondaryBtn {
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
