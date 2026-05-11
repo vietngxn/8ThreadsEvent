@@ -18,6 +18,7 @@ export default function ProfileInfomation() {
     const [userLocal, setUserLocal] = useState(null);
     const [userName, setUserName] = useState("...");
     const [userId, setUserId] = useState(null);
+    console.log(userId)
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -97,7 +98,7 @@ export default function ProfileInfomation() {
 
         setUserLocal(user);
         setUserName(user?.name || "Người dùng");
-        setUserId(user?._id || null);
+        setUserId(user?.userId || null);
 
         if (user?.avatar) {
             setAvatarSrc(user.avatar);
