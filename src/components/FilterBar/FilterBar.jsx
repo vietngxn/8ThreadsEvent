@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./FilterBar.module.css";
 import { ChevronDown, ArrowUpDown, Funnel } from "lucide-react";
+import FilterModal from "@/components/FilterModal/FilterModal";
 
 export default function FilterBar({
   filters,
@@ -13,13 +14,27 @@ export default function FilterBar({
 }) {
   const [cityOpen, setCityOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
-  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const cityRef = useRef(null);
+  const sortRef = useRef(null);
+
+  // Click outside to close dropdowns
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (cityRef.current && !cityRef.current.contains(e.target)) {
+        setCityOpen(false);
+      }
+      if (sortRef.current && !sortRef.current.contains(e.target)) {
+        setSortOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const cities = options?.cities || [];
-
-  const prices = ["0k - 500k", "500k - 1000k", "1000k - 2000k", "2000k+"];
-
-  const genres = options?.genres || [];
 
   const sortOptions = [
     {
@@ -44,37 +59,22 @@ export default function FilterBar({
     setCityOpen(false);
   };
 
-  const selectPrice = (price) => {
-    setFilters((prev) => ({
-      ...prev,
-      price,
-    }));
-  };
-
-  const selectGenre = (genre) => {
-    setFilters((prev) => ({
-      ...prev,
-      genre,
-    }));
-  };
-
-  const resetAdvanced = () => {
-    setFilters((prev) => ({
-      ...prev,
-      price: "",
-      genre: "",
-    }));
-  };
+  // Check if any advanced filter is active
+  const hasAdvancedFilters =
+    filters.price ||
+    filters.dateFrom ||
+    filters.dateTo;
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.filterItem}>
+      {/* City Dropdown */}
+      <div className={styles.filterItem} ref={cityRef}>
         <button
           className={`${styles.button} ${cityOpen ? styles.buttonOpen : ""}`}
           onClick={() => setCityOpen(!cityOpen)}
           type="button"
         >
-          {filters.city}
+          {filters.city === "All" ? "Thành phố" : filters.city}
           <ChevronDown
             size={18}
             className={cityOpen ? styles.iconRotated : ""}
@@ -90,14 +90,15 @@ export default function FilterBar({
                 onClick={() => selectCity(city)}
                 type="button"
               >
-                {city}
+                {city === "All" ? "Tất cả" : city}
               </button>
             ))}
           </div>
         )}
       </div>
 
-      <div className={styles.filterItem}>
+      {/* Sort Dropdown */}
+      <div className={styles.filterItem} ref={sortRef}>
         <button
           className={`${styles.button} ${sortOpen ? styles.buttonOpen : ""}`}
           onClick={() => setSortOpen(!sortOpen)}
@@ -131,79 +132,28 @@ export default function FilterBar({
         )}
       </div>
 
-      {/* Advanced Filter */}
-
+      {/* Advanced Filter Button → Opens Modal */}
       <div className={styles.filterItem}>
         <button
-          className={`${styles.button} ${advancedOpen ? styles.buttonOpen : ""}`}
-          onClick={() => setAdvancedOpen(!advancedOpen)}
+          className={`${styles.button} ${hasAdvancedFilters ? styles.buttonActive : ""}`}
+          onClick={() => setModalOpen(true)}
           type="button"
         >
-          <Funnel size={18} />
+          <Funnel size={15} />
           Bộ lọc nâng cao
+          {hasAdvancedFilters && (
+            <span className={styles.badge}>●</span>
+          )}
         </button>
-
-        {advancedOpen && (
-          <div className={styles.advanced}>
-            <div className={styles.advancedHeader}>
-              <div>
-                <p className={styles.subTitle}>Tinh chỉnh kết quả</p>
-                <h3 className={styles.title}>Bộ lọc nâng cao</h3>
-              </div>
-
-              <button
-                className={styles.clearButton}
-                onClick={resetAdvanced}
-                type="button"
-              >
-                Xóa lọc
-              </button>
-            </div>
-
-            <div className={styles.group}>
-              <p>Giá</p>
-
-              <div className={styles.optionGrid}>
-                {prices.map((price) => (
-                  <button
-                    key={price}
-                    className={`${styles.option} ${filters.price === price ? styles.optionActive : ""}`}
-                    onClick={() => selectPrice(price)}
-                    type="button"
-                  >
-                    {price}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.group}>
-              <p>Thể loại</p>
-
-              <div className={styles.optionGrid}>
-                {genres.map((genre) => (
-                  <button
-                    key={genre}
-                    className={`${styles.option} ${filters.genre === genre ? styles.optionActive : ""}`}
-                    onClick={() => selectGenre(genre)}
-                    type="button"
-                  >
-                    {genre}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <button
-              className={styles.applyButton}
-              onClick={() => setAdvancedOpen(false)}
-              type="button"
-            >
-              Áp dụng bộ lọc
-            </button>
-          </div>
-        )}
       </div>
+
+      {/* Filter Modal */}
+      <FilterModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        filters={filters}
+        setFilters={setFilters}
+      />
     </div>
   );
 }

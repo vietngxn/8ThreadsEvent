@@ -46,48 +46,52 @@ export default function ConcertsPage() {
         ),
       ];
 
-      const genres = [
-        "All",
-        ...new Set(
-          eventsData
-            .map((event) => event.categoryId)
-            .filter(Boolean)
-        ),
-      ];
-
       setFilterOptions({
         cities,
-        genres,
       });
     });
   }, []);
 
   const [filterOptions, setFilterOptions] = useState({
     cities: [],
-    genres: [],
   });
+
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("q") || ""
+  );
 
   const [filters, setFilters] = useState({
     city: searchParams.get("city") || "All",
     price: searchParams.get("price") || "",
-    genre: searchParams.get("genre") || "All",
+    dateFrom: searchParams.get("dateFrom") || "",
+    dateTo: searchParams.get("dateTo") || "",
   });
 
-  const [sortBy, setSortBy] = useState("date-nearest");
+  const [sortBy, setSortBy] = useState(
+    searchParams.get("sort") || "date-nearest"
+  );
 
   useEffect(() => {
     const params = new URLSearchParams();
+
+    if (searchQuery) {
+      params.set("q", searchQuery);
+    }
 
     if (filters.city && filters.city !== "All") {
       params.set("city", filters.city);
     }
 
-    if (filters.genre && filters.genre !== "All") {
-      params.set("genre", filters.genre);
-    }
-
     if (filters.price) {
       params.set("price", filters.price);
+    }
+
+    if (filters.dateFrom) {
+      params.set("dateFrom", filters.dateFrom);
+    }
+
+    if (filters.dateTo) {
+      params.set("dateTo", filters.dateTo);
     }
 
     if (sortBy) {
@@ -95,19 +99,23 @@ export default function ConcertsPage() {
     }
 
     router.push(`/page/concerts?${params.toString()}`);
-  }, [filters, sortBy, router]);
+  }, [filters, sortBy, searchQuery, router]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
   const filteredEvents = events.filter((event) => {
+    // Only show active events
+    if (event.status === "inactive") return false;
+
+    // Search by name
+    const matchSearch =
+      !searchQuery ||
+      event.name?.toLowerCase().includes(searchQuery.toLowerCase());
+
     const matchCity =
       filters.city === "All" ||
       event.venue?.city === filters.city;
-
-    const matchGenre =
-      filters.genre === "All" ||
-      event.categoryId === filters.genre;
 
     const matchPrice =
       filters.price === "" ||
@@ -122,7 +130,23 @@ export default function ConcertsPage() {
       (filters.price === "2000k+" &&
         event.minPrice > 2000000);
 
-    return matchCity && matchGenre && matchPrice;
+    // Date range filter
+    const eventStart = new Date(event.time?.event?.start);
+    let matchDate = true;
+
+    if (filters.dateFrom) {
+      const from = new Date(filters.dateFrom);
+      from.setHours(0, 0, 0, 0);
+      if (eventStart < from) matchDate = false;
+    }
+
+    if (filters.dateTo) {
+      const to = new Date(filters.dateTo);
+      to.setHours(23, 59, 59, 999);
+      if (eventStart > to) matchDate = false;
+    }
+
+    return matchSearch && matchCity && matchPrice && matchDate;
   });
 
   const sortedEvents = [...filteredEvents].sort((a, b) => {
@@ -157,7 +181,7 @@ export default function ConcertsPage() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters, sortBy]);
+  }, [filters, sortBy, searchQuery]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -175,7 +199,12 @@ export default function ConcertsPage() {
 
             <div className="flex items-center gap-8">
               <div className="flex-1">
-                <SearchBar />
+                <SearchBar
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onSearch={() => { }}
+                  placeholder="Tìm kiếm sự kiện..."
+                />
               </div>
               <FilterBar
                 filters={filters}
@@ -187,7 +216,12 @@ export default function ConcertsPage() {
             </div>
 
             <div className="mt-3">
-              <FilterTags filters={filters} setFilters={setFilters} />
+              <FilterTags
+                filters={filters}
+                setFilters={setFilters}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
