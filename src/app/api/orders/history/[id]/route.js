@@ -4,17 +4,13 @@ import mongoose from "mongoose";
 export async function GET(req, context) {
   try {
     await connectDB();
-
     const { id } = await context.params;
-
     const db = mongoose.connection.db;
-
     const orders = await db
       .collection("Orders")
       .find({ userId: id })
       .sort({ createdAt: -1 })
       .toArray();
-
     const result = [];
 
     for (const order of orders) {
@@ -71,21 +67,33 @@ export async function GET(req, context) {
 
       if (voucher) {
         if (voucher.voucherType === "percent") {
-          discount = (originalTotal * voucher.value) / 100;
-        } else if (voucher.voucherType === "minus") {
-          discount = voucher.value; 
+          discount =
+            (originalTotal * voucher.value) / 100;
+        } else if (
+          voucher.voucherType === "minus"
+        ) {
+          discount = voucher.value;
         }
       } else {
-        discount = originalTotal - order.subtotal;
+        discount = Math.max(
+          0,
+          originalTotal -
+            (order.subtotal || originalTotal)
+        );
       }
 
-      if (discount < 0) discount = 0;
+      if (discount < 0) {
+        discount = 0;
+      }
+
+      const finalTotal =
+        originalTotal - discount;
 
       result.push({
         orderId: order.orderId,
         userId: order.userId,
         status: order.status,
-        subtotal: order.subtotal,
+        subtotal: finalTotal,
         createdAt: order.createdAt,
 
         totalQty,
@@ -96,7 +104,6 @@ export async function GET(req, context) {
           payment?.method || "",
         paymentStatus:
           payment?.status || "",
-
         voucherName:
           voucher?.voucherName || "",
 
