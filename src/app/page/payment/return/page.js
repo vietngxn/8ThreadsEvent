@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2, XCircle } from "lucide-react";
 import Navbar from "@/components/common/Navbar/Navbar";
 import GoldButton from "@/components/common/Button/GoldButton";
 import styles from "./paymentReturn.module.css";
 
-export default function PaymentReturnPage() {
+function PaymentReturnContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState("loading");
@@ -97,5 +97,13 @@ export default function PaymentReturnPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function PaymentReturnPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentReturnContent />
+    </Suspense>
   );
 }

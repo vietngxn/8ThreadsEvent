@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const fogtwono5 = localFont({
-    src: "../../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
+    src: "../../../../public/assets/fonts/fogtwono5/FogtwoNo5.otf",
     variable: "--font-fogtwono5",
     display: "swap",
 });
