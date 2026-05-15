@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import ConcertCard from "@/components/Card/ConcertCard";
 import Navbar from "@/components/common/Navbar/Navbar";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
@@ -8,7 +8,7 @@ import FilterBar from "@/components/FilterBar/FilterBar";
 import FilterTags from "@/components/FilterTags/FilterTags";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function ConcertsPage() {
+function ConcertsContent() {
   const [events, setEvents] = useState([]);
 
   const router = useRouter();
@@ -277,5 +277,13 @@ export default function ConcertsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ConcertsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ConcertsContent />
+    </Suspense>
   );
 }

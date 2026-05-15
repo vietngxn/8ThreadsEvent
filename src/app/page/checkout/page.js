@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { CalendarDays, Circle, CircleCheck, MapPin } from "lucide-react";
@@ -46,7 +46,7 @@ function extractMinOrder(condition) {
   return matched ? Number(matched[1]) * 1000 : null;
 }
 
-export default function CheckoutRoutePage() {
+function CheckoutContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedEventId = searchParams.get("eventId");
@@ -642,5 +642,13 @@ export default function CheckoutRoutePage() {
         />
       ) : null}
     </div>
+  );
+}
+
+export default function CheckoutRoutePage() {
+  return (
+    <Suspense fallback={<div>Đang tải...</div>}>
+      <CheckoutContent />
+    </Suspense>
   );
 }
