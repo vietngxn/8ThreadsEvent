@@ -394,12 +394,14 @@ export default function PaymentPage() {
                     Thử lại
                   </button>
                 </div>
-              ) : (
+              ) : qrSource ? (
                 <img
                   src={qrSource}
                   alt="QR thanh toán VNPAY"
                   className={styles.qrImage}
                 />
+              ) : (
+                <div className={styles.qrLoading}>Đang tạo mã QR...</div>
               )}
             </div>
 
