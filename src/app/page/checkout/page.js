@@ -76,12 +76,18 @@ export default function CheckoutRoutePage() {
 
   useEffect(() => {
     let isMounted = true;
+    const ticketTypeUrl = selectedEventId
+      ? `/api/ticketTypes?eventId=${encodeURIComponent(selectedEventId)}`
+      : "/api/ticketTypes";
+    const voucherUrl = selectedEventId
+      ? `/api/vouchers?eventId=${encodeURIComponent(selectedEventId)}`
+      : "/api/vouchers";
 
     Promise.all([
-      fetch("/assets/data/events.json").then((res) => res.json()),
-      fetch("/assets/data/orders.json").then((res) => res.json()),
-      fetch("/assets/data/ticket_types.json").then((res) => res.json()),
-      fetch("/assets/data/vouchers.json").then((res) => res.json()),
+      fetch("/api/events").then((res) => res.json()),
+      fetch("/api/orders").then((res) => res.json()),
+      fetch(ticketTypeUrl).then((res) => res.json()),
+      fetch(voucherUrl).then((res) => res.json()),
     ])
       .then(([eventsData, ordersData, ticketTypesData, vouchersData]) => {
         if (!isMounted) return;
@@ -101,7 +107,7 @@ export default function CheckoutRoutePage() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [selectedEventId]);
 
   useEffect(() => {
     try {
