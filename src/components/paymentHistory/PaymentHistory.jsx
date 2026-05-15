@@ -101,7 +101,7 @@ export default function PaymentHistory() {
                 <div key={order.orderId} className={styles.card}>
                     {/* Poster */}
                     <img
-                        src={order.event?.img}
+                        src={order.event?.img || "/poster.jpg"}
                         alt=""
                         className={styles.poster}
                     />

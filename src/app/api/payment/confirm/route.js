@@ -186,8 +186,8 @@ export async function POST(request) {
 
     const order = existingOrder
       ? await Order.findOneAndUpdate({ orderId }, orderPayload, {
-          new: true,
-        })
+        new: true,
+      })
       : await Order.create(orderPayload);
 
     const paymentId = makePaymentId(
