@@ -90,7 +90,7 @@ export default function Node({
 
   const stock = zoneData ? zoneData.totalQuantity - zoneData.soldQuantity : 0;
 
-  const isSoldOut = zoneData ? stock <= 0 : false;
+  const isSoldOut = zoneData ? stock <= 0 : true;
 
   const realPrice = zoneData ? zoneData.price : price;
 
