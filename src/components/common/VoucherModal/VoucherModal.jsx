@@ -4,7 +4,7 @@ import { Ticket } from "lucide-react";
 import styles from "./VoucherModal.module.css";
 
 function formatMoneyVN(value) {
-  return `${new Intl.NumberFormat("vi-VN").format(Number(value || 0) * 1000)}đ`;
+  return `${new Intl.NumberFormat("vi-VN").format(Number(value || 0))}đ`;
 }
 
 function getDiscountText(voucher) {
