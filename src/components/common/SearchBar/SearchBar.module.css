@@ -12,7 +12,7 @@
   max-width: 800px;
   transition: filter 0.25s ease;
   height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
 }
 
 .input {
@@ -20,9 +20,9 @@
   height: 100%;
   /* padding: 0 60px 0 20px; */
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(0, 0, 0, 0.08);
-  color: rgba(0, 0, 0, 0.88);
+  color: white;
   font-size: 16px;
   font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
   transition:
@@ -30,19 +30,15 @@
     border-color 0.2s ease,
     box-shadow 0.2s ease;
   outline: none;
+  padding: 0 60px 0 20px;
 }
 
 .input::placeholder {
-  color: rgba(0, 0, 0, 0.6);
+  color: white;
   font-family: "KanitLocal", "Kanit", "Segoe UI", sans-serif;
 }
 
-.wrapper:focus-within .input {
-  background: rgba(0, 0, 0, 0.3);
-  border-color: rgba(0, 0, 0, 0.55);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.16);
-  color: #fff;
-}
+
 
 .wrapper:focus-within .input::placeholder {
   color: rgba(255, 255, 255, 0.8);
@@ -58,7 +54,7 @@
   border-radius: 50%;
   border: none;
   background: transparent;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
