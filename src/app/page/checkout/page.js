@@ -37,13 +37,13 @@ function getVoucherDiscountAmount(voucher, subtotal) {
       (Number(subtotal || 0) * Number(voucher.value || 0)) / 100,
     );
   }
-  return Number(voucher.value || 0) * 1000;
+  return Number(voucher.value || 0);
 }
 
 function extractMinOrder(condition) {
   if (!condition) return null;
   const matched = condition.match(/minOrder\s*>?=\s*(\d+)/i);
-  return matched ? Number(matched[1]) * 1000 : null;
+  return matched ? Number(matched[1]) : null;
 }
 
 function CheckoutContent() {
@@ -156,7 +156,7 @@ function CheckoutContent() {
     const contextEvent = storedCheckoutContext?.event || null;
     const cartItems =
       Array.isArray(storedCheckoutContext?.cart) &&
-      storedCheckoutContext.cart.length > 0
+        storedCheckoutContext.cart.length > 0
         ? storedCheckoutContext.cart
         : storedCart.length > 0
           ? storedCart
