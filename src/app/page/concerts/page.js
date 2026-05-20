@@ -7,49 +7,80 @@ import SearchBar from "@/components/common/SearchBar/SearchBar";
 import FilterBar from "@/components/FilterBar/FilterBar";
 import FilterTags from "@/components/FilterTags/FilterTags";
 import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 function ConcertsContent() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/events").then(res => res.json()),
-      fetch("/api/ticketTypes").then(res => res.json())
-    ]).then(([eventsData, ticketsData]) => {
+    const fetchData = async () => {
+      setLoading(true);
 
-      const ticketMap = {};
-
-      ticketsData.forEach(t => {
-        if (!t.isActive) return;
-        if (!ticketMap[t.eventId]) ticketMap[t.eventId] = [];
-        ticketMap[t.eventId].push(Number(t.price));
+      toast.loading("Đang tải concert...", {
+        id: "concert-loading",
       });
 
-      const eventsWithPrice = eventsData.map(event => ({
-        ...event,
-        minPrice: ticketMap[event.eventId]
-          ? Math.min(...ticketMap[event.eventId])
-          : 0
-      }));
+      try {
+        const [eventsData, ticketsData] = await Promise.all([
+          fetch("/api/events").then((res) => res.json()),
+          fetch("/api/ticketTypes").then((res) => res.json()),
+        ]);
 
-      setEvents(eventsWithPrice);
+        const ticketMap = {};
 
-      const cities = [
-        "All",
-        ...new Set(
-          eventsData
-            .map((event) => event.venue?.city)
-            .filter(Boolean)
-        ),
-      ];
+        ticketsData.forEach((t) => {
+          if (!t.isActive) return;
 
-      setFilterOptions({
-        cities,
-      });
-    });
+          if (!ticketMap[t.eventId]) {
+            ticketMap[t.eventId] = [];
+          }
+
+          ticketMap[t.eventId].push(Number(t.price));
+        });
+
+        const eventsWithPrice = eventsData.map((event) => ({
+          ...event,
+          minPrice: ticketMap[event.eventId]
+            ? Math.min(...ticketMap[event.eventId])
+            : 0,
+        }));
+
+        setEvents(eventsWithPrice);
+
+        const cities = [
+          "All",
+          ...new Set(
+            eventsData
+              .map((event) => event.venue?.city)
+              .filter(Boolean)
+          ),
+        ];
+
+        setFilterOptions({
+          cities,
+        });
+
+        toast.success("Tải concert thành công!", {
+          id: "concert-loading",
+        });
+
+        toast.dismiss("redirect");
+        toast.dismiss("auth-check");
+
+      } catch (err) {
+        toast.error("Không thể tải concert", {
+          id: "concert-loading",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const [filterOptions, setFilterOptions] = useState({
@@ -192,6 +223,13 @@ function ConcertsContent() {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "var(--background-image)" }}
     >
+      {loading && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center">
+          <div className="text-[#DDB248] text-2xl tracking-[6px] animate-pulse">
+            LOADING...
+          </div>
+        </div>
+      )}
       <div className="relative z-10">
 
         <div className="max-w-[2000px] mx-auto pt-[calc(var(--navbar-height)*1.5)]">
