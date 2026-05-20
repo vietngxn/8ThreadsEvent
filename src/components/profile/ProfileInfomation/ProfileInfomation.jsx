@@ -85,7 +85,6 @@ export default function ProfileInfomation() {
         });
     };
 
-    // Đọc localStorage 1 lần
     useEffect(() => {
         const raw = localStorage.getItem("user");
 
