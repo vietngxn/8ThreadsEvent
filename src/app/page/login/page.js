@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import { useAuth } from "@/context/AuthContext";
+import toast from "react-hot-toast";
 
 const EyeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -26,7 +27,7 @@ const EyeOffIcon = () => (
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [account, setAccount] = useState(searchParams.get("account") || "");
   const [password, setPassword] = useState("");
@@ -35,24 +36,44 @@ function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // reset lỗi cũ
 
-    const res = await fetch("/api/users/login", {
+    setLoading(true);
+
+    const loginPromise = fetch("/api/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ account, password }),
+    }).then(async (res) => {
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Sai tài khoản hoặc mật khẩu");
+      }
+
+      return data;
     });
 
-    if (res.ok) {
-      const data = await res.json();
+    try {
+      const data = await toast.promise(loginPromise, {
+        loading: "Đang xác thực...",
+        success: "Đăng nhập thành công!",
+        error: (err) => err.message,
+      });
 
       login(data.token, data.user);
 
-      const redirect = searchParams.get("redirect") || "/";
+      toast.loading("Đang chuyển hướng...", {
+        id: "redirect",
+      });
+
+      const redirect =
+        searchParams.get("redirect") || "/page/concerts";
+
       router.replace(redirect);
-    } else {
-      const data = await res.json();
-      setError(data.message || "Sai tài khoản hoặc mật khẩu");
+
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
   };
 
@@ -92,18 +113,18 @@ function LoginForm() {
           </button>
         </div>
 
-        <p className={styles.errorText}>
-          {error || "\u00A0"}
-        </p>
-
         <div className="text-right mb-6">
           <a href="#" className="text-[11px] text-gray-500 hover:text-[#cbb37a] transition">
             Forgot password?
           </a>
         </div>
 
-        <Button size="lg" className="w-full font-bold tracking-widest uppercase">
-          Login
+        <Button
+          size="lg"
+          className="w-full font-bold tracking-widest uppercase"
+          disabled={loading}
+        >
+          {loading ? "LOADING..." : "LOGIN"}
         </Button>
       </form>
 
@@ -133,6 +154,10 @@ export default function LoginPage() {
     const token = localStorage.getItem("token");
 
     if (token) {
+      toast.loading("Đang chuyển hướng...", {
+        id: "auth-check",
+      });
+
       router.replace("/");
     } else {
       setChecking(false);
