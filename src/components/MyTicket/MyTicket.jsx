@@ -100,16 +100,25 @@ export default function MyTickets() {
 
     const now = new Date();
 
-    const filteredTickets = tickets.filter((t) => {
-        const statusMatch = activeTab === "all" || t.status === activeTab;
-        const eventEnd = t.event?.time?.event?.end
-            ? new Date(t.event.time.event.end)
-            : null;
-        const isUpcoming = eventEnd ? eventEnd > now : true;
-        const timeMatch =
-            activeSubTab === "upcoming" ? isUpcoming : !isUpcoming;
-        return statusMatch && timeMatch;
-    });
+const filteredTickets = tickets.filter((ticket) => {
+
+    const sameStatus =
+        activeTab === "all" ||
+        ticket.status === activeTab;
+
+    const endTime = ticket.event?.time?.event?.end;
+    const isUpcoming =
+        endTime
+            ? new Date(endTime) > now
+            : true;
+
+    const sameTimeType =
+        activeSubTab === "upcoming"
+            ? isUpcoming
+            : !isUpcoming;
+
+    return sameStatus && sameTimeType;
+});
 
     return (
         <div className={styles.wrapper}>
@@ -165,7 +174,6 @@ export default function MyTickets() {
                         <div className={styles.ticketGrid}>
                             {filteredTickets.map((ticket) => (
                                 <div key={ticket.ticketId} className={styles.ticketCard}>
-                                    {/* Left: Event image */}
                                     {ticket.event?.img && (
                                         <div className={styles.cardImg}>
                                             <img
@@ -175,7 +183,6 @@ export default function MyTickets() {
                                         </div>
                                     )}
 
-                                    {/* Center: Content */}
                                     <div className={styles.cardBody}>
                                         <span className={`${styles.badge} ${STATUS_CLASS[ticket.status] || ""}`}>
                                             {STATUS_LABEL[ticket.status] || ticket.status}
